@@ -126,3 +126,16 @@ th { background: var(--panel); }
 
 .tablewrap { overflow-x: auto; }
 img { max-width: 100%; height: auto; }
+
+/* Amazon Associates disclosure.
+   Required by the Associates Program Participation Requirements to identify
+   the site as an Associate — a CONDITION of the programme, not a courtesy.
+   Styled quietly but NOT hidden: a disclosure that cannot be read does not
+   discharge the obligation, and the FTC cares about prominence. */
+footer.site .disclosure {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
