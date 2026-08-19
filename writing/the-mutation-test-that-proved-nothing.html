@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The mutation test that proved nothing — The Prompt Architect</title>
+<meta name="description" content="Breaking your code to check that a test fails is good practice. It only works if the test fails for the reason you intended — and twice now, mine did not.">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>◆</text></svg>">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">The Prompt <span>Architect</span></a>
+    <nav>
+      <a href="/">Writing</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+<article>
+
+<h1>The mutation test that proved nothing</h1>
+<time datetime="2026-08-18">18 August 2026</time>
+
+<p>
+  When I write a test after the code — which happens, whatever the ideal says —
+  I do not trust it until I have watched it fail. A test written against working
+  code passes immediately, and a passing test that has never failed has
+  demonstrated nothing. It might be asserting something trivially true. It might
+  be pointed at the wrong thing entirely.
+</p>
+
+<p>
+  So I break the code deliberately and check the test catches it. Twice now, that
+  check itself has been worthless, in two different ways.
+</p>
+
+<h2>The first failure: the mutation broke compilation</h2>
+
+<p>
+  I had written a test asserting that a legally required disclosure always
+  renders next to a generated affiliate link. Displaying it is a condition of the
+  program — omit it and you can lose the account and the earnings — so I wanted
+  the test to be real, not decorative.
+</p>
+
+<p>
+  The test passed. To verify it meant something, I deleted the block of markup
+  that renders the disclosure and re-ran.
+</p>
+
+<pre><code>Test Files  1 failed
+     Tests  no tests</code></pre>
+
+<p>
+  <strong>"No tests."</strong> Not a failing assertion — nothing ran at all. My
+  crude deletion had left invalid markup, the file no longer compiled, and the
+  runner could not load it.
+</p>
+
+<p>
+  That is a red result, and if I had been moving quickly I might have read "red,
+  good, the test catches it" and moved on. But it proves nothing about the test.
+  It proves the file was broken. A test that never executed cannot demonstrate
+  that it detects anything.
+</p>
+
+<h2>The fix: mutate a value, not a structure</h2>
+
+<p>
+  The second attempt changed the disclosure constant to an empty string:
+</p>
+
+<pre><code>- disclosure: "As an Amazon Associate I earn from qualifying purchases.",
++ disclosure: "",</code></pre>
+
+<p>
+  That compiles cleanly. And the result was what I actually wanted to see:
+</p>
+
+<pre><code>× carries the exact disclosure the program requires
+× shows the disclosure whenever it shows a link
+  Tests  2 failed | 20 passed</code></pre>
+
+<p>
+  Two failures, both specific, both naming the property I care about — and
+  eighteen other tests still passing, which tells me the mutation was targeted
+  rather than a blast radius.
+</p>
+
+<p>
+  The general rule: <strong>mutate values, not syntax.</strong> Changing a
+  constant, flipping a comparison, swapping a return value — these keep the
+  program valid and isolate exactly one behaviour. Deleting a block tests your
+  build.
+</p>
+
+<h2>The second failure: the mutation landed somewhere else</h2>
+
+<p>
+  The earlier version of this mistake was subtler and I like it more, because
+  nothing about the output looked wrong.
+</p>
+
+<p>
+  I wanted to prove a test would catch a dangerous reordering — a delete
+  happening before validation instead of after. I applied the mutation by
+  searching for an anchor string and patching around it. The suite ran. Everything
+  passed.
+</p>
+
+<p>
+  I nearly concluded the test was worthless. In fact the anchor string appeared
+  many times across a seven-thousand-line file, and my patch had landed in a
+  different function than the one under test. The mutation was real, it compiled,
+  it ran — and it was in the wrong place. The test was fine. My verification was
+  not.
+</p>
+
+<div class="note">
+  <p>
+    A mutation test has three ways to lie: the mutation did not compile, the
+    mutation did not land where you meant, or the mutation did not actually
+    change behaviour. All three produce a result you can misread as an answer.
+  </p>
+</div>
+
+<h2>The checklist I use now</h2>
+
+<ol>
+  <li>
+    <strong>Confirm the mutation landed.</strong> Diff the file. If you patched
+    by string match, verify the match was unique — that one was expensive to
+    learn.
+  </li>
+  <li>
+    <strong>Confirm the code still compiles and the suite still runs.</strong>
+    "No tests" and "0 passed" are not failures in the sense you need.
+  </li>
+  <li>
+    <strong>Confirm the <em>right</em> tests failed</strong>, by name. Not "some
+    things went red." The specific assertions covering the specific property.
+  </li>
+  <li>
+    <strong>Confirm unrelated tests still pass.</strong> If everything goes red,
+    you broke something structural and learned nothing about the one behaviour.
+  </li>
+  <li>
+    <strong>Revert, and re-run to green</strong> before you commit anything.
+  </li>
+</ol>
+
+<h2>Why bother</h2>
+
+<p>
+  This is maybe two minutes of work per test that matters, and I do not do it for
+  every test. I do it when a test is the only thing standing between me and a
+  consequence I cannot undo — a legal disclosure vanishing from a page, a delete
+  running against unvalidated data.
+</p>
+
+<p>
+  For those, the question is not "do I have coverage." It is "have I seen this
+  test catch the thing it exists to catch." Those are very different claims, and
+  only one of them survives contact with a real failure.
+</p>
+
+</article>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>The Prompt Architect — written by Cam Sweatman, Pensacola, Florida.</p>
+    <p><a href="/">More writing</a> · <a href="/about.html">About</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

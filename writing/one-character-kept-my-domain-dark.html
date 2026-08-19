@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One character kept my domain dark for nine days — The Prompt Architect</title>
+<meta name="description" content="A GitHub Pages CNAME with an extra zero. Every DNS check passed, HTTPS was silently dead, and the only symptom was a 404 nobody was looking at.">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>◆</text></svg>">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">The Prompt <span>Architect</span></a>
+    <nav>
+      <a href="/">Writing</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+<article>
+
+<h1>One character kept my domain dark for nine days</h1>
+<time datetime="2026-08-18">18 August 2026</time>
+
+<p>
+  This site lives at <code>amco100.me</code>. For nine days it served nothing,
+  and I did not notice, because every diagnostic I would naturally reach for
+  reported that things were fine.
+</p>
+
+<p>
+  The cause was a <code>CNAME</code> file in the repository containing
+  <code>amco1000.me</code>. Three zeros instead of two.
+</p>
+
+<h2>Why it was invisible</h2>
+
+<p>
+  GitHub Pages uses that file to decide which hostname the site answers on. With
+  the wrong name in it, Pages happily served the site at the typo domain and
+  returned <strong>404</strong> at the real one.
+</p>
+
+<p>
+  Here is the part that kept it hidden. I own both domains — the typo one was
+  registered at some point and forgotten. Both sit on the same registrar's
+  nameservers. Both resolve to GitHub's Pages addresses. So:
+</p>
+
+<div class="tablewrap">
+<table>
+  <tr><th>Check</th><th>Result</th><th>Conclusion it invited</th></tr>
+  <tr><td>Does DNS resolve?</td><td>Yes, four A records</td><td>DNS is fine</td></tr>
+  <tr><td>Do they point at GitHub Pages?</td><td>Yes, <code>185.199.*</code></td><td>Hosting is fine</td></tr>
+  <tr><td>Is the Pages build green?</td><td><code>"status": "built"</code></td><td>Deployment is fine</td></tr>
+  <tr><td>Does the page load?</td><td><strong>404</strong></td><td>— the only failing check</td></tr>
+</table>
+</div>
+
+<p>
+  Three green signals and one red one, and the three green ones are the checks
+  you run first when a domain misbehaves. Nothing in DNS is capable of noticing
+  that the name in a file inside a repository is misspelled.
+</p>
+
+<h2>The second symptom I misread</h2>
+
+<p>
+  HTTPS was dead on both domains — connections simply failed. I filed that
+  mentally under "certificate not provisioned yet," which is a normal transient
+  state for a new Pages site.
+</p>
+
+<p>
+  It was actually a consequence of the same bug. Pages requests a certificate
+  for the name in the <code>CNAME</code> file. The certificate that existed
+  covered the typo domain. The real domain had no certificate because, as far as
+  the platform was concerned, no one had asked for one.
+</p>
+
+<p>
+  So the bug produced two symptoms, and the second one had an innocent
+  explanation ready to hand. That is worth naming as a pattern: <em>a plausible
+  benign explanation for a symptom is how a root cause stays hidden.</em> I did
+  not investigate because I had already explained it.
+</p>
+
+<h2>The fix, and the check that would have caught it</h2>
+
+<p>
+  The fix was to correct one character and push. The site was live within a
+  minute, and the certificate issued shortly after.
+</p>
+
+<p>
+  The check that would have caught it on day one is embarrassingly simple:
+</p>
+
+<pre><code>curl -s -o /dev/null -w "%{http_code}\n" https://your-domain.example/</code></pre>
+
+<p>
+  Fetch the actual page over the actual protocol you expect people to use.
+  Everything else — resolution, IP addresses, build status — is a proxy for that
+  question, and every proxy can be green while the answer is no.
+</p>
+
+<div class="note">
+  <p>
+    I have since written a warning into the repository's README, directly above
+    the file: <em>this CNAME is load-bearing and was wrong for nine days.</em>
+    A comment where the mistake happened is worth more than a note in an issue
+    tracker nobody re-reads.
+  </p>
+</div>
+
+<h2>The general version</h2>
+
+<p>
+  Deployment pipelines are full of values that are <em>syntactically valid and
+  semantically wrong</em>: a domain that exists but is not yours, a bucket name
+  that resolves to someone else's, an environment variable pointing at a real
+  database that is not the intended one, a region that is valid but empty.
+</p>
+
+<p>
+  Type checking cannot help. Validation cannot help, because the value is
+  well-formed. The build is green because the build succeeded. The only thing
+  that catches this class of error is <strong>exercising the system from the
+  outside, the way a user reaches it</strong> — and doing that once, deliberately,
+  after any change to how the thing is addressed.
+</p>
+
+<p>
+  Nine days is not a catastrophe for a site that had no visitors. But the same
+  shape of mistake, one layer down, is a payment webhook posting to a URL that
+  looks right and nobody reads. The lesson is cheap here. It is not always.
+</p>
+
+</article>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>The Prompt Architect — written by Cam Sweatman, Pensacola, Florida.</p>
+    <p><a href="/">More writing</a> · <a href="/about.html">About</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

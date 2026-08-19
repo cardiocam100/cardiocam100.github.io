@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design for text you didn't write — The Prompt Architect</title>
+<meta name="description" content="A layout bug I shipped twice in the same component. When a model writes your copy, every length assumption in your CSS becomes a bug waiting for the right output.">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>◆</text></svg>">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">The Prompt <span>Architect</span></a>
+    <nav>
+      <a href="/">Writing</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+<article>
+
+<h1>Design for text you didn't write</h1>
+<time datetime="2026-08-18">18 August 2026</time>
+
+<p>
+  I shipped the same layout bug twice, in the same component, months apart. Both
+  times the cause was identical: I sized a container for text a human would
+  write, and a model wrote something longer.
+</p>
+
+<h2>What it looked like</h2>
+
+<p>
+  A card showing a product recommendation. Name on the left, commission figure on
+  the right. In every example I built against, the figure was short —
+  <code>20–40%</code>, <code>$30–80 per sale</code>. It fit comfortably.
+</p>
+
+<p>
+  Then a run came back with <code>$1,000–$5,000 per booking (or per
+  charter)</code>. The card's right-hand block was marked <code>shrink-0</code>,
+  so it refused to compress. The block pushed the card wider than its grid
+  column. The figure was cut off mid-word against the card edge. The dialog grew
+  a horizontal scrollbar. And the product name — squeezed into whatever width
+  was left — wrapped into a ribbon one or two words per line.
+</p>
+
+<p>
+  One long string, and the entire card fell apart.
+</p>
+
+<h2>The mechanical cause</h2>
+
+<p>
+  <code>shrink-0</code> (<code>flex-shrink: 0</code>) tells a flex child never to
+  compress below its natural size. For a long unbroken run of text, natural size
+  is <em>the whole line</em>. The track sizes to min-content, min-content is
+  enormous, and everything else in the row gets whatever remains.
+</p>
+
+<p>
+  The rule I now hold: <strong>a flex child only wraps if it is allowed to
+  shrink.</strong> So the fix is <code>min-w-0</code> on both sides — permitting
+  compression — plus a maximum width so one column cannot eat the row:
+</p>
+
+<pre><code>&lt;!-- before: refuses to compress, overflows on long values --&gt;
+&lt;div class="text-right shrink-0"&gt;
+
+&lt;!-- after: allowed to wrap, capped --&gt;
+&lt;div class="text-right min-w-0 max-w-[45%]"&gt;</code></pre>
+
+<p>
+  The first time this bit me, in the same dialog, it hid controls off the right
+  edge — a "Queue posts" button a user could not see or reach. Different symptom,
+  identical mechanism.
+</p>
+
+<h2>Why generated text keeps finding this</h2>
+
+<p>
+  Every layout carries implicit assumptions about content length. When you write
+  the copy, those assumptions hold trivially, because you write to fit. You would
+  never type a forty-character commission figure into a slot built for eight.
+</p>
+
+<p>
+  A model has no such feedback. It emits whatever the prompt and the data
+  suggest, and the distribution has a long tail. Most outputs are short. Some are
+  not. And the ones that are not appear only when a real run happens to produce
+  them — which is exactly why this survives testing. My fixtures had short
+  values, because I wrote the fixtures.
+</p>
+
+<div class="note">
+  <p>
+    Wherever generated text meets layout, ask: <em>what happens at ten times this
+    length?</em> If the answer is "it overflows," that is not an edge case. It is
+    a scheduled outage waiting for the right prompt.
+  </p>
+</div>
+
+<h2>The second bug in the same card</h2>
+
+<p>
+  Worth mentioning because it has the same root. The card drew a dollar-sign icon
+  beside the commission figure. Reasonable — until a value arrives that already
+  carries its own symbol. Users saw:
+</p>
+
+<blockquote>$ $1,000–$5,000 per booking</blockquote>
+
+<p>
+  Again: I assumed a shape for text I did not write. The fix suppresses the icon
+  when the value already starts with a currency symbol, and — this part matters —
+  <strong>never edits the number itself</strong>. Rewriting a figure someone is
+  about to make a financial decision on would be a worse defect than the one
+  being fixed. Decorate around generated content; do not silently correct it.
+</p>
+
+<h2>What I do now</h2>
+
+<ul>
+  <li>
+    <strong>Never <code>shrink-0</code> on generated text.</strong> It is fine on
+    an icon, a badge, a fixed-width control. On model output it is a bug with a
+    delay fuse.
+  </li>
+  <li>
+    <strong>Look at real output, not fixtures.</strong> Both bugs were found by
+    opening the actual product and reading the actual screen. Neither was
+    reachable from the test suite, because the suite used data I invented.
+  </li>
+  <li>
+    <strong>Write the rule at the call site.</strong> There is now a comment
+    above that block explaining why it is <code>min-w-0</code> and what happens
+    if someone "tidies" it back. I shipped this twice; the third time should cost
+    somebody a comment rather than an afternoon.
+  </li>
+</ul>
+
+</article>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>The Prompt Architect — written by Cam Sweatman, Pensacola, Florida.</p>
+    <p><a href="/">More writing</a> · <a href="/about.html">About</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
