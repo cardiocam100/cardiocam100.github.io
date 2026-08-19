@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Prompt Architect — building AI systems that fail honestly</title>
+<meta name="description" content="Field notes on building reliable AI systems: evidence discipline, verification that actually catches defects, and what shipping to real users teaches that tests cannot.">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>◆</text></svg>">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">The Prompt <span>Architect</span></a>
+    <nav>
+      <a href="/">Writing</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <h1>Building AI systems that fail honestly</h1>
+  <p class="lede">
+    Most writing about AI engineering describes what worked. These are notes on
+    what broke — specifically, the failures that passing test suites did not
+    catch, and the disciplines that would have caught them sooner.
+  </p>
+
+  <p>
+    I build <strong>AMCO</strong>, a campaign orchestrator that generates marketing
+    material end to end: strategy briefs, channel copy, content calendars, visual
+    direction, email sequences, and the export files a client loads into their own
+    tools. It is a real system with real output going to real businesses, which
+    means its failures are the useful kind — the ones that cost something.
+  </p>
+
+  <p>
+    The recurring theme in everything below: <em>a language model will produce
+    confident, well-formed, plausible output whether or not it has any basis for
+    it.</em> Almost every hard bug I have shipped traces back to trusting the
+    shape of an answer instead of its substance.
+  </p>
+
+  <ul class="posts">
+    <li>
+      <h2><a href="/writing/tests-passed-production-broke.html">The tests passed. The feature was broken for every user.</a></h2>
+      <time datetime="2026-08-18">18 August 2026</time>
+      <p>
+        Five tests, all green, covering a feature that was uniformly broken in
+        production. The mocks asserted what the code did with data it was given —
+        and the actual defect was that the model was never given anything.
+      </p>
+    </li>
+    <li>
+      <h2><a href="/writing/fabricated-citations.html">A fabricated citation is worse than no citation</a></h2>
+      <time datetime="2026-08-18">18 August 2026</time>
+      <p>
+        If you ask a model to cite its sources, it will. Whether or not it read
+        them. The fix is not a better prompt — it is refusing to trust the model's
+        URLs at all, and matching them against what you actually retrieved.
+      </p>
+    </li>
+    <li>
+      <h2><a href="/writing/no-esp-imports-a-sequence.html">No email platform imports a sequence</a></h2>
+      <time datetime="2026-08-18">18 August 2026</time>
+      <p>
+        I planned an email export for a week on an assumption that turned out to
+        be false in the first ten minutes of reading vendor documentation. A note
+        on checking the world before designing against it.
+      </p>
+    </li>
+  </ul>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>The Prompt Architect — written by Cam Sweatman, Pensacola, Florida.</p>
+    <p><a href="/about.html">About this site</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A fabricated citation is worse than no citation — The Prompt Architect</title>
+<meta name="description" content="Why you should never trust a model's URLs, and the whitelist pattern that makes citation in an LLM feature actually mean something.">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>◆</text></svg>">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">The Prompt <span>Architect</span></a>
+    <nav>
+      <a href="/">Writing</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+<article>
+
+<h1>A fabricated citation is worse than no citation</h1>
+<time datetime="2026-08-18">18 August 2026</time>
+
+<p>
+  This is the rule I hold most strictly when building anything that generates
+  claims: <strong>a made-up source is worse than an absent one.</strong> Not
+  equally bad. Worse.
+</p>
+
+<p>
+  An uncited number invites scrutiny. You see "commission: 20–40%" with nothing
+  behind it and you know to go check. A cited number closes the question. It
+  converts a guess into apparent evidence, and it spends a kind of credibility
+  the system has not earned. The reader stops looking precisely when they should
+  start.
+</p>
+
+<h2>Models will cite anything you ask them to</h2>
+
+<p>
+  If you add a <code>sources</code> field to your output schema and ask a model
+  to fill it, it will. It will produce URLs that are well-formed, plausibly
+  named, on real domains, and pointing at pages that may not exist. This is not
+  the model malfunctioning. You asked for a list of URLs; it produced the most
+  probable such list. Nothing in that process involves having read anything.
+</p>
+
+<p>
+  So the instinct to fix this with prompt engineering — <em>only cite real
+  sources, do not invent URLs, be accurate</em> — misunderstands the failure. The
+  model is not disobeying. It has no mechanism to distinguish a URL it retrieved
+  from a URL that merely sounds right, unless you build one.
+</p>
+
+<h2>The pattern: whitelist against what you actually retrieved</h2>
+
+<p>
+  If your system does retrieval, you already possess ground truth: the exact set
+  of URLs that came back. That set is the whitelist. Everything else is
+  discarded, unconditionally, no matter how convincing.
+</p>
+
+<pre><code>function groundCitations(products, retrievedSources) {
+  const retrieved = new Set(retrievedSources.map(s =&gt; s.url));
+  return products.map(p =&gt; {
+    const cited = (p.sourceUrls ?? []).filter(url =&gt; retrieved.has(url));
+    return { ...p, sourceUrls: cited, claimsSourced: cited.length &gt; 0 };
+  });
+}</code></pre>
+
+<p>
+  Three properties matter here, and each one was a decision:
+</p>
+
+<h3>Derive the flag from what survived, not what was claimed</h3>
+
+<p>
+  <code>claimsSourced</code> is computed from the filtered list, never from
+  whether the model said it had sources. If the model cites three URLs and all
+  three are invented, the correct output is <em>unsourced</em> — not "sourced,
+  citations unavailable." The flag must describe reality after filtering.
+</p>
+
+<h3>Exact matching, deliberately</h3>
+
+<p>
+  It is tempting to normalise before comparing — strip <code>www.</code>, ignore
+  trailing slashes, compare domains only. I decided against it. In practice the
+  near-miss is the signal: a model that returns <code>flexoffers.com/x</code>
+  when the retrieved URL was <code>www.flexoffers.com/x</code> is reconstructing
+  from memory rather than copying what it was given. Loosening the match hides
+  exactly the behaviour you want to detect.
+</p>
+
+<p>
+  The cost is occasionally dropping a citation that was morally correct. I will
+  take that trade every time. A dropped good citation shows as "unverified,"
+  which is a mild, honest understatement. A retained bad one is a lie.
+</p>
+
+<h3>Say so in the interface</h3>
+
+<p>
+  The filtering is worthless if the UI renders sourced and unsourced claims
+  identically. In my system an unsourced product now says, in place of its
+  citation line:
+</p>
+
+<blockquote>
+  Unverified estimate — no retrieved source backs this commission or trend
+  figure. Check the network's own rate card before spending.
+</blockquote>
+
+<p>
+  Note the last sentence. A warning that only says "unverified" tells the reader
+  they have a problem. Telling them where the authoritative answer lives tells
+  them what to do about it.
+</p>
+
+<h2>The precondition everyone misses</h2>
+
+<p>
+  All of the above assumes the model can cite correctly when it wants to. That
+  requires the retrieved URLs to be <em>in the prompt</em>, as an explicit list.
+  I shipped this whole mechanism once with the URLs missing from the prompt — the
+  filter worked flawlessly and marked every single item unsourced, because there
+  was nothing to match.
+</p>
+
+<p>
+  If you take one operational detail from this: put the source list in the
+  prompt explicitly, labelled as the only permissible citations, and separately
+  from the prose summary of what those sources said. Then verify against the
+  live model that citations actually come back, because a filter with an empty
+  input is indistinguishable from a filter working correctly.
+</p>
+
+<h2>Where this generalises</h2>
+
+<p>
+  The pattern is not really about citations. It is: <em>when a model produces a
+  reference to something in the real world, validate the reference against the
+  real world rather than trusting the reference.</em>
+</p>
+
+<p>
+  It applies to file paths a model claims exist, function names it says are
+  defined, product identifiers, dates, prices, statute numbers, and anything else
+  where being wrong is invisible in the shape of the answer. If you can check it
+  cheaply, check it. If you cannot check it, say you cannot — and make the
+  interface say it too.
+</p>
+
+</article>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>The Prompt Architect — written by Cam Sweatman, Pensacola, Florida.</p>
+    <p><a href="/">More writing</a> · <a href="/about.html">About</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

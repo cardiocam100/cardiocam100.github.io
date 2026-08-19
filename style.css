@@ -1,0 +1,128 @@
+/* The Prompt Architect — one stylesheet, no external requests.
+   Self-hosted on purpose: a font CDN is a third party that can slow, track,
+   or break the page, and none of this needs one. */
+
+:root {
+  --bg: #0e1116;
+  --panel: #151a21;
+  --line: #232a34;
+  --ink: #e6edf3;
+  --muted: #9aa7b4;
+  --accent: #4dd0c7;
+  --accent-dim: #2b8f89;
+  --max: 46rem;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #fbfcfd;
+    --panel: #ffffff;
+    --line: #e2e8ee;
+    --ink: #16202b;
+    --muted: #5b6875;
+    --accent: #0f766e;
+    --accent-dim: #0d5f59;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 17px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+
+header.site {
+  border-bottom: 1px solid var(--line);
+  padding: 1.5rem 0;
+  margin-bottom: 3rem;
+}
+header.site .wrap { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+header.site a.brand {
+  font-weight: 700; letter-spacing: -0.01em; font-size: 1.05rem;
+  color: var(--ink); text-decoration: none;
+}
+header.site a.brand span { color: var(--accent); }
+nav a {
+  color: var(--muted); text-decoration: none; margin-left: 1.25rem; font-size: 0.95rem;
+}
+nav a:hover, nav a:focus { color: var(--accent); }
+
+h1 { font-size: 2rem; line-height: 1.25; letter-spacing: -0.02em; margin: 0 0 0.75rem; }
+h2 { font-size: 1.3rem; line-height: 1.35; margin: 2.5rem 0 0.75rem; letter-spacing: -0.01em; }
+h3 { font-size: 1.05rem; margin: 2rem 0 0.5rem; }
+
+p, li { color: var(--ink); }
+.lede { font-size: 1.15rem; color: var(--muted); margin-top: 0; }
+
+a { color: var(--accent); }
+a:hover { color: var(--accent-dim); }
+
+article { padding-bottom: 3rem; }
+article time { color: var(--muted); font-size: 0.9rem; }
+
+ul.posts { list-style: none; padding: 0; margin: 2rem 0 0; }
+ul.posts li {
+  border-top: 1px solid var(--line);
+  padding: 1.5rem 0;
+}
+ul.posts h2 { margin: 0 0 0.35rem; font-size: 1.15rem; }
+ul.posts h2 a { text-decoration: none; }
+ul.posts h2 a:hover { text-decoration: underline; }
+ul.posts p { margin: 0.35rem 0 0; color: var(--muted); font-size: 0.98rem; }
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0.75rem 0 0.75rem 1.25rem;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+}
+
+code {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+pre code { background: none; border: 0; padding: 0; font-size: 0.86rem; }
+
+.note {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 1rem 1.15rem;
+  margin: 1.75rem 0;
+}
+.note p { margin: 0; }
+
+footer.site {
+  border-top: 1px solid var(--line);
+  margin-top: 4rem;
+  padding: 2rem 0 3rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+footer.site a { color: var(--muted); }
+
+table { border-collapse: collapse; width: 100%; margin: 1.5rem 0; font-size: 0.95rem; }
+th, td { border: 1px solid var(--line); padding: 0.6rem 0.75rem; text-align: left; vertical-align: top; }
+th { background: var(--panel); }
+
+.tablewrap { overflow-x: auto; }
+img { max-width: 100%; height: auto; }

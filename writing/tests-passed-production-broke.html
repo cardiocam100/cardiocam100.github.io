@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The tests passed. The feature was broken for every user. — The Prompt Architect</title>
+<meta name="description" content="Five passing tests covering a feature that was uniformly broken in production. What mocked tests can and cannot prove about an LLM feature.">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>◆</text></svg>">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">The Prompt <span>Architect</span></a>
+    <nav>
+      <a href="/">Writing</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+<article>
+
+<h1>The tests passed. The feature was broken for every user.</h1>
+<time datetime="2026-08-18">18 August 2026</time>
+
+<p>
+  I shipped a feature with five passing tests. It was broken for every single
+  user, immediately, in a way that made the product worse than before I touched
+  it. The tests were not wrong. They were answering a different question than the
+  one that mattered.
+</p>
+
+<h2>The feature</h2>
+
+<p>
+  My campaign tool has a research component that suggests products worth
+  promoting. For each one it prints a commission estimate in bold green type and
+  a trend statistic — something like <em>"search volume up 180% year over
+  year"</em> — as flat, unqualified fact.
+</p>
+
+<p>
+  Both numbers are model output. The system does run live web research and gets
+  back real sources, but nothing tied any specific number to any specific source.
+  A figure the research fully supported and a figure the model invented rendered
+  identically. Someone could spend money against either.
+</p>
+
+<p>
+  So I built provenance: ask the model to cite which retrieved sources back each
+  claim, filter those citations against the URLs research actually returned, and
+  mark anything unsupported as an unverified estimate. I wrote five tests. A
+  citation that matches a retrieved source survives. One that does not is
+  dropped. A product whose citations all fail is marked unsourced. Missing
+  citations do not crash. All green. Shipped.
+</p>
+
+<h2>What actually happened</h2>
+
+<p>
+  Later I ran the real endpoint against the real model, because a rule I try to
+  hold is that a feature is not verified until it has been exercised against
+  live data. Research retrieved five sources. All six products came back
+  <strong>unsourced</strong>.
+</p>
+
+<p>
+  Every card in production now read "Unverified estimate." Not because the
+  numbers were bad, but because the filter dropped everything. I had replaced an
+  unlabelled figure with a figure labelled untrustworthy, across the board. That
+  is worse. An unlabelled number invites you to check it. A number the system
+  itself flags as unverified trains you to ignore the flag.
+</p>
+
+<h2>The bug was in the prompt</h2>
+
+<p>
+  The grounding block sent to the model contained the research <em>text</em> — a
+  synthesised summary of what the sources said. It did not contain the source
+  <em>URLs</em>.
+</p>
+
+<p>
+  So the instruction was, in effect: <em>cite verbatim from a list you cannot
+  see.</em> The model did the only reasonable thing and returned nothing, or
+  returned plausible-looking URLs from memory that my filter correctly rejected.
+  The filter worked perfectly. It was filtering against an empty intersection.
+</p>
+
+<div class="note">
+  <p>
+    <strong>The one-line fix:</strong> put the retrieved URLs in the prompt as an
+    explicit list — <em>these are the only URLs you may cite</em> — alongside the
+    research text. After that, five of six products carried a genuine citation.
+  </p>
+</div>
+
+<h2>Why the tests could not have caught it</h2>
+
+<p>
+  This is the part worth internalising. My tests all had this shape:
+</p>
+
+<pre><code>mockModel.returns({ sourceUrls: ["https://example.com/report"] })
+mockResearch.returns({ sources: [{ url: "https://example.com/report" }] })
+// assert the citation survives</code></pre>
+
+<p>
+  Every test <em>handed the endpoint citations</em> and asserted what it did with
+  them. The defect was that in production the model produced no usable citations,
+  because of what the prompt did not contain. No amount of testing the filter can
+  surface a bug in the input to the filter, when the test supplies the input.
+</p>
+
+<p>
+  The mock encoded my assumption — that the model would return matching URLs —
+  and then confirmed it. That is the failure mode of mocking: a mock is a
+  statement of what you believe the world does, dressed as a test of what your
+  code does.
+</p>
+
+<h2>The test I added afterwards</h2>
+
+<p>
+  The property I was missing was not about the filter at all. It was about the
+  prompt:
+</p>
+
+<pre><code>it("shows the model the retrieved URLs, or it can never cite one", ...)
+// assert every retrieved source URL appears in the text sent to the model</code></pre>
+
+<p>
+  That test would have failed on the original implementation. It asserts the one
+  precondition that makes everything downstream reachable. It is worth asking, of
+  any LLM feature: <em>what must be true of the prompt for this feature to be
+  possible at all?</em> — and testing that, separately from what you do with the
+  response.
+</p>
+
+<h2>Two things I took from it</h2>
+
+<p>
+  <strong>Mocked tests verify plumbing, not behaviour.</strong> For anything
+  involving a model, they tell you the code handles a response correctly. They
+  tell you nothing about whether that response will ever occur. Those are
+  different claims and it is easy to feel covered by the first while needing the
+  second.
+</p>
+
+<p>
+  <strong>Run it against the real thing before believing it.</strong> One live
+  call took under a minute and found a defect that a full green suite had
+  certified as working. If a feature depends on a model's behaviour, budget for
+  exercising it against the model — not as a final smoke test, but as the thing
+  that decides whether you shipped what you think you shipped.
+</p>
+
+<p>
+  There is a smaller detail I have thought about since. When the fix landed, five
+  of six products cited correctly. The sixth cited
+  <code>flexoffers.com/...</code> where the retrieved URL was
+  <code>www.flexoffers.com/...</code> — a missing subdomain. My filter dropped it,
+  correctly. A human reviewer would have glanced at that and waved it through.
+  That is the case for matching citations mechanically rather than eyeballing
+  them: the near-misses are exactly what a person's eye smooths over.
+</p>
+
+</article>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>The Prompt Architect — written by Cam Sweatman, Pensacola, Florida.</p>
+    <p><a href="/">More writing</a> · <a href="/about.html">About</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

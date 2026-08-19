@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — The Prompt Architect</title>
+<meta name="description" content="About The Prompt Architect: field notes on building reliable AI systems, written by Cam Sweatman.">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>◆</text></svg>">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">The Prompt <span>Architect</span></a>
+    <nav>
+      <a href="/">Writing</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+<article>
+
+<h1>About</h1>
+
+<p class="lede">
+  Field notes on building AI systems that fail honestly, written from the middle
+  of building one.
+</p>
+
+<p>
+  I am Cam Sweatman. I work in Pensacola, Florida, and I build
+  <strong>AMCO</strong> — a campaign orchestrator that takes a business brief and
+  produces the material a marketing campaign is made of: strategy, channel copy,
+  content calendars, visual direction, email sequences, and the import files a
+  client loads into whatever tools they already pay for.
+</p>
+
+<p>
+  It is not a demo. It generates output that goes to real businesses, which is
+  the only reason any of this writing is worth reading. A system that never ships
+  produces opinions. A system that ships produces bugs, and bugs are where the
+  actual knowledge is.
+</p>
+
+<h2>What I write about</h2>
+
+<p>
+  Mostly one thing, from different angles: <strong>a language model produces
+  confident, well-formed, plausible output whether or not it has any basis for
+  it.</strong> Every serious defect I have shipped comes back to trusting the
+  shape of an answer instead of its substance — a citation that was never
+  retrieved, a test that asserted my assumption back to me, a format designed
+  against a platform that works differently than I imagined.
+</p>
+
+<p>
+  So the recurring subjects are evidence discipline, verification that actually
+  catches things, and the gap between "the tests pass" and "it works."
+</p>
+
+<h2>How I try to work</h2>
+
+<ul>
+  <li>
+    <strong>Run it against the real thing before believing it.</strong> Mocked
+    tests verify plumbing. They cannot tell you whether the response you handled
+    correctly will ever occur.
+  </li>
+  <li>
+    <strong>Prefer the honest gap to the plausible filler.</strong> An empty
+    field, a stated "unverified," a missing merge tag — all better than a
+    confident value that fails in front of somebody else's customer.
+  </li>
+  <li>
+    <strong>Read the vendor's own documentation.</strong> Not a summary of it.
+    Several summaries I checked were confident and wrong.
+  </li>
+  <li>
+    <strong>Write the failure down.</strong> Most of these posts exist because I
+    wanted the next person hitting the same wall — often me, months later — to
+    hit it once instead of twice.
+  </li>
+</ul>
+
+<h2>Contact</h2>
+
+<p>
+  You can reach me at
+  <a href="mailto:nosweatautomotive@gmail.com">nosweatautomotive@gmail.com</a>.
+  I also run <a href="https://nosweatautomotive.com">No Sweat Automotive</a>, a
+  family collision repair shop in Pensacola that has been open since 1988 — which
+  is a different job entirely, and the reason I care about tools that work for
+  small businesses rather than tools that demo well.
+</p>
+
+</article>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>The Prompt Architect — written by Cam Sweatman, Pensacola, Florida.</p>
+    <p><a href="/">More writing</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

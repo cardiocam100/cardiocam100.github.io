@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>No email platform imports a sequence — The Prompt Architect</title>
+<meta name="description" content="A design assumption that survived a week of planning and died in ten minutes of reading vendor documentation, and what that changed about the export.">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>◆</text></svg>">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">The Prompt <span>Architect</span></a>
+    <nav>
+      <a href="/">Writing</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+<article>
+
+<h1>No email platform imports a sequence</h1>
+<time datetime="2026-08-18">18 August 2026</time>
+
+<p>
+  My campaign tool generates email sequences: five or six messages with subject
+  lines, preview text, body copy, and a day number saying when each should go
+  out. For a long time the generated sequence sat in the product with no way to
+  get it anywhere useful. The obvious next step was an export.
+</p>
+
+<p>
+  I assumed that export was a file — some structured format you upload to your
+  email platform, which reads it and builds the sequence. That assumption is
+  wrong, and it is wrong in a way that changes the entire shape of the feature.
+</p>
+
+<h2>What the documentation actually says</h2>
+
+<p>
+  Mailchimp and Klaviyo both import <strong>one HTML template at a time</strong>.
+  The automation that strings messages together — the delays, the ordering, the
+  branching — is built by hand in their interface. There is no format that
+  carries a sequence.
+</p>
+
+<div class="tablewrap">
+<table>
+  <tr><th></th><th>Mailchimp</th><th>Klaviyo</th></tr>
+  <tr><td>Import unit</td><td>One HTML file, or a zip</td><td>One .html file, or a zip for assets</td></tr>
+  <tr><td>Unsubscribe</td><td>Requires its own merge tag in every campaign</td><td>Requires its own unsubscribe tag</td></tr>
+  <tr><td>Zip limits</td><td>Under 1MB, exactly one HTML file, images in the root</td><td>Carries assets</td></tr>
+  <tr><td>Plan gate</td><td>Standard plan or higher</td><td>None stated</td></tr>
+</table>
+</div>
+
+<p>
+  Three consequences fall straight out of that table, and none of them are
+  matters of taste:
+</p>
+
+<p>
+  <strong>There is no vendor-neutral file.</strong> Both platforms require an
+  unsubscribe tag, and the syntax differs. A single HTML file cannot satisfy
+  both. Ship the wrong tag and the import is rejected — or worse, accepted and
+  then unable to send.
+</p>
+
+<p>
+  <strong>The timing has nowhere to live.</strong> No HTML import carries a day
+  number. If the export is only templates, the sequencing — the part the system
+  actually reasoned about — is silently discarded at the boundary.
+</p>
+
+<p>
+  <strong>"Zip the sequence" is wrong before you write it.</strong> Mailchimp's
+  zip holds exactly one HTML file. Five emails is five files or five zips, never
+  one bundle.
+</p>
+
+<h2>What I built instead</h2>
+
+<p>
+  A folder. One <code>.html</code> per email, ready to import. A
+  <code>SEQUENCE.txt</code> carrying the schedule. A README. And a plain-text
+  copy of every message.
+</p>
+
+<p>
+  The schedule file is the piece I would have missed. It does not just list day
+  numbers — it states the <em>wait between sends</em>:
+</p>
+
+<pre><code>  Day 1 — Eco vs. Potency: A False Trade?
+      file:    01-day-1-eco-vs-potency-a-false-trade.html
+
+      ↓ wait 3 days
+
+  Day 4 — The objection you are already thinking</code></pre>
+
+<p>
+  A wait is literally the number you type into a delay step. Printing only the
+  absolute day makes the person do arithmetic at the exact moment they are
+  clicking through an unfamiliar automation builder, which is where sequences get
+  mis-built.
+</p>
+
+<h2>Two details that only appear in real data</h2>
+
+<p>
+  I ran the exporter over forty real stored emails. Two things surfaced that no
+  amount of unit testing would have.
+</p>
+
+<p>
+  <strong>Two emails can share a day.</strong> The sheet rendered "wait 0 days,"
+  which is not an instruction anyone can follow — it reads as a defect in the
+  sequence you are handing a client. It now says "same day, send later in the
+  day."
+</p>
+
+<p>
+  <strong>The markdown is narrower than you would build for.</strong> Measured
+  across those forty bodies: bold in eight, italic in five, links in five, and
+  zero headings, zero bullet lists, zero raw HTML. I had been sizing up a full
+  markdown dependency for syntax that never appears. Forty lines of conversion
+  covers the actual distribution.
+</p>
+
+<h2>The part I refuse to automate</h2>
+
+<p>
+  The export deliberately emits <strong>no personalization merge tags</strong>.
+  Not <code>*|FNAME|*</code>, not anything. The system does not know which fields
+  the recipient's list carries, and a merge tag against a list that lacks it
+  sends "Hi ," to a real human being.
+</p>
+
+<p>
+  That is the same discipline as refusing to fabricate a citation. When you do
+  not know something, the correct output is the honest gap, not a plausible
+  filler that fails in front of someone else's customer.
+</p>
+
+<h2>The general lesson</h2>
+
+<p>
+  I spent real design effort on a format that could not exist. Ten minutes with
+  the vendor's own documentation, before the design rather than during the build,
+  would have saved all of it.
+</p>
+
+<p>
+  When a feature's job is to hand output to somebody else's system, the
+  constraint that decides the design lives in that system's documentation — not
+  in your data model, and not in what would be elegant. Go read it first. And
+  read the vendor's own pages, not a summary: the summaries were confident and
+  several were wrong about the plan gate.
+</p>
+
+<div class="note">
+  <p>
+    One more thing worth stating plainly: a file that parses is not a file that
+    imports. Until someone has uploaded it to the real platform and watched it
+    land, that half is unproven, and no test in your repository can prove it.
+  </p>
+</div>
+
+</article>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>The Prompt Architect — written by Cam Sweatman, Pensacola, Florida.</p>
+    <p><a href="/">More writing</a> · <a href="/about.html">About</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
