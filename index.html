@@ -2,113 +2,759 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Prompt Architect — building AI systems that fail honestly</title>
-<meta name="description" content="Field notes on building reliable AI systems: evidence discipline, verification that actually catches defects, and what shipping to real users teaches that tests cannot.">
-<link rel="stylesheet" href="/style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>◆</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AMCO | Whole marketing campaigns, built for real businesses</title>
+<meta name="description" content="AMCO builds complete marketing campaigns for local businesses: customer research, posts for 11 platforms, ads, emails, images and video, delivered on one link and ready to post.">
+<meta name="theme-color" content="#07080c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='%23ff2e63'/></svg>">
+<!-- Motion scene, built with the amco-orchestrator motion kit: ONE paused GSAP
+     timeline on window.__timeline, every time from timing.ts, facts from
+     data.json. render.mjs seeks it to make video; on the website (SITE mode,
+     set by build.mjs) the intro autoplays and scrolling scrubs the rest.
+     Never load anything from the network: fonts and images are local. -->
+<script src="assets/gsap.min.js"></script>
+<script>window.SITE = true; window.TIMING = {"fps":30,"size":[1920,1080],"shutter":0.1,"shutterLen":0.9,"heroIn":0.25,"kickerIn":0.9,"headlineIn":1.15,"wordStagger":0.09,"subIn":1.9,"ctaIn":2.25,"jetsIn":1,"jetsFly":1.5,"jetsStagger":0.14,"hudIn":2.4,"introEnd":3.2,"heroHold":1.4,"chapterLen":4.2,"wipe":0.85,"holdAt":1.6,"burst":0.9,"tail":3,"scrollPerSecond":0.5,"stills":[0.6,3,7.4,11.6,15.8,20,24.2,28.4,32.6,36.8,40,42.2]}; window.DATA = {"brand":"AMCO","site":"amco100.me","contactEmail":"camcampaigns@agentmail.to","contactSubject":"I want a campaign","place":"Pensacola, Florida","platforms":["Facebook","Instagram","Threads","X","YouTube","Reddit","LinkedIn","Pinterest","Etsy","Snapchat","TikTok"],"deliverables":["Customer profiles","Competitor intel","Keywords","Facebook and Instagram ads","Google search ads","Email sequences","Video ad scripts","Short vertical videos","Images","Content calendar","Brand kit","One-link campaign hub"],"chapters":[{"id":"launch","label":"Launch"},{"id":"research","label":"Research"},{"id":"intel","label":"Intel"},{"id":"ads","label":"Ads"},{"id":"brand","label":"Brand"},{"id":"video","label":"Video"},{"id":"delivery","label":"Delivery"},{"id":"reach","label":"Reach"},{"id":"how","label":"How it works"},{"id":"finale","label":"Work with us"}],"jets":[{"go":"research","label":"Research","x":70,"y":11,"w":8,"px":20,"py":12,"pw":24},{"go":"ads","label":"Ads and emails","x":87,"y":14,"w":9.5,"px":80,"py":12,"pw":26},{"go":"delivery","label":"Your campaign hub","x":78,"y":27,"w":8,"px":24,"py":26,"pw":20},{"go":"reach","label":"11 platforms","x":92,"y":34,"w":6.5,"px":80,"py":26,"pw":20},{"go":"how","label":"How it works","x":72,"y":41,"w":7,"px":22,"py":39,"pw":18}]};</script>
+
+<style>
+  @font-face { font-family: "Anton"; src: url("assets/fonts/anton.woff2") format("woff2"); font-display: block; }
+  @font-face { font-family: "Bebas Neue"; src: url("assets/fonts/bebas-neue.woff2") format("woff2"); font-display: block; }
+  @font-face { font-family: "Inter"; src: url("assets/fonts/inter.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: "JetBrains Mono"; src: url("assets/fonts/jetbrains-mono.woff2") format("woff2"); font-weight: 100 800; font-display: swap; }
+
+  :root {
+    --bg: #07080c; --ink: #f4f1ea; --muted: #a9afbd; --dim: #6b7280;
+    --neon: #ff2e63; --cyan: #2de2e6; --ember: #ff7a1a; --gold: #ffc53d;
+    --display: "Anton", "Impact", "Arial Narrow", sans-serif;
+    --hud: "Bebas Neue", "Anton", sans-serif;
+    --body: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --gutter: clamp(16px, 4.2vw, 80px);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); }
+  body { overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  body.render { width: 100vw; height: 100vh; overflow: hidden; }
+  a { color: inherit; }
+
+  /* The stage is the film frame: fixed, full viewport. The scroller under it
+     only provides scroll distance (SITE mode). */
+  .stage { position: fixed; inset: 0; overflow: hidden; background: var(--bg); }
+  #scroller { position: relative; width: 1px; pointer-events: none; }
+
+  /* Shots: one full-bleed image per chapter. .cam takes mouse parallax, the
+     img takes the timeline's camera moves, so they never fight. */
+  .shot { position: absolute; inset: 0; visibility: hidden; }
+  .shot .cam { position: absolute; inset: -3%; will-change: transform; }
+  .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+  .shot::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, rgba(7,8,12,.92) 0%, rgba(7,8,12,.72) 30%, rgba(7,8,12,.12) 58%, rgba(7,8,12,0) 75%),
+                linear-gradient(0deg, rgba(7,8,12,.85) 0%, rgba(7,8,12,0) 28%); }
+  #shot-launch img { object-position: 50% 30%; }
+  #shot-research img { object-position: 60% 40%; }
+  #shot-intel img { object-position: 60% 40%; }
+  #shot-ads img { object-position: 55% 40%; }
+  #shot-brand img { object-position: 60% 40%; }
+  #shot-video img { object-position: 62% 40%; }
+  #how-bg .bgimg { object-position: 60% 35%; }
+  #shot-delivery img { object-position: 60% 35%; }
+  /* Reach and How keep their graphic look: the scene sits behind a dark wash. */
+  .bgimg { position: absolute; inset: -3%; width: 106%; height: 106%; object-fit: cover; object-position: 58% 40%; will-change: transform; }
+  .reach-bg::after, .how-bg::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, rgba(7,8,12,.9) 0%, rgba(7,8,12,.66) 40%, rgba(7,8,12,.3) 70%, rgba(7,8,12,.45) 100%), linear-gradient(0deg, rgba(7,8,12,.85) 0%, rgba(7,8,12,0) 40%); }
+  .how-bg::after { background: linear-gradient(0deg, rgba(7,8,12,.92) 0%, rgba(7,8,12,.55) 55%, rgba(7,8,12,.25) 100%); }
+  .reach-bg .ticker { z-index: 1; }
+
+  /* Jets: --x/--y are % of the stage, --w is vw; --px/--py/--pw on phones. */
+  .jets { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+  .jet { position: absolute; left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); width: calc(var(--w) * 1vw); transform: translate(-50%, -50%); pointer-events: auto; text-decoration: none; display: block; visibility: hidden; }
+  .jet .fly, .jet .bob { display: block; position: relative; }
+  .jet img { display: block; width: 100%; filter: drop-shadow(0 8px 10px rgba(0,0,0,.28)); transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
+  .jet .trail { position: absolute; right: 86%; top: 48%; width: 320%; height: 16%; border-radius: 50%; pointer-events: none;
+    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55) 60%, rgba(255,255,255,.95)); filter: blur(3px); transform-origin: 100% 50%; transition: transform .35s, filter .35s; }
+  .jet .burn { position: absolute; right: 93%; top: 47%; width: 14%; height: 12%; border-radius: 50%; background: radial-gradient(closest-side, #fff7d6, #ffb347 45%, rgba(255,90,30,0)); opacity: 0; transition: opacity .25s; }
+  .jet .tag { position: absolute; left: 50%; top: 100%; margin-top: 2px; transform: translateX(-50%); white-space: nowrap; font-family: var(--hud); font-size: clamp(12px, .95vw, 18px); letter-spacing: .1em; text-transform: uppercase; padding: .3em .85em; border-radius: 999px; color: #fff; background: rgba(7,8,12,.62); box-shadow: 0 0 0 1px rgba(255,255,255,.35) inset; backdrop-filter: blur(4px); transition: background .25s, box-shadow .25s, transform .25s; }
+  .jet .tag b { font-weight: 400; color: var(--cyan); margin-left: .35em; }
+  .jet:hover img, .jet:focus-visible img { transform: translateY(-8%) rotate(-5deg) scale(1.1); }
+  .jet:hover .trail, .jet:focus-visible .trail { transform: scaleX(1.35); filter: blur(2px) brightness(1.2); }
+  .jet:hover .burn, .jet:focus-visible .burn { opacity: 1; }
+  .jet:hover .tag, .jet:focus-visible .tag { background: var(--neon); box-shadow: 0 0 22px rgba(255,46,99,.75); transform: translateX(-50%) scale(1.06); }
+  .jet:hover .tag b, .jet:focus-visible .tag b { color: #fff; }
+  .jet:focus-visible { outline: none; }
+  .jet:focus-visible .tag { outline: 2px solid var(--cyan); outline-offset: 2px; }
+  #card-launch { width: min(760px, 42vw); }
+  #card-launch h1 { font-size: clamp(50px, 6.2vw, 124px); }
+  canvas#fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .grain { position: absolute; inset: -50%; pointer-events: none; opacity: .09; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  .vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 60% 45%, rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 100%); }
+  .streaks { position: absolute; inset: 0; pointer-events: none; opacity: 0; mix-blend-mode: screen;
+    background: repeating-linear-gradient(180deg, rgba(255,255,255,0) 0 22px, rgba(255,255,255,.55) 22px 24px, rgba(255,255,255,0) 24px 61px, rgba(45,226,230,.6) 61px 62px, rgba(255,255,255,0) 62px 97px, rgba(255,46,99,.55) 97px 99px);
+    filter: blur(1px); }
+  .flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+  .shutter { position: absolute; left: 0; right: 0; height: 50.5%; background: #000; z-index: 30; }
+  .shutter.top { top: 0; } .shutter.bot { bottom: 0; }
+
+  /* Copy blocks */
+  .card { position: absolute; left: var(--gutter); top: 0; bottom: 0; width: min(780px, 52vw); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; visibility: hidden; z-index: 5; }
+  /* Cards and the top bar span big areas: only their own links take clicks,
+     so the jets underneath stay clickable. */
+  .card, nav.top { pointer-events: none; }
+  .card a, .card .step, nav.top a { pointer-events: auto; }
+  .kicker { font-family: var(--hud); font-size: clamp(16px, 1.45vw, 28px); letter-spacing: .14em; color: var(--cyan); display: flex; align-items: center; gap: .6em; }
+  .kicker::before { content: ""; width: 2.4em; height: 2px; background: currentColor; }
+  h1, h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: .92; margin: .25em 0 .35em; letter-spacing: .005em; }
+  h1 { font-size: clamp(54px, 7.6vw, 150px); }
+  h2 { font-size: clamp(44px, 5.6vw, 112px); }
+  .w { display: inline-block; overflow: hidden; vertical-align: top; padding: .04em .02em 0; margin: -.04em -.02em 0; }
+  .w > span { display: inline-block; }
+  h1 em, h2 em { font-style: normal; color: var(--neon); text-shadow: 0 0 .35em rgba(255,46,99,.45); }
+  .sub { font-size: clamp(16px, 1.3vw, 24px); line-height: 1.5; color: #d9dbe2; max-width: 34em; margin: 0 0 1.6em; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn { position: relative; display: inline-flex; align-items: center; gap: .6em; padding: .95em 1.5em; border-radius: 999px; font-family: var(--hud); font-size: clamp(18px, 1.35vw, 26px); letter-spacing: .08em; text-decoration: none; cursor: pointer; border: 0; will-change: transform; }
+  .btn.primary { background: var(--neon); color: #fff; box-shadow: 0 0 0 1px rgba(255,255,255,.12) inset, 0 10px 40px rgba(255,46,99,.45); }
+  .btn.primary:hover { box-shadow: 0 0 0 1px rgba(255,255,255,.3) inset, 0 12px 60px rgba(255,46,99,.75); }
+  .btn.ghost { color: var(--ink); background: rgba(255,255,255,.06); box-shadow: 0 0 0 1px rgba(255,255,255,.28) inset; backdrop-filter: blur(6px); }
+  .btn.ghost:hover { background: rgba(255,255,255,.14); }
+  .btn:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+  .btn .arr { transition: transform .25s; } .btn:hover .arr { transform: translateX(4px); }
+
+  /* HUD: the camera viewfinder over everything */
+  .hud { position: absolute; inset: 0; pointer-events: none; z-index: 10; }
+  .hud .corner { position: absolute; width: 38px; height: 38px; border: 2px solid rgba(255,255,255,.55); opacity: 0; }
+  .hud .tl { top: 84px; left: calc(var(--gutter) - 22px); border-right: 0; border-bottom: 0; }
+  .hud .tr { top: 84px; right: calc(var(--gutter) - 22px); border-left: 0; border-bottom: 0; }
+  .hud .bl { bottom: 28px; left: calc(var(--gutter) - 22px); border-right: 0; border-top: 0; }
+  .hud .br { bottom: 28px; right: calc(var(--gutter) - 22px); border-left: 0; border-top: 0; }
+  .hud .readout { position: absolute; bottom: 40px; right: var(--gutter); font-family: var(--mono); font-size: clamp(11px, .8vw, 15px); color: rgba(255,255,255,.75); letter-spacing: .08em; text-align: right; opacity: 0; line-height: 1.7; }
+  .rec { color: #fff; } .rec i { display: inline-block; width: .7em; height: .7em; border-radius: 50%; background: var(--neon); margin-right: .5em; vertical-align: -1px; box-shadow: 0 0 10px var(--neon); }
+  .hud .scene-name { color: var(--cyan); }
+
+  /* Top bar */
+  nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 18px var(--gutter); opacity: 0; }
+  .logo { display: flex; align-items: center; gap: .45em; font-family: var(--display); font-size: 30px; letter-spacing: .04em; text-decoration: none; }
+  .logo b { width: .5em; height: .5em; border-radius: 50%; background: var(--neon); box-shadow: 0 0 14px var(--neon); }
+  .logo small { font-family: var(--hud); font-size: 15px; color: var(--muted); letter-spacing: .14em; margin-left: .3em; }
+  .links { display: flex; align-items: center; gap: clamp(14px, 2vw, 34px); font-family: var(--hud); font-size: 19px; letter-spacing: .1em; }
+  .links a { text-decoration: none; color: #e7e8ec; }
+  .links a:hover { color: var(--cyan); }
+  .links .btn { font-size: 18px; padding: .65em 1.2em; }
+
+  /* Chapter rail */
+  .rail { position: fixed; right: calc(var(--gutter) - 30px); top: 50%; transform: translateY(-50%); z-index: 20; display: flex; flex-direction: column; gap: 14px; opacity: 0; }
+  .rail button { all: unset; cursor: pointer; display: flex; align-items: center; justify-content: flex-end; gap: 10px; font-family: var(--hud); letter-spacing: .12em; font-size: 15px; color: rgba(255,255,255,0); transition: color .2s; }
+  .rail button i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.35); transition: all .25s; }
+  .rail button:hover, .rail button:focus-visible { color: rgba(255,255,255,.9); }
+  .rail button.on i { background: var(--neon); box-shadow: 0 0 10px var(--neon); transform: scale(1.5); }
+
+  .hint { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); font-family: var(--hud); letter-spacing: .2em; font-size: 16px; color: rgba(255,255,255,.7); z-index: 6; opacity: 0; text-align: center; }
+  .hint span { display: block; width: 2px; height: 34px; margin: 8px auto 0; background: linear-gradient(var(--neon), transparent); }
+
+  /* Reach: platforms wall */
+  #card-reach { width: auto; right: var(--gutter); align-items: stretch; }
+  .count { font-family: var(--display); font-size: clamp(120px, 17vw, 330px); line-height: .8; color: var(--neon); text-shadow: 0 0 40px rgba(255,46,99,.45); float: left; margin: 0 .12em 0 -.04em; }
+  .reach-top { display: flow-root; }
+  .reach-top h2 { margin-top: .1em; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; max-width: 1180px; margin-top: 22px; }
+  .chip { font-family: var(--hud); font-size: clamp(17px, 1.45vw, 28px); letter-spacing: .08em; padding: .35em .8em; border-radius: 6px; background: rgba(255,255,255,.07); box-shadow: 0 0 0 1px rgba(255,255,255,.18) inset; }
+  .chip.p { color: #fff; background: rgba(45,226,230,.12); box-shadow: 0 0 0 1px rgba(45,226,230,.55) inset; }
+  .reach-bg { position: absolute; inset: 0; visibility: hidden; background: radial-gradient(ellipse at 20% 30%, rgba(255,46,99,.20), transparent 55%), radial-gradient(ellipse at 85% 80%, rgba(45,226,230,.16), transparent 50%), #07080c; }
+  .ticker { position: absolute; left: 0; white-space: nowrap; font-family: var(--display); text-transform: uppercase; font-size: clamp(60px, 9vw, 180px); color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.10); line-height: 1; }
+
+  /* How it works */
+  #card-how { width: auto; right: var(--gutter); align-items: stretch; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.6vw, 28px); margin-top: 10px; }
+  .step { position: relative; padding: clamp(18px, 2vw, 34px); border-radius: 14px; background: linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.02)); box-shadow: 0 0 0 1px rgba(255,255,255,.14) inset; transform-style: preserve-3d; }
+  .step .n { font-family: var(--display); font-size: clamp(48px, 5vw, 96px); line-height: 1; color: var(--cyan); text-shadow: 0 0 24px rgba(45,226,230,.35); }
+  .step h3 { font-family: var(--hud); font-weight: 400; font-size: clamp(24px, 2.1vw, 40px); letter-spacing: .06em; margin: .3em 0 .3em; }
+  .step p { margin: 0; color: #cfd2da; line-height: 1.5; font-size: clamp(14px, 1.05vw, 19px); }
+  .how-bg { position: absolute; inset: 0; visibility: hidden; background: linear-gradient(180deg, #0a0c14, #07080c); }
+  .how-bg::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(45,226,230,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(45,226,230,.07) 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse at 50% 60%, #000 30%, transparent 75%); }
+
+  /* Finale */
+  .finale-bg { position: absolute; inset: 0; visibility: hidden; background: radial-gradient(ellipse at 70% 60%, #3a1206 0%, #12070a 45%, #07080c 80%); }
+  .city { position: absolute; left: 0; right: 0; bottom: 0; height: 42%; }
+  #card-finale { width: min(980px, 64vw); }
+  #card-finale h2 { font-size: clamp(54px, 7vw, 140px); }
+  .mailline { margin: 1.1em 0 0; font-family: var(--mono); font-size: clamp(12px, .9vw, 16px); color: var(--muted); }
+  .mailline span { color: var(--ink); user-select: all; }
+  .foot { position: absolute; left: calc(var(--gutter) - 12px); bottom: 16px; display: flex; flex-direction: column; gap: 4px; padding: 8px 12px; border-radius: 8px; background: rgba(7,8,12,.82); backdrop-filter: blur(4px); font-size: 13px; color: var(--dim); z-index: 6; visibility: hidden; }
+  .foot a { color: var(--muted); }
+
+  /* Phones and portrait: copy sits at the bottom over a taller scrim. */
+  @media (max-aspect-ratio: 1/1), (max-width: 760px) {
+    .shot::after { background: linear-gradient(0deg, rgba(7,8,12,.97) 0%, rgba(7,8,12,.86) 40%, rgba(7,8,12,.15) 66%, rgba(7,8,12,0) 80%); }
+    #shot-launch img { object-position: 47% 20%; }
+    #shot-research img { object-position: 80% 30%; }
+    #shot-intel img { object-position: 88% 30%; }
+    #shot-brand img { object-position: 62% 40%; }
+    #shot-video img { object-position: 64% 40%; }
+    #how-bg .bgimg { object-position: 72% 30%; }
+    #shot-ads img { object-position: 60% 30%; }
+    #shot-delivery img { object-position: 68% 20%; }
+    .bgimg { object-position: 62% 30%; }
+    .card, #card-finale { width: auto; right: var(--gutter); justify-content: flex-end; padding-bottom: max(92px, 9vh); }
+    #card-reach, #card-how { justify-content: center; padding: 70px 0 40px; }
+    .steps { grid-template-columns: 1fr; }
+    .step { padding: 14px 18px; display: grid; grid-template-columns: auto 1fr; column-gap: 16px; align-items: center; }
+    .step .n { grid-row: span 2; }
+    .step h3 { margin: 0; }
+    .links a:not(.btn) { display: none; }
+    .rail { right: 6px; gap: 10px; }
+    .rail button span { display: none; }
+    .hud .readout { bottom: auto; top: 70px; }
+    .hud .corner { display: none; }
+    .hint { display: none; }
+    .foot { bottom: 10px; font-size: 11px; }
+    .count { font-size: clamp(110px, 32vw, 200px); }
+  }
+  @media (max-aspect-ratio: 1/1), (max-width: 760px) {
+    .jet { left: calc(var(--px) * 1%); top: calc(var(--py) * 1%); width: calc(var(--pw) * 1vw); }
+    .jet .tag { font-size: 11px; padding: .25em .6em; }
+    #card-launch { width: auto; }
+  }
+  @media (max-width: 760px) { .logo small { display: none; } }
+</style>
 </head>
 <body>
-
-<header class="site">
-  <div class="wrap">
-    <a class="brand" href="/">The Prompt <span>Architect</span></a>
-    <nav>
-      <a href="/">Writing</a>
-      <a href="/about.html">About</a>
-    </nav>
+<nav class="top" id="nav" aria-label="Main">
+  <a class="logo" href="/"><b></b>AMCO<small>amco100.me</small></a>
+  <div class="links">
+    <a href="#research" data-go="research">Services</a>
+    <a href="#how" data-go="how">How it works</a>
+    <a href="/writing/">Writing</a>
+    <a class="btn primary mag" data-email href="#finale">Work With Us</a>
   </div>
-</header>
+</nav>
 
-<main class="wrap">
-
-  <h1>Building AI systems that fail honestly</h1>
-  <p class="lede">
-    Most writing about AI engineering describes what worked. These are notes on
-    what broke — specifically, the failures that passing test suites did not
-    catch, and the disciplines that would have caught them sooner.
-  </p>
-
-  <p>
-    I build <strong>AMCO</strong>, a campaign orchestrator that generates marketing
-    material end to end: strategy briefs, channel copy, content calendars, visual
-    direction, email sequences, and the export files a client loads into their own
-    tools. It is a real system with real output going to real businesses, which
-    means its failures are the useful kind — the ones that cost something.
-  </p>
-
-  <p>
-    The recurring theme in everything below: <em>a language model will produce
-    confident, well-formed, plausible output whether or not it has any basis for
-    it.</em> Almost every hard bug I have shipped traces back to trusting the
-    shape of an answer instead of its substance.
-  </p>
-
-  <ul class="posts">
-    <li>
-      <h2><a href="/writing/one-character-kept-my-domain-dark.html">One character kept my domain dark for nine days</a></h2>
-      <time datetime="2026-08-18">18 August 2026</time>
-      <p>
-        A GitHub Pages CNAME with an extra zero. DNS resolved, the build was
-        green, the hosting was correct — and the site 404'd, because none of
-        those checks can see a misspelled name inside a file.
-      </p>
-    </li>
-    <li>
-      <h2><a href="/writing/design-for-text-you-didnt-write.html">Design for text you didn't write</a></h2>
-      <time datetime="2026-08-18">18 August 2026</time>
-      <p>
-        The same layout bug, shipped twice in the same component. When a model
-        writes your copy, every length assumption in your CSS becomes a bug
-        waiting for the right output.
-      </p>
-    </li>
-    <li>
-      <h2><a href="/writing/the-mutation-test-that-proved-nothing.html">The mutation test that proved nothing</a></h2>
-      <time datetime="2026-08-18">18 August 2026</time>
-      <p>
-        Breaking your code to confirm a test fails is good practice — and it has
-        three ways to lie to you. Twice now, mine did.
-      </p>
-    </li>
-    <li>
-      <h2><a href="/writing/tests-passed-production-broke.html">The tests passed. The feature was broken for every user.</a></h2>
-      <time datetime="2026-08-18">18 August 2026</time>
-      <p>
-        Five tests, all green, covering a feature that was uniformly broken in
-        production. The mocks asserted what the code did with data it was given —
-        and the actual defect was that the model was never given anything.
-      </p>
-    </li>
-    <li>
-      <h2><a href="/writing/fabricated-citations.html">A fabricated citation is worse than no citation</a></h2>
-      <time datetime="2026-08-18">18 August 2026</time>
-      <p>
-        If you ask a model to cite its sources, it will. Whether or not it read
-        them. The fix is not a better prompt — it is refusing to trust the model's
-        URLs at all, and matching them against what you actually retrieved.
-      </p>
-    </li>
-    <li>
-      <h2><a href="/writing/no-esp-imports-a-sequence.html">No email platform imports a sequence</a></h2>
-      <time datetime="2026-08-18">18 August 2026</time>
-      <p>
-        I planned an email export for a week on an assumption that turned out to
-        be false in the first ten minutes of reading vendor documentation. A note
-        on checking the world before designing against it.
-      </p>
-    </li>
-  </ul>
-
-</main>
-
-<footer class="site">
-  <div class="wrap">
-    <p>The Prompt Architect — written by Cam Sweatman, Pensacola, Florida.</p>
-    <p class="disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
-    <p><a href="/about.html">About this site</a></p>
+<div class="stage" id="stage">
+  <section class="shot" id="shot-launch" aria-label="Launch"><div class="cam"><img src="assets/img/jet-hero.jpg" alt="A man in a suit stands on top of a flying jet high above a white-sand beach, typing on a laptop at a steel desk bolted to the jet, coffee in hand."></div></section>
+  <section class="shot" id="shot-research" aria-label="Research"><div class="cam"><img src="assets/img/ocean.jpg" alt="At the bottom of the ocean, a man in a suit and a glass diving helmet runs a focus group, taking notes while a giant squid, anglerfish and a sea turtle sit on a sunken couch."></div></section>
+  <section class="shot" id="shot-intel" aria-label="Competitor intel"><div class="cam"><img src="assets/img/shark.jpg" alt="In a hurricane at sea, he sits on a tiny raft playing chess against a great white shark."></div></section>
+  <section class="shot" id="shot-ads" aria-label="Ads"><div class="cam"><img src="assets/img/everest.jpg" alt="At a glass desk on the snowy summit of Everest, he arm-wrestles a grizzly bear and signs a contract with his other hand while a climber holds an umbrella over the paperwork."></div></section>
+  <section class="shot" id="shot-brand" aria-label="Brand kit"><div class="cam"><img src="assets/img/balloon.jpg" alt="Hanging one-handed from a hot-air balloon above the clouds, he repaints a giant billboard with a paint roller while flamingos in sunglasses fly past."></div></section>
+  <section class="shot" id="shot-video" aria-label="Video"><div class="cam"><img src="assets/img/volcano.jpg" alt="In the crater of an erupting volcano, he sits in a director's chair sipping iced coffee while a film crew in fire suits rolls cameras."></div></section>
+  <section class="shot" id="shot-delivery" aria-label="Delivery"><div class="cam"><img src="assets/img/moon.jpg" alt="On the Moon, he jetpacks off with a glowing pizza box for Earth while astronauts wave and a rover pulls a wheelie."></div></section>
+  <!-- The formation: each jet is a link to one chapter of the film. -->
+  <nav class="jets" id="jets" aria-label="Services"></nav>
+  <div class="reach-bg" id="reach-bg">
+    <img class="bgimg" src="assets/img/trex.jpg" alt="He rides a galloping T. rex down a city street, eleven glowing phones strapped to it, posting from a twelfth while the crowd films.">
+    <div class="ticker" id="tick1" style="top:8%"></div>
+    <div class="ticker" id="tick2" style="top:auto;bottom:6%"></div>
   </div>
-</footer>
+  <div class="how-bg" id="how-bg"><img class="bgimg" src="assets/img/train.jpg" alt="He walks along the roof of a speeding train through the mountains at dusk, reading a tablet, tie flying behind him."></div>
+  <div class="finale-bg" id="finale-bg"><svg class="city" id="city" viewBox="0 0 1600 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg></div>
 
+  <canvas id="fx"></canvas>
+  <div class="streaks" id="streaks"></div>
+
+  <!-- Copy. Every claim here is something AMCO really does today. -->
+  <div class="card" id="card-launch">
+    <div class="kicker">Marketing campaigns, made by AMCO</div>
+    <h1 class="split">It's a normal Tuesday. <em>Your campaign is done.</em></h1>
+    <p class="sub">We research your customers, read your competitors, then write and design everything: posts for 11 platforms, ads, emails, images and video. You get one link with all of it, ready to post.</p>
+    <div class="ctas">
+      <a class="btn primary mag" data-email href="#finale">Work With Us <span class="arr">&rarr;</span></a>
+      <a class="btn ghost mag" href="#research" data-go="research">Roll the film</a>
+    </div>
+  </div>
+  <div class="card" id="card-research">
+    <div class="kicker">Scene 02 &middot; Research</div>
+    <h2 class="split">First, we find out <em>who actually buys from you.</em></h2>
+    <p class="sub">Customer profiles built from your website and your market: what your buyers want, what makes them hesitate, and what finally gets a yes. Plus the exact words they search before they find you.</p>
+  </div>
+  <div class="card" id="card-intel">
+    <div class="kicker">Scene 03 &middot; Competitor intel</div>
+    <h2 class="split">We read your competitors' websites <em>so you don't have to.</em></h2>
+    <p class="sub">Who you're up against, what each of them leads with, and the gap nobody is filling yet. Every source we cite is a page we actually read.</p>
+  </div>
+  <div class="card" id="card-ads">
+    <div class="kicker">Scene 04 &middot; Ads that close</div>
+    <h2 class="split">No more staring at <em>an empty ad box.</em></h2>
+    <p class="sub">Facebook, Instagram and Google ads written around the reason people pick you, plus email sequences ready to load into your email tool.</p>
+  </div>
+  <div class="card" id="card-brand">
+    <div class="kicker">Scene 05 &middot; Brand kit</div>
+    <h2 class="split">Every post looks like <em>the same business made it.</em></h2>
+    <p class="sub">Your logo, colors and fonts on every image, video and page, so someone who scrolls past three of your posts knows all three were you.</p>
+  </div>
+  <div class="card" id="card-video">
+    <div class="kicker">Scene 06 &middot; Video</div>
+    <h2 class="split">And yes, <em>video.</em></h2>
+    <p class="sub">Vertical videos for Reels, TikTok and Shorts, plus video ad scripts with a voiceover track, all built from the same research as everything else.</p>
+  </div>
+  <div class="card" id="card-delivery">
+    <div class="kicker">Scene 07 &middot; Delivery</div>
+    <h2 class="split">One link. <em>All of it.</em></h2>
+    <p class="sub">Posts, ads, emails, images and a posting calendar on one page dressed in your brand. Open it on your phone, copy a post, post it.</p>
+  </div>
+  <div class="card" id="card-reach">
+    <div class="kicker">Scene 08 &middot; Reach</div>
+    <div class="reach-top"><div class="count" id="count">0</div><h2 class="split">Platforms. Written for each one, <em>not pasted into all of them.</em></h2></div>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="card" id="card-how">
+    <div class="kicker">Scene 09 &middot; How it works</div>
+    <h2 class="split">Three steps. <em>You do the first one.</em></h2>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h3>Send your website</h3><p>Or just tell us about the business. Two minutes, tops.</p></div>
+      <div class="step"><div class="n">02</div><h3>We build the campaign</h3><p>Research, strategy, posts, ads, emails, images and video. A real person checks every claim before you see it.</p></div>
+      <div class="step"><div class="n">03</div><h3>You get one link</h3><p>Everything in one place, ready to post. Want another one next month? Say so.</p></div>
+    </div>
+  </div>
+  <div class="card" id="card-finale">
+    <div class="kicker">Scene 10 &middot; Work with us</div>
+    <h2 class="split">We'll take it <em>from here.</em></h2>
+    <p class="sub">Tell us about your business, and we'll show you what a whole campaign for it looks like.</p>
+    <div class="ctas">
+      <a class="btn primary mag" data-email href="#finale">Work With Us <span class="arr">&rarr;</span></a>
+      <a class="btn ghost mag" href="#launch" data-go="launch">Watch it again</a>
+    </div>
+    <p class="mailline">Or write to <span data-email-text></span></p>
+  </div>
+  <div class="foot" id="foot">
+    <span>AMCO, made by Cam Sweatman in <span data-place></span>.</span>
+    <span><a href="/writing/">Writing</a> &middot; As an Amazon Associate I earn from qualifying purchases.</span>
+  </div>
+
+  <div class="hint" id="hint">Click a jet, or scroll to roll the film<span></span></div>
+  <div class="hud" aria-hidden="true">
+    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+    <div class="readout" id="readout"><div class="rec"><i></i>REC <span id="tc">00:00:00:00</span></div><div class="scene-name" id="scene-name">SCENE 01 &middot; LAUNCH</div></div>
+  </div>
+  <div class="flash" id="flash"></div>
+  <div class="shutter top" id="sh-top"></div><div class="shutter bot" id="sh-bot"></div>
+</div>
+<nav class="rail" id="rail" aria-label="Chapters"></nav>
+<div id="scroller"></div>
+
+<script>
+(() => {
+  const T = window.TIMING, D = window.DATA, SITE = !!window.SITE;
+  const $ = (s) => document.querySelector(s);
+  if (!SITE) document.body.classList.add("render");
+
+  // ---- Facts from data.json into the page ----
+  const mail = `mailto:${D.contactEmail}?subject=${encodeURIComponent(D.contactSubject)}`;
+  document.querySelectorAll("[data-email]").forEach((a) => a.setAttribute("href", mail));
+  document.querySelectorAll("[data-place]").forEach((s) => (s.textContent = D.place));
+  document.querySelectorAll("[data-email-text]").forEach((s) => (s.textContent = D.contactEmail));
+  $("#chips").innerHTML = D.platforms.map((p) => `<span class="chip p">${p}</span>`).join("") +
+    D.deliverables.map((p) => `<span class="chip">${p}</span>`).join("");
+  const tickText = (arr) => (arr.join(" • ") + " • ").repeat(3);
+  $("#tick1").textContent = tickText(D.platforms);
+  $("#tick2").textContent = tickText(D.deliverables);
+
+  $("#jets").innerHTML = D.jets.map((j) =>
+    `<a class="jet" href="#${j.go}" data-go="${j.go}" aria-label="Fly to ${j.label}" style="--x:${j.x};--y:${j.y};--w:${j.w};--px:${j.px};--py:${j.py};--pw:${j.pw}">` +
+    `<span class="fly"><span class="bob"><span class="trail"></span><span class="burn"></span><img src="assets/img/jet.png" alt=""><span class="tag">${j.label}<b>&rarr;</b></span></span></span></a>`).join("");
+
+  // Skyline for the finale: deterministic, drawn once.
+  (() => {
+    let s = 7, out = "", x = 0;
+    const r = () => ((s = (s * 9301 + 49297) % 233280) / 233280);
+    while (x < 1600) {
+      const w = 50 + r() * 90, h = 90 + r() * 240, y = 400 - h;
+      out += `<rect x="${x.toFixed(0)}" y="${y.toFixed(0)}" width="${w.toFixed(0)}" height="${h.toFixed(0)}" fill="#0b0608"/>`;
+      for (let wy = y + 14; wy < 390; wy += 22) for (let wx = x + 10; wx < x + w - 12; wx += 18)
+        if (r() > 0.62) out += `<rect class="win" x="${wx.toFixed(0)}" y="${wy.toFixed(0)}" width="8" height="10" fill="#ff9a3d" opacity="${(0.25 + r() * 0.6).toFixed(2)}"/>`;
+      x += w + 4;
+    }
+    // The tower that blows up stands where drawBoom() puts the blast (72% across).
+    out += `<rect x="1100" y="80" width="120" height="320" fill="#120709"/><rect x="1140" y="40" width="40" height="44" fill="#120709"/>`;
+    for (let wy = 100; wy < 390; wy += 24) for (let wx = 1112; wx < 1210; wx += 20) out += `<rect x="${wx}" y="${wy}" width="10" height="12" fill="#ffb347" opacity="${wy < 180 ? 0.9 : 0.35}"/>`;
+    $("#city").innerHTML = out;
+  })();
+
+  // Split headlines into masked words.
+  document.querySelectorAll(".split").forEach((h) => {
+    const walk = (node) => [...node.childNodes].forEach((n) => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) return frag.appendChild(document.createTextNode(" "));
+          const w = document.createElement("span"); w.className = "w";
+          const i = document.createElement("span"); i.textContent = part; w.appendChild(i); frag.appendChild(w);
+        });
+        n.replaceWith(frag);
+      } else walk(n);
+    });
+    walk(h);
+  });
+
+  // ---- Chapter clock ----
+  const ids = D.chapters.map((c) => c.id);
+  const start = {};
+  ids.forEach((id, i) => (start[id] = i === 0 ? 0 : T.introEnd + T.heroHold + (i - 1) * T.chapterLen));
+  const hold = (id) => (id === "launch" ? T.introEnd : id === "finale" ? start[id] + T.burst + T.holdAt : start[id] + T.holdAt);
+  const END = start.finale + T.holdAt + T.tail;
+
+  // Particle layers: their strength is tweened on the timeline, their motion
+  // is a pure function of time (drawn in frame()).
+  const fx = { sparks: 0, bubbles: 0, rain: 0, snow: 0, stars: 0, embers: 0, boom: 0, count: 0 };
+
+  const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+  const wordsOf = (sel) => document.querySelectorAll(`${sel} .w > span`);
+  const cardIn = (sel, at) => {
+    tl.set(sel, { autoAlpha: 1 }, at);
+    tl.fromTo(`${sel} .kicker`, { autoAlpha: 0, x: -40 }, { autoAlpha: 1, x: 0, duration: 0.5 }, at);
+    tl.fromTo(wordsOf(sel), { yPercent: 115, rotate: 4 }, { yPercent: 0, rotate: 0, duration: 0.6, stagger: T.wordStagger * 0.7, ease: "back.out(1.4)" }, at + 0.12);
+    tl.fromTo(`${sel} .sub, ${sel} .ctas, ${sel} .mailline, ${sel} .steps, ${sel} .chips`, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.55, stagger: 0.1 }, at + 0.45);
+  };
+  const cardOut = (sel, at) => {
+    tl.to(sel, { autoAlpha: 0, x: -60, duration: 0.35, ease: "power2.in" }, at);
+    tl.set(sel, { x: 0 }, at + 0.36);
+  };
+  // Whip-pan: old shot tears left with streaks, new shot rips in from the right.
+  const whip = (outSel, inSel, at) => {
+    tl.to("#streaks", { opacity: 0.85, duration: T.wipe * 0.35, ease: "power2.in" }, at);
+    tl.fromTo("#streaks", { backgroundPositionY: "0px" }, { backgroundPositionY: "-420px", duration: T.wipe, ease: "none" }, at);
+    tl.to("#streaks", { opacity: 0, duration: T.wipe * 0.5, ease: "power2.out" }, at + T.wipe * 0.5);
+    if (outSel) {
+      tl.to(`${outSel}`, { xPercent: -45, skewX: 8, duration: T.wipe * 0.6, ease: "power3.in" }, at);
+      tl.set(outSel, { autoAlpha: 0, xPercent: 0, skewX: 0 }, at + T.wipe * 0.6);
+    }
+    tl.set(inSel, { autoAlpha: 1 }, at + T.wipe * 0.45);
+    tl.fromTo(inSel, { xPercent: 45, skewX: -8 }, { xPercent: 0, skewX: 0, duration: T.wipe * 0.6, ease: "power3.out" }, at + T.wipe * 0.45);
+    tl.fromTo("#flash", { opacity: 0.0 }, { opacity: 0.18, duration: 0.08, yoyo: true, repeat: 1, ease: "none" }, at + T.wipe * 0.42);
+  };
+  // Slow camera push on a shot's image for its whole stay.
+  const push = (sel, from, to, at, len) => tl.fromTo(`${sel} img`, from, { ...to, duration: len, ease: "none" }, at);
+
+  // ---- Intro (autoplays on the site) ----
+  tl.set(".shot, .card, .reach-bg, .how-bg, .finale-bg, .foot", { autoAlpha: 0 }, 0);
+  tl.fromTo("#sh-top", { yPercent: 0 }, { yPercent: -101, duration: T.shutterLen, ease: "expo.inOut" }, T.shutter);
+  tl.fromTo("#sh-bot", { yPercent: 0 }, { yPercent: 101, duration: T.shutterLen, ease: "expo.inOut" }, T.shutter);
+  tl.set("#shot-launch", { autoAlpha: 1 }, 0);
+  tl.fromTo("#shot-launch img", { scale: 1.3, filter: "brightness(2.2) saturate(0.4)" }, { scale: 1.0, filter: "brightness(1) saturate(1)", duration: 1.1, ease: "expo.out" }, T.heroIn);
+  tl.fromTo(fx, { sparks: 0 }, { sparks: 1, duration: 0.8 }, T.heroIn + 0.3);
+  tl.set("#card-launch", { autoAlpha: 1 }, T.kickerIn);
+  tl.fromTo("#card-launch .kicker", { autoAlpha: 0, x: -40 }, { autoAlpha: 1, x: 0, duration: 0.5 }, T.kickerIn);
+  tl.fromTo(wordsOf("#card-launch"), { yPercent: 120, rotate: 6 }, { yPercent: 0, rotate: 0, duration: 0.55, stagger: T.wordStagger, ease: "back.out(1.7)" }, T.headlineIn);
+  tl.fromTo("#card-launch .sub", { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 0.6 }, T.subIn);
+  tl.fromTo("#card-launch .ctas", { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 0.6 }, T.ctaIn);
+  tl.fromTo("#nav, #rail, .hud .readout", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, T.hudIn);
+  tl.fromTo(".hud .corner", { autoAlpha: 0, scale: 1.6 }, { autoAlpha: 1, scale: 1, duration: 0.5, stagger: 0.06 }, T.hudIn);
+  tl.set(".jet", { autoAlpha: 1 }, T.jetsIn);
+  tl.fromTo(".jet .fly", { x: () => -innerWidth * 1.2, y: 40 }, { x: 0, y: 0, duration: T.jetsFly, stagger: T.jetsStagger, ease: "power3.out" }, T.jetsIn);
+  tl.fromTo(".jet .tag", { autoAlpha: 0, y: -6 }, { autoAlpha: 1, y: 0, duration: 0.4, stagger: T.jetsStagger }, T.jetsIn + T.jetsFly * 0.7);
+  tl.fromTo("#hint", { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.5 }, T.introEnd - 0.4);
+  tl.addLabel("introEnd", T.introEnd);
+
+  // ---- Scroll chapters ----
+  // Launch: the train keeps moving while the hero holds.
+  push("#shot-launch", { scale: 1.0, xPercent: 0 }, { scale: 1.06, xPercent: 1.5 }, T.introEnd, start.research - T.introEnd + T.wipe);
+  tl.to("#hint", { autoAlpha: 0, duration: 0.3 }, T.introEnd + 0.25);
+
+  cardOut("#card-launch", start.research);
+  tl.to(".jet .fly", { x: () => innerWidth * 1.1, y: -60, duration: 0.6, stagger: 0.05, ease: "power2.in" }, start.research - 0.2);
+  tl.set(".jet", { autoAlpha: 0 }, start.research + 0.7);
+  tl.to(fx, { sparks: 0, duration: 0.4 }, start.research);
+  whip("#shot-launch", "#shot-research", start.research);
+  push("#shot-research", { scale: 1.22, yPercent: 3 }, { scale: 1.04, yPercent: 0 }, start.research + T.wipe * 0.45, T.chapterLen);
+  tl.to(fx, { bubbles: 1, duration: 0.8 }, start.research + 0.5);
+  cardIn("#card-research", start.research + T.wipe * 0.8);
+
+  // Intel: chess with a shark, in the rain.
+  cardOut("#card-research", start.intel);
+  tl.to(fx, { bubbles: 0, duration: 0.4 }, start.intel);
+  whip("#shot-research", "#shot-intel", start.intel);
+  push("#shot-intel", { scale: 1.2, xPercent: -3 }, { scale: 1.04, xPercent: 0 }, start.intel + T.wipe * 0.45, T.chapterLen);
+  tl.to(fx, { rain: 1, duration: 0.8 }, start.intel + 0.4);
+  cardIn("#card-intel", start.intel + T.wipe * 0.8);
+
+  cardOut("#card-intel", start.ads);
+  tl.to(fx, { rain: 0, duration: 0.4 }, start.ads);
+  whip("#shot-intel", "#shot-ads", start.ads);
+  push("#shot-ads", { scale: 1.2, xPercent: 3 }, { scale: 1.04, xPercent: 0 }, start.ads + T.wipe * 0.45, T.chapterLen);
+  tl.to(fx, { snow: 1, duration: 0.8 }, start.ads + 0.4);
+  cardIn("#card-ads", start.ads + T.wipe * 0.8);
+
+  // Brand: the billboard in the clouds.
+  cardOut("#card-ads", start.brand);
+  tl.to(fx, { snow: 0, duration: 0.4 }, start.brand);
+  whip("#shot-ads", "#shot-brand", start.brand);
+  push("#shot-brand", { scale: 1.22, yPercent: -3 }, { scale: 1.04, yPercent: 0 }, start.brand + T.wipe * 0.45, T.chapterLen);
+  cardIn("#card-brand", start.brand + T.wipe * 0.8);
+
+  // Video: directing in a volcano, embers drifting.
+  cardOut("#card-brand", start.video);
+  whip("#shot-brand", "#shot-video", start.video);
+  push("#shot-video", { scale: 1.2, xPercent: 3 }, { scale: 1.04, xPercent: 0 }, start.video + T.wipe * 0.45, T.chapterLen);
+  cardIn("#card-video", start.video + T.wipe * 0.8);
+
+  cardOut("#card-video", start.delivery);
+  whip("#shot-video", "#shot-delivery", start.delivery);
+  push("#shot-delivery", { scale: 1.25, xPercent: -3 }, { scale: 1.05, xPercent: 0 }, start.delivery + T.wipe * 0.45, T.chapterLen);
+  tl.to(fx, { stars: 1, duration: 0.8 }, start.delivery + 0.4);
+  cardIn("#card-delivery", start.delivery + T.wipe * 0.8);
+
+  // Reach: text-only scene, count rolls 0 to 11, tickers slide.
+  cardOut("#card-delivery", start.reach);
+  tl.to(fx, { stars: 0, duration: 0.4 }, start.reach);
+  whip("#shot-delivery", "#reach-bg", start.reach);
+  tl.fromTo("#tick1", { xPercent: 0 }, { xPercent: -30, duration: T.chapterLen + 1, ease: "none" }, start.reach);
+  tl.fromTo("#tick2", { xPercent: -30 }, { xPercent: 0, duration: T.chapterLen + 1, ease: "none" }, start.reach);
+  tl.fromTo("#reach-bg .bgimg", { scale: 1.18, xPercent: 2 }, { scale: 1.02, xPercent: 0, duration: T.chapterLen + T.wipe, ease: "none" }, start.reach + T.wipe * 0.45);
+  cardIn("#card-reach", start.reach + T.wipe * 0.8);
+  tl.fromTo(fx, { count: 0 }, { count: D.platforms.length, duration: 1.1, ease: "power2.out" }, start.reach + T.wipe * 0.8 + 0.2);
+  tl.fromTo("#count", { scale: 0.4, rotate: -10 }, { scale: 1, rotate: 0, duration: 0.8, ease: "back.out(2)" }, start.reach + T.wipe * 0.8 + 0.1);
+  tl.fromTo("#chips .chip", { autoAlpha: 0, y: 24, scale: 0.8 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.035, ease: "back.out(2)" }, start.reach + T.wipe * 0.8 + 0.5);
+
+  // How it works: steps flip up like cards being dealt.
+  cardOut("#card-reach", start.how);
+  whip("#reach-bg", "#how-bg", start.how);
+  tl.fromTo("#how-bg .bgimg", { scale: 1.2, yPercent: 2 }, { scale: 1.04, yPercent: 0, duration: T.chapterLen + T.wipe, ease: "none" }, start.how + T.wipe * 0.45);
+  tl.fromTo(fx, { sparks: 0 }, { sparks: 0.8, duration: 0.8 }, start.how + 0.4);
+  tl.to(fx, { sparks: 0, duration: 0.4 }, start.finale);
+  cardIn("#card-how", start.how + T.wipe * 0.8);
+  tl.fromTo("#card-how .step", { rotateX: -70, y: 60, autoAlpha: 0, transformPerspective: 900 }, { rotateX: 0, y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.18, ease: "back.out(1.3)" }, start.how + T.wipe * 0.8 + 0.45);
+
+  // Finale: the building blows, our hero card does not.
+  cardOut("#card-how", start.finale);
+  whip("#how-bg", "#finale-bg", start.finale);
+  tl.fromTo("#city", { yPercent: 30 }, { yPercent: 0, duration: 1.0 }, start.finale + T.wipe * 0.5);
+  tl.fromTo(fx, { boom: 0 }, { boom: 1, duration: 2.6, ease: "none" }, start.finale + T.burst);
+  tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.85, duration: 0.06, ease: "none" }, start.finale + T.burst);
+  tl.to("#flash", { opacity: 0, duration: 0.6, ease: "power2.out" }, start.finale + T.burst + 0.06);
+  tl.to("#stage", { keyframes: [{ x: -14, y: 8 }, { x: 12, y: -6 }, { x: -8, y: 4 }, { x: 5, y: -2 }, { x: 0, y: 0 }], duration: 0.5, ease: "none" }, start.finale + T.burst);
+  tl.to(fx, { embers: 1, duration: 0.6 }, start.finale + T.burst);
+  cardIn("#card-finale", start.finale + T.burst + 0.35);
+  tl.fromTo("#foot", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, start.finale + T.burst + 1.2);
+  tl.to({}, { duration: 0.01 }, END - 0.01);
+  window.__timeline = tl;
+
+  // ---- Per-frame layer: particles, timecode, chapter readout ----
+  const cv = $("#fx"), cx = cv.getContext("2d");
+  let W = 0, H = 0, DPR = 1;
+  const size = () => {
+    DPR = Math.min(window.devicePixelRatio || 1, SITE ? 1.5 : 1);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+  };
+  size(); addEventListener("resize", () => { size(); if (SITE) layout(); });
+  const rnd = (i, k) => { const x = Math.sin(i * 127.1 + k * 311.7) * 43758.5453; return x - Math.floor(x); };
+  const N = () => (W < 760 ? 0.55 : 1);
+  const pad = (n) => String(Math.floor(n)).padStart(2, "0");
+  const railBtns = [];
+  const jetBobs = [...document.querySelectorAll(".jet .bob")];
+  let lastScene = "";
+
+  // Wind: thin speed lines racing past the jet (the hero shot's "sparks" layer).
+  function drawSparks(a, c) {
+    const n = Math.round(70 * N());
+    cx.lineCap = "round";
+    for (let i = 0; i < n; i++) {
+      const sp = (1.6 + rnd(i, 1) * 2.4) * W, len = W * (0.06 + rnd(i, 2) * 0.16);
+      const x = W + len - ((c * sp + rnd(i, 3) * (W + len * 2)) % (W + len * 2));
+      const y = H * (0.04 + rnd(i, 4) * 0.92);
+      const g = cx.createLinearGradient(x, y, x + len, y);
+      g.addColorStop(0, `rgba(255,255,255,${a * (0.25 + 0.45 * rnd(i, 5))})`); g.addColorStop(1, "rgba(255,255,255,0)");
+      cx.strokeStyle = g; cx.lineWidth = 0.8 + rnd(i, 6) * 1.6;
+      cx.beginPath(); cx.moveTo(x, y); cx.lineTo(x + len, y); cx.stroke();
+    }
+  }
+  function drawBubbles(a, c) {
+    const n = Math.round(70 * N());
+    for (let i = 0; i < n; i++) {
+      const sp = 40 + rnd(i, 1) * 90, r = 2 + rnd(i, 2) * 9;
+      const y = H + 40 - ((c * sp + rnd(i, 3) * (H + 80)) % (H + 80));
+      const x = W * rnd(i, 4) + Math.sin(c * (0.8 + rnd(i, 5)) + i) * 14;
+      cx.strokeStyle = `rgba(170,240,255,${a * (0.25 + rnd(i, 6) * 0.45)})`; cx.lineWidth = 1.2;
+      cx.beginPath(); cx.arc(x, y, r, 0, 6.283); cx.stroke();
+      cx.fillStyle = `rgba(255,255,255,${a * 0.35})`; cx.beginPath(); cx.arc(x - r * 0.35, y - r * 0.35, r * 0.22, 0, 6.283); cx.fill();
+    }
+  }
+  function drawRain(a, c) {
+    const n = Math.round(220 * N());
+    cx.lineWidth = 1.2;
+    for (let i = 0; i < n; i++) {
+      const z = 0.4 + rnd(i, 1) * 1.1, len = 18 + 34 * z;
+      const y = ((c * 1100 * z + rnd(i, 2) * (H + 80)) % (H + 80)) - 40;
+      const x = (((W * rnd(i, 3) - c * 380 * z) % (W + 80)) + W + 80) % (W + 80) - 40;
+      cx.strokeStyle = `rgba(200,220,235,${a * (0.18 + 0.35 * rnd(i, 4))})`;
+      cx.beginPath(); cx.moveTo(x, y); cx.lineTo(x - len * 0.35, y + len); cx.stroke();
+    }
+  }
+  function drawSnow(a, c) {
+    const n = Math.round(260 * N());
+    for (let i = 0; i < n; i++) {
+      const z = 0.3 + rnd(i, 1) * 1.2, sp = 90 * z;
+      const y = ((c * sp * 1.4 + rnd(i, 2) * (H + 40)) % (H + 40)) - 20;
+      const x = (((W * rnd(i, 3) - c * 160 * z) % (W + 40)) + W + 40) % (W + 40) - 20;
+      cx.fillStyle = `rgba(240,246,255,${a * (0.35 + 0.5 * rnd(i, 4))})`;
+      cx.beginPath(); cx.arc(x, y, 0.8 + z * 1.9, 0, 6.283); cx.fill();
+    }
+  }
+  function drawStars(a, c) {
+    const n = Math.round(160 * N());
+    for (let i = 0; i < n; i++) {
+      const x = W * rnd(i, 1), y = H * 0.62 * rnd(i, 2);
+      const tw = 0.5 + 0.5 * Math.sin(c * (1 + rnd(i, 3) * 3) + i);
+      cx.fillStyle = `rgba(255,255,255,${a * (0.2 + 0.7 * tw) * rnd(i, 4)})`;
+      cx.fillRect(x, y, 1.6, 1.6);
+    }
+    const d = (c * 0.12) % 1, sx = W * (1.05 - d * 1.4), sy = H * (0.08 + d * 0.3);
+    if (d < 0.35) {
+      const g = cx.createLinearGradient(sx, sy, sx + 160, sy - 50);
+      g.addColorStop(0, `rgba(255,255,255,${a * 0.9})`); g.addColorStop(1, "rgba(255,255,255,0)");
+      cx.strokeStyle = g; cx.lineWidth = 2; cx.beginPath(); cx.moveTo(sx, sy); cx.lineTo(sx + 160, sy - 50); cx.stroke();
+    }
+  }
+  function drawBoom(b, e, c) {
+    // Same spot as the tower top: the skyline is 42% of the height, slice-scaled.
+    const k = Math.max(W / 1600, (H * 0.42) / 400), ox = W / 2 + (1160 - 800) * k, oy = H - (400 - 60) * k, R = Math.max(W, H);
+    cx.globalCompositeOperation = "lighter";
+    if (b > 0 && b < 1) {
+      const fb = Math.min(1, b * 3);
+      const core = cx.createRadialGradient(ox, oy, 0, ox, oy, R * 0.34 * fb);
+      core.addColorStop(0, `rgba(255,250,220,${(1 - b) * 0.95})`);
+      core.addColorStop(0.35, `rgba(255,160,40,${(1 - b) * 0.8})`);
+      core.addColorStop(1, "rgba(255,60,20,0)");
+      cx.fillStyle = core; cx.beginPath(); cx.arc(ox, oy, R * 0.34 * fb, 0, 6.283); cx.fill();
+      for (let k = 0; k < 3; k++) {
+        const rb = Math.max(0, b - k * 0.08);
+        cx.strokeStyle = `rgba(255,${200 - k * 50},120,${(1 - rb) * 0.7})`;
+        cx.lineWidth = 6 * (1 - rb) + 1;
+        cx.beginPath(); cx.arc(ox, oy, R * 0.75 * Math.pow(rb, 0.6), 0, 6.283); cx.stroke();
+      }
+      const n = Math.round(90 * N());
+      for (let i = 0; i < n; i++) {
+        const ang = rnd(i, 1) * 6.283, sp = R * (0.25 + rnd(i, 2) * 0.6), t = b * 1.4;
+        const x = ox + Math.cos(ang) * sp * t, y = oy + Math.sin(ang) * sp * t + 300 * t * t;
+        cx.fillStyle = `rgba(255,${120 + (rnd(i, 3) * 120) | 0},40,${Math.max(0, 1 - b * 1.1)})`;
+        cx.fillRect(x, y, 2 + rnd(i, 4) * 4, 2 + rnd(i, 4) * 4);
+      }
+    }
+    if (e > 0) {
+      // The fire that stays lit on the tower after the blast.
+      for (let k = 0; k < 4; k++) {
+        const fl = 0.75 + 0.25 * Math.sin(c * (7 + k * 3.1) + k * 2) * Math.sin(c * (3.3 + k) + k);
+        const fr = R * (0.05 + k * 0.035) * fl;
+        const fy = oy - k * R * 0.012;
+        const g = cx.createRadialGradient(ox, fy, 0, ox, fy, fr);
+        g.addColorStop(0, `rgba(255,${220 - k * 40},120,${e * 0.55 * fl})`);
+        g.addColorStop(1, "rgba(255,70,20,0)");
+        cx.fillStyle = g; cx.beginPath(); cx.arc(ox, fy, fr, 0, 6.283); cx.fill();
+      }
+      const n = Math.round(120 * N());
+      for (let i = 0; i < n; i++) {
+        const sp = 30 + rnd(i, 1) * 110;
+        const y = H + 20 - ((c * sp + rnd(i, 2) * (H + 40)) % (H + 40));
+        const x = W * rnd(i, 3) + Math.sin(c * (0.6 + rnd(i, 4)) + i) * 30;
+        const al = e * (0.3 + 0.6 * rnd(i, 5)) * (y / H);
+        cx.fillStyle = `rgba(255,${110 + (rnd(i, 6) * 100) | 0},40,${al})`;
+        cx.beginPath(); cx.arc(x, y, 0.8 + rnd(i, 7) * 2.2, 0, 6.283); cx.fill();
+      }
+    }
+  }
+
+  // t: timeline time (scrubbed). c: the clock particles move on. On render
+  // they are the same number, so every frame is reproducible.
+  function frame(t, c) {
+    cx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    cx.globalCompositeOperation = "source-over";
+    cx.clearRect(0, 0, W, H);
+    if (fx.sparks > 0.01) drawSparks(fx.sparks, c);
+    cx.globalCompositeOperation = "source-over";
+    if (fx.bubbles > 0.01) drawBubbles(fx.bubbles, c);
+    if (fx.rain > 0.01) drawRain(fx.rain, c);
+    if (fx.snow > 0.01) drawSnow(fx.snow, c);
+    if (fx.stars > 0.01) drawStars(fx.stars, c);
+    if (fx.boom > 0 || fx.embers > 0.01) drawBoom(fx.boom, fx.embers, c);
+    jetBobs.forEach((b, i) => { b.style.transform = `translateY(${(Math.sin(c * 1.4 + i * 1.7) * 0.6).toFixed(3)}vw) rotate(${(Math.sin(c * 0.9 + i) * 1.4).toFixed(2)}deg)`; });
+    $("#count").textContent = Math.round(fx.count);
+    const f = Math.floor((t % 1) * (T.fps || 30));
+    $("#tc").textContent = `00:${pad(t / 60)}:${pad(t % 60)}:${pad(f)}`;
+    let cur = ids[0];
+    ids.forEach((id) => { if (t >= start[id] + T.wipe * 0.45) cur = id; });
+    if (cur !== lastScene) {
+      lastScene = cur;
+      const i = ids.indexOf(cur);
+      $("#scene-name").textContent = `SCENE ${pad(i + 1)} · ${D.chapters[i].label.toUpperCase()}`;
+      railBtns.forEach((b, k) => b.classList.toggle("on", k === i));
+    }
+  }
+  window.__afterSeek = (t) => frame(t, t);
+  frame(0, 0);
+
+  // ---- Website mode: intro autoplay, scroll scrubbing, interaction ----
+  ids.forEach((id, i) => {
+    const b = document.createElement("button");
+    b.innerHTML = `<span>${D.chapters[i].label}</span><i></i>`;
+    b.setAttribute("aria-label", `Go to ${D.chapters[i].label}`);
+    b.dataset.go = id;
+    $("#rail").appendChild(b); railBtns.push(b);
+  });
+  lastScene = ""; frame(0, 0);
+  if (!SITE) return;
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const per = () => T.scrollPerSecond * innerHeight;
+  function layout() { $("#scroller").style.height = `${(END - T.introEnd) * per() + innerHeight}px`; }
+  layout();
+  const timeFor = (y) => Math.min(END, T.introEnd + y / per());
+  const yFor = (t) => Math.max(0, (t - T.introEnd) * per());
+  let introDone = scrollY > 4 || reduce;
+  let cur = introDone ? timeFor(scrollY) : 0;
+  if (!introDone) {
+    tl.tweenTo(T.introEnd, { duration: T.introEnd, ease: "none", onComplete: () => { introDone = true; cur = T.introEnd; } });
+  }
+  const go = (id) => {
+    if (!introDone) { tl.pause(); introDone = true; cur = tl.time(); }
+    scrollTo({ top: yFor(id === "launch" ? T.introEnd : hold(id)), behavior: reduce ? "auto" : "smooth" });
+  };
+  document.addEventListener("click", (e) => {
+    const g = e.target.closest("[data-go]");
+    if (g) { e.preventDefault(); go(g.dataset.go); }
+  });
+  addEventListener("keydown", (e) => {
+    if (!["ArrowDown", "ArrowUp", "PageDown", "PageUp"].includes(e.key) || e.target.closest("input,textarea")) return;
+    e.preventDefault();
+    const now = timeFor(scrollY), dir = e.key === "ArrowDown" || e.key === "PageDown" ? 1 : -1;
+    const holds = ids.map(hold);
+    const next = dir > 0 ? holds.find((h) => h > now + 0.05) : [...holds].reverse().find((h) => h < now - 0.05);
+    if (next !== undefined) scrollTo({ top: yFor(next), behavior: reduce ? "auto" : "smooth" });
+  });
+  // A deep link like amco100.me/#ads lands on that chapter.
+  const hash = location.hash.slice(1);
+  if (ids.includes(hash) && hash !== "launch") { introDone = true; tl.progress(0); cur = hold(hash); scrollTo(0, yFor(hold(hash))); }
+  addEventListener("hashchange", () => { const h = location.hash.slice(1); if (ids.includes(h)) go(h); });
+
+  // Mouse parallax on each shot's camera, and a magnetic pull on buttons.
+  if (!reduce && matchMedia("(pointer: fine)").matches) {
+    const cams = [...document.querySelectorAll(".shot .cam")].map((el) => ({ x: gsap.quickTo(el, "x", { duration: 0.9, ease: "power3" }), y: gsap.quickTo(el, "y", { duration: 0.9, ease: "power3" }) }));
+    addEventListener("pointermove", (e) => {
+      const nx = e.clientX / innerWidth - 0.5, ny = e.clientY / innerHeight - 0.5;
+      cams.forEach((c) => { c.x(nx * -26); c.y(ny * -18); });
+    });
+    document.querySelectorAll(".mag").forEach((b) => {
+      const qx = gsap.quickTo(b, "x", { duration: 0.4, ease: "power3" }), qy = gsap.quickTo(b, "y", { duration: 0.4, ease: "power3" });
+      b.addEventListener("pointermove", (e) => { const r = b.getBoundingClientRect(); qx((e.clientX - r.left - r.width / 2) * 0.28); qy((e.clientY - r.top - r.height / 2) * 0.35); });
+      b.addEventListener("pointerleave", () => { qx(0); qy(0); });
+    });
+    document.querySelectorAll(".step").forEach((s) => {
+      s.addEventListener("pointermove", (e) => { const r = s.getBoundingClientRect(); gsap.to(s, { rotateY: ((e.clientX - r.left) / r.width - 0.5) * 14, rotateX: -((e.clientY - r.top) / r.height - 0.5) * 14, duration: 0.4, overwrite: "auto" }); });
+      s.addEventListener("pointerleave", () => gsap.to(s, { rotateY: 0, rotateX: 0, duration: 0.6 }));
+    });
+  }
+
+  // The loop: ease the timeline toward where the scroll says it should be.
+  const t0 = performance.now();
+  (function loop() {
+    const c = (performance.now() - t0) / 1000;
+    if (introDone) {
+      const target = timeFor(scrollY);
+      cur += (target - cur) * (reduce ? 1 : 0.1);
+      if (Math.abs(target - cur) < 0.001) cur = target;
+      if (Math.abs(tl.time() - cur) > 0.0005) tl.time(cur);
+    } else if (scrollY > 4) {
+      tl.pause(); introDone = true; cur = tl.time();
+    }
+    frame(tl.time(), c);
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
 </body>
 </html>

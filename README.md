@@ -3,8 +3,12 @@
 Static site, served by GitHub Pages from `main`. No build step, no dependencies,
 no external requests: plain HTML and one stylesheet.
 
-- `index.html` — home and post list
-- `writing/` — one file per post
+- `index.html` — the AMCO home page: a scroll-driven motion film (GSAP, one
+  timeline). BUILT, do not hand-edit: source lives in Asset-Orchestrator
+  `docs/amco-site/` (`node build.mjs`), then copy `dist/index.html` and
+  `dist/assets/` here.
+- `assets/` — fonts (OFL, licences alongside), gsap.min.js, scene images
+- `writing/` — the blog: `writing/index.html` is the post list, one file per post
 - `about.html`, `404.html`, `style.css`
 - `CNAME` — the custom domain
 
