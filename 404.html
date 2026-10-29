@@ -2,24 +2,105 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Not found — The Prompt Architect</title>
-<link rel="stylesheet" href="/style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>◆</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Not found | AMCO</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07080c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='%23ff2e63'/></svg>">
+<!-- 404 scene for amco100.me, same motion-kit shape as home: one paused GSAP
+     timeline on window.__timeline. GitHub Pages serves it for any missing
+     path, so build.mjs keeps its asset paths absolute. -->
+<script src="/assets/gsap.min.js"></script>
+<script>window.SITE = true; window.TIMING = {"fps":30,"size":[1920,1080],"shotIn":0.1,"kickerIn":0.5,"headlineIn":0.7,"wordStagger":0.08,"subIn":1.4,"ctaIn":1.7,"end":3,"stills":[0.4,2.8]}; window.DATA = {"place":"Pensacola, Florida"};</script>
+
+<style>
+  @font-face { font-family: "Anton"; src: url("/assets/fonts/anton.woff2") format("woff2"); font-display: block; }
+  @font-face { font-family: "Bebas Neue"; src: url("/assets/fonts/bebas-neue.woff2") format("woff2"); font-display: block; }
+  @font-face { font-family: "Inter"; src: url("/assets/fonts/inter.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+  :root {
+    --bg: #07080c; --ink: #f4f1ea; --muted: #a9afbd; --dim: #6b7280; --neon: #ff2e63; --cyan: #2de2e6;
+    --display: "Anton", "Impact", "Arial Narrow", sans-serif;
+    --hud: "Bebas Neue", "Anton", sans-serif;
+    --body: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --gutter: clamp(16px, 4.2vw, 80px);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+  body { overflow: hidden; }
+  a { color: inherit; }
+  .shot { position: fixed; inset: 0; overflow: hidden; }
+  .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 40%; }
+  .shot::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(7,8,12,.94) 0%, rgba(7,8,12,.74) 32%, rgba(7,8,12,.1) 60%, rgba(7,8,12,0) 75%), linear-gradient(0deg, rgba(7,8,12,.8) 0%, rgba(7,8,12,0) 26%); }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: 18px var(--gutter); }
+  .logo { display: flex; align-items: center; gap: .45em; font-family: var(--display); font-size: 30px; letter-spacing: .04em; text-decoration: none; }
+  .logo b { width: .5em; height: .5em; border-radius: 50%; background: var(--neon); box-shadow: 0 0 14px var(--neon); }
+  .card { position: fixed; left: var(--gutter); top: 0; bottom: 0; width: min(760px, 50vw); z-index: 4; display: flex; flex-direction: column; justify-content: center; }
+  .kicker { font-family: var(--hud); font-size: clamp(16px, 1.45vw, 28px); letter-spacing: .14em; color: var(--cyan); display: flex; align-items: center; gap: .6em; }
+  .kicker::before { content: ""; width: 2.4em; height: 2px; background: currentColor; }
+  h1 { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: .92; margin: .25em 0 .35em; font-size: clamp(54px, 6.6vw, 132px); }
+  h1 em { font-style: normal; color: var(--neon); text-shadow: 0 0 .35em rgba(255,46,99,.45); }
+  .w { display: inline-block; overflow: hidden; vertical-align: top; padding: .04em .02em 0; margin: -.04em -.02em 0; }
+  .w > span { display: inline-block; }
+  .sub { font-size: clamp(16px, 1.3vw, 24px); line-height: 1.5; color: #d9dbe2; max-width: 30em; margin: 0 0 1.6em; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn { display: inline-flex; align-items: center; gap: .6em; padding: .95em 1.5em; border-radius: 999px; font-family: var(--hud); font-size: clamp(18px, 1.35vw, 26px); letter-spacing: .08em; text-decoration: none; }
+  .btn.primary { background: var(--neon); color: #fff; box-shadow: 0 10px 40px rgba(255,46,99,.45); }
+  .btn.ghost { background: rgba(255,255,255,.06); box-shadow: 0 0 0 1px rgba(255,255,255,.28) inset; }
+  .btn:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+  .foot { position: fixed; left: var(--gutter); bottom: 14px; z-index: 4; font-size: 12px; color: var(--dim); }
+  @media (max-aspect-ratio: 1/1), (max-width: 760px) {
+    .shot img { object-position: 58% 30%; }
+    .shot::after { background: linear-gradient(0deg, rgba(7,8,12,.97) 0%, rgba(7,8,12,.86) 42%, rgba(7,8,12,.1) 68%, rgba(7,8,12,0) 80%); }
+    .card { width: auto; right: var(--gutter); justify-content: flex-end; padding-bottom: 64px; }
+  }
+</style>
 </head>
 <body>
-<header class="site">
-  <div class="wrap">
-    <a class="brand" href="/writing/">The Prompt <span>Architect</span></a>
-    <nav><a href="/">AMCO</a><a href="/writing/">Writing</a><a href="/about.html">About</a></nav>
+<nav aria-label="Main"><a class="logo" href="/"><b></b>AMCO</a></nav>
+<div class="shot" id="shot"><img src="/assets/img/mars-maze.jpg" alt="In a corn maze on Mars, a man in a suit studies a paper map held upside down while an alien beside him points the other way."></div>
+<main class="card" id="card">
+  <div class="kicker">Error 404 &middot; Off the map</div>
+  <h1 class="split">This page isn't here. <em>He checked.</em></h1>
+  <p class="sub">Wrong address, or a page that moved. The rest of the site is right where it was.</p>
+  <div class="ctas">
+    <a class="btn primary" href="/">Back to the film</a>
+    <a class="btn ghost" href="/writing/">Writing</a>
   </div>
-</header>
-<main class="wrap">
-  <h1>Not found</h1>
-  <p class="lede">That page does not exist here.</p>
-  <p><a href="/writing/">Back to the writing</a></p>
 </main>
-<footer class="site"><div class="wrap"><p>The Prompt Architect</p>
-    <p class="disclosure">As an Amazon Associate I earn from qualifying purchases.</p></div></footer>
+<p class="foot">AMCO, made in <span data-place></span>. As an Amazon Associate I earn from qualifying purchases.</p>
+<script>
+(() => {
+  const T = window.TIMING, D = window.DATA, SITE = !!window.SITE;
+  document.querySelectorAll("[data-place]").forEach((s) => (s.textContent = D.place));
+  document.querySelectorAll(".split").forEach((h) => {
+    const walk = (node) => [...node.childNodes].forEach((n) => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) return frag.appendChild(document.createTextNode(" "));
+          const w = document.createElement("span"); w.className = "w";
+          const i = document.createElement("span"); i.textContent = part; w.appendChild(i); frag.appendChild(w);
+        });
+        n.replaceWith(frag);
+      } else walk(n);
+    });
+    walk(h);
+  });
+  const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+  tl.fromTo("#shot img", { scale: 1.25, filter: "brightness(2) saturate(.4)" }, { scale: 1.04, filter: "brightness(1) saturate(1)", duration: 1.2, ease: "expo.out" }, T.shotIn);
+  tl.fromTo(".kicker", { autoAlpha: 0, x: -40 }, { autoAlpha: 1, x: 0, duration: 0.5 }, T.kickerIn);
+  tl.fromTo(".w > span", { yPercent: 115, rotate: 4 }, { yPercent: 0, rotate: 0, duration: 0.55, stagger: T.wordStagger, ease: "back.out(1.5)" }, T.headlineIn);
+  tl.fromTo(".sub", { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.5 }, T.subIn);
+  tl.fromTo(".ctas, .foot", { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.5 }, T.ctaIn);
+  tl.to("#shot img", { scale: 1.0, duration: T.end - 1.3, ease: "none" }, 1.3);
+  window.__timeline = tl;
+  if (!SITE) { tl.progress(0); return; }
+  // Reduced motion: show the finished frame.
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) tl.progress(1);
+  else tl.play();
+})();
+</script>
 </body>
 </html>

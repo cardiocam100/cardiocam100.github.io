@@ -6,6 +6,22 @@
 <title>AMCO | Whole marketing campaigns, built for real businesses</title>
 <meta name="description" content="AMCO builds complete marketing campaigns for local businesses: customer research, posts for 11 platforms, ads, emails, images and video, delivered on one link and ready to post.">
 <meta name="theme-color" content="#07080c">
+<!-- Link previews on X, LinkedIn, iMessage and Slack. The card is drawn by
+     docs/amco-site/share-card.mjs from the hero shot. Absolute URLs: the
+     scrapers do not resolve relative ones. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AMCO">
+<meta property="og:url" content="https://amco100.me/">
+<meta property="og:title" content="It's a normal Tuesday. Your campaign is done.">
+<meta property="og:description" content="Customer research, posts for 11 platforms, ads, emails, images and video. One link, ready to post.">
+<meta property="og:image" content="https://amco100.me/assets/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A man in a suit types at a desk bolted to a flying jet. Headline: It's a normal Tuesday. Your campaign is done.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="It's a normal Tuesday. Your campaign is done.">
+<meta name="twitter:description" content="Customer research, posts for 11 platforms, ads, emails, images and video. One link, ready to post.">
+<meta name="twitter:image" content="https://amco100.me/assets/img/share.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='%23ff2e63'/></svg>">
 <!-- Motion scene, built with the amco-orchestrator motion kit: ONE paused GSAP
      timeline on window.__timeline, every time from timing.ts, facts from
@@ -13,7 +29,7 @@
      set by build.mjs) the intro autoplays and scrolling scrubs the rest.
      Never load anything from the network: fonts and images are local. -->
 <script src="assets/gsap.min.js"></script>
-<script>window.SITE = true; window.TIMING = {"fps":30,"size":[1920,1080],"shutter":0.1,"shutterLen":0.9,"heroIn":0.25,"kickerIn":0.9,"headlineIn":1.15,"wordStagger":0.09,"subIn":1.9,"ctaIn":2.25,"jetsIn":1,"jetsFly":1.5,"jetsStagger":0.14,"hudIn":2.4,"introEnd":3.2,"heroHold":1.4,"chapterLen":4.2,"wipe":0.85,"holdAt":1.6,"burst":0.9,"tail":3,"scrollPerSecond":0.5,"stills":[0.6,3,7.4,11.6,15.8,20,24.2,28.4,32.6,36.8,40,42.2]}; window.DATA = {"brand":"AMCO","site":"amco100.me","contactEmail":"camcampaigns@agentmail.to","contactSubject":"I want a campaign","place":"Pensacola, Florida","platforms":["Facebook","Instagram","Threads","X","YouTube","Reddit","LinkedIn","Pinterest","Etsy","Snapchat","TikTok"],"deliverables":["Customer profiles","Competitor intel","Keywords","Facebook and Instagram ads","Google search ads","Email sequences","Video ad scripts","Short vertical videos","Images","Content calendar","Brand kit","One-link campaign hub"],"chapters":[{"id":"launch","label":"Launch"},{"id":"research","label":"Research"},{"id":"intel","label":"Intel"},{"id":"ads","label":"Ads"},{"id":"brand","label":"Brand"},{"id":"video","label":"Video"},{"id":"delivery","label":"Delivery"},{"id":"reach","label":"Reach"},{"id":"how","label":"How it works"},{"id":"finale","label":"Work with us"}],"jets":[{"go":"research","label":"Research","x":70,"y":11,"w":8,"px":20,"py":12,"pw":24},{"go":"ads","label":"Ads and emails","x":87,"y":14,"w":9.5,"px":80,"py":12,"pw":26},{"go":"delivery","label":"Your campaign hub","x":78,"y":27,"w":8,"px":24,"py":26,"pw":20},{"go":"reach","label":"11 platforms","x":92,"y":34,"w":6.5,"px":80,"py":26,"pw":20},{"go":"how","label":"How it works","x":72,"y":41,"w":7,"px":22,"py":39,"pw":18}]};</script>
+<script>window.SITE = true; window.TIMING = {"fps":30,"size":[1920,1080],"shutter":0.1,"shutterLen":0.9,"heroIn":0.25,"kickerIn":0.9,"headlineIn":1.15,"wordStagger":0.09,"subIn":1.9,"ctaIn":2.25,"jetsIn":1,"jetsFly":1.5,"jetsStagger":0.14,"hudIn":2.4,"introEnd":3.2,"heroHold":1.4,"chapterLen":4.2,"wipe":0.85,"holdAt":1.6,"holdLate":2.3,"burst":0.9,"tail":3,"scrollPerSecond":0.5,"stills":[0.6,3,7.4,11.6,15.8,20,24.2,28.4,32.6,36.8,41,44.6,46.8]}; window.DATA = {"brand":"AMCO","site":"amco100.me","contactEmail":"camcampaigns@agentmail.to","contactSubject":"I want a campaign","place":"Pensacola, Florida","platforms":["Facebook","Instagram","Threads","X","YouTube","Reddit","LinkedIn","Pinterest","Etsy","Snapchat","TikTok"],"deliverables":["Customer profiles","Competitor intel","Keywords","Facebook and Instagram ads","Google search ads","Email sequences","Video ad scripts","Short vertical videos","Images","Content calendar","Brand kit","One-link campaign hub"],"chapters":[{"id":"launch","label":"Launch"},{"id":"research","label":"Research"},{"id":"intel","label":"Intel"},{"id":"ads","label":"Ads"},{"id":"brand","label":"Brand"},{"id":"video","label":"Video"},{"id":"delivery","label":"Delivery"},{"id":"work","label":"The work"},{"id":"reach","label":"Reach"},{"id":"how","label":"How it works"},{"id":"finale","label":"Work with us"}],"jets":[{"go":"research","label":"Research","x":70,"y":11,"w":8,"px":20,"py":12,"pw":24},{"go":"ads","label":"Ads and emails","x":87,"y":14,"w":9.5,"px":80,"py":12,"pw":26},{"go":"work","label":"See one we made","x":78,"y":27,"w":8,"px":24,"py":26,"pw":20},{"go":"reach","label":"11 platforms","x":92,"y":34,"w":6.5,"px":80,"py":26,"pw":20},{"go":"how","label":"How it works","x":72,"y":41,"w":7,"px":22,"py":39,"pw":18}],"work":{"_note":"A real AMCO campaign (outreach pitch for a veterans' service dog charity, Operation Delta Dog) renamed by the showcase thread to Steady Leash Project (docs/showcase/mocks/steady-leash on branch claude/project-thread-mvbz4w). Copy, plan and colors come from that renamed hub. Swap in any showcase mock here.","name":"Steady Leash Project","stamp":"Sample. Name changed.","tagline":"He was rescued. Now he's on duty.","sub":"A real campaign we built for a veterans' service dog charity, with the name changed. Veterans Day to Giving Tuesday: the posts, the plan and one clear ask.","whoTitle":"WHO THE DOGS ARE FOR","who":["Veterans with PTSD","Traumatic brain injury","Military sexual trauma","$0 to the veteran"],"posts":[{"platform":"Instagram","text":"The handoff takes two seconds.\nThe training behind it takes a lot longer, and the veteran pays nothing for any of it."},{"platform":"X","text":"Rescue dog: needed a job.\nVeteran: needed a battle buddy with four legs.\nWe made the introduction."},{"platform":"Facebook","text":"Veterans Day is Wednesday.\nThank a veteran, absolutely. Then help put a trained service dog next to one."},{"platform":"TikTok","text":"POV: you were a shelter dog, and today you got a job."},{"platform":"Threads","text":"Gifts we take: cash, stock, crypto, fund grants, IRA gifts.\nGifts we can't take: excuses."}],"plan":[{"when":"Nov 11","title":"Honor: Veterans Day"},{"when":"Mid Nov","title":"Give smart: stock, funds, IRAs"},{"when":"Dec 1","title":"Ask: Giving Tuesday"},{"when":"Late Dec","title":"Remind the year-end givers"}],"theme":{"paper":"#F7F5F0","top":"#1D3557","dark":"#0F1A2B","gold":"#E9B44C","hot":"#E5383B"},"toast":"<b>Copied.</b> Paste it into Facebook."}};</script>
 
 <style>
   @font-face { font-family: "Anton"; src: url("assets/fonts/anton.woff2") format("woff2"); font-display: block; }
@@ -99,7 +115,7 @@
   /* Cards and the top bar span big areas: only their own links take clicks,
      so the jets underneath stay clickable. */
   .card, nav.top { pointer-events: none; }
-  .card a, .card .step, nav.top a { pointer-events: auto; }
+  .card a, .card .step, nav.top a, nav.top button { pointer-events: auto; }
   .kicker { font-family: var(--hud); font-size: clamp(16px, 1.45vw, 28px); letter-spacing: .14em; color: var(--cyan); display: flex; align-items: center; gap: .6em; }
   .kicker::before { content: ""; width: 2.4em; height: 2px; background: currentColor; }
   h1, h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: .92; margin: .25em 0 .35em; letter-spacing: .005em; }
@@ -180,6 +196,51 @@
   .foot { position: absolute; left: calc(var(--gutter) - 12px); bottom: 16px; display: flex; flex-direction: column; gap: 4px; padding: 8px 12px; border-radius: 8px; background: rgba(7,8,12,.82); backdrop-filter: blur(4px); font-size: 13px; color: var(--dim); z-index: 6; visibility: hidden; }
   .foot a { color: var(--muted); }
 
+  /* The work: a real campaign hub (name changed) on a phone drawn in code.
+     Everything inside the phone is sized in em off the phone's font-size, so
+     the screen scroll (--scroll, 0 to 1, tweened on the timeline) travels the
+     same distance at every viewport size. */
+  .work-bg { position: absolute; inset: 0; visibility: hidden; background: radial-gradient(ellipse at 72% 45%, rgba(45,226,230,.16), transparent 55%), radial-gradient(ellipse at 10% 90%, rgba(255,46,99,.14), transparent 50%), #07080c; }
+  .work-bg::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.10) 1px, transparent 1.4px); background-size: 28px 28px; mask-image: radial-gradient(ellipse at 70% 50%, #000 0%, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at 70% 50%, #000 0%, transparent 70%); }
+  .phone { position: absolute; left: 70%; top: 52%; font-size: min(1.55vh, 1.05vw); width: 24em; height: 49em; margin: -24.5em 0 0 -12em; border-radius: 3.6em; padding: .9em; background: linear-gradient(145deg, #2a2e3a, #0d0f15 60%); box-shadow: 0 0 0 .18em #3a3f4d inset, 0 2.4em 6em rgba(0,0,0,.65), 0 0 9em rgba(45,226,230,.18); visibility: hidden; }
+  .phone::before { content: ""; position: absolute; top: 1.6em; left: 50%; width: 6.5em; height: 1.8em; margin-left: -3.25em; border-radius: 1em; background: #050608; z-index: 3; }
+  /* The hub wears the sample campaign's own brand colors (data.json work.theme). */
+  .screen { position: relative; width: 100%; height: 100%; border-radius: 2.8em; overflow: hidden; background: var(--h-paper); color: var(--h-dark); font-family: var(--body); }
+  .screen-in { --scroll: 0; --travel: 52em; transform: translateY(calc(var(--scroll) * var(--travel) * -1)); }
+  .hub-top { padding: 4.6em 1.6em 1.6em; background: var(--h-top); color: var(--h-paper); }
+  .hub-top .stamp { display: inline-block; font-family: var(--mono); font-size: .78em; letter-spacing: .08em; text-transform: uppercase; background: rgba(0,0,0,.35); padding: .35em .7em; border-radius: .4em; margin-bottom: 1em; }
+  .hub-top b { display: block; font-family: var(--display); font-weight: 400; font-size: 2.5em; line-height: .95; text-transform: uppercase; }
+  .hub-top i { display: block; font-style: normal; margin-top: .5em; font-size: 1.05em; opacity: .9; }
+  .hub-sec { padding: 1.3em 1.6em .4em; }
+  .hub-sec h4 { margin: 0 0 .7em; font-family: var(--hud); font-weight: 400; letter-spacing: .12em; font-size: 1.15em; color: var(--h-top); }
+  .who { display: flex; flex-wrap: wrap; gap: .5em; }
+  .who span { font-size: .86em; padding: .45em .75em; border-radius: 2em; background: var(--h-dark); color: var(--h-paper); }
+  .post { position: relative; background: #fff; border-radius: 1.1em; padding: 1em 1.1em; margin-bottom: .8em; box-shadow: 0 .2em .8em rgba(0,0,0,.10); }
+  .post small { display: block; font-family: var(--hud); letter-spacing: .1em; font-size: .95em; color: var(--h-hot); margin-bottom: .3em; }
+  .post p { margin: 0; font-size: 1.02em; line-height: 1.35; white-space: pre-line; }
+  .post .copy { position: absolute; right: .9em; top: .8em; font-family: var(--mono); font-size: .72em; color: var(--h-top); }
+  .plan { display: grid; gap: .45em; }
+  .plan div { display: grid; grid-template-columns: 6.6em 1fr; gap: .6em; align-items: baseline; padding: .6em .8em; border-radius: .7em; background: rgba(0,0,0,.06); transition: none; }
+  .plan div b { font-family: var(--hud); font-weight: 400; letter-spacing: .08em; font-size: 1.05em; }
+  .plan div span { font-size: .95em; }
+  .plan div.on { background: var(--h-top); color: var(--h-paper); }
+  .plan div.on b { color: var(--h-gold); }
+  .swatches { display: flex; gap: .5em; }
+  .swatches i { flex: 1; height: 3em; border-radius: .6em; box-shadow: 0 0 0 1px rgba(0,0,0,.12) inset; }
+  .toast { position: absolute; left: 50%; bottom: 2.4em; transform: translateX(-50%); white-space: nowrap; font-size: .95em; padding: .7em 1.1em; border-radius: 2em; background: var(--h-dark); color: var(--h-paper); box-shadow: 0 .6em 1.6em rgba(0,0,0,.3); visibility: hidden; z-index: 4; }
+  .toast b { color: var(--h-gold); font-weight: 600; }
+  .copybtn { all: unset; cursor: pointer; margin-left: .8em; padding: .2em .7em; border-radius: 4px; color: var(--cyan); box-shadow: 0 0 0 1px rgba(45,226,230,.5) inset; font-family: var(--mono); pointer-events: auto; }
+  .copybtn:hover { background: rgba(45,226,230,.12); }
+  .copybtn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+  .menubtn { display: none; }
+  .menu { position: fixed; inset: 0; z-index: 40; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 80px var(--gutter) 40px; background: rgba(7,8,12,.96); backdrop-filter: blur(8px); }
+  .menu[hidden] { display: none; }
+  .menu a, .menu button.x { all: unset; cursor: pointer; font-family: var(--display); text-transform: uppercase; font-size: clamp(30px, 9vw, 54px); line-height: 1.12; color: var(--ink); }
+  .menu a:focus-visible, .menu button.x:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+  .menu a.cur { color: var(--neon); }
+  .menu a.small { font-family: var(--hud); font-size: 22px; letter-spacing: .12em; color: var(--muted); margin-top: 18px; }
+  .menu button.x { position: absolute; top: 18px; right: var(--gutter); font-family: var(--hud); font-size: 20px; letter-spacing: .12em; padding: .5em .9em; border-radius: 999px; box-shadow: 0 0 0 1px rgba(255,255,255,.3) inset; }
+
   /* Phones and portrait: copy sits at the bottom over a taller scrim. */
   @media (max-aspect-ratio: 1/1), (max-width: 760px) {
     .shot::after { background: linear-gradient(0deg, rgba(7,8,12,.97) 0%, rgba(7,8,12,.86) 40%, rgba(7,8,12,.15) 66%, rgba(7,8,12,0) 80%); }
@@ -206,6 +267,11 @@
     .hint { display: none; }
     .foot { bottom: 10px; font-size: 11px; }
     .count { font-size: clamp(110px, 32vw, 200px); }
+    .phone { left: 50%; top: 36%; font-size: min(.98vh, 2vw); }
+    #card-work { padding-bottom: max(64px, 6vh); }
+    #card-work h2 { font-size: clamp(40px, 11vw, 64px); }
+    #card-work .sub { font-size: 15px; margin-bottom: 0; }
+    .menubtn { display: inline-flex; font-size: 16px; padding: .6em 1em; }
   }
   @media (max-aspect-ratio: 1/1), (max-width: 760px) {
     .jet { left: calc(var(--px) * 1%); top: calc(var(--py) * 1%); width: calc(var(--pw) * 1vw); }
@@ -219,12 +285,17 @@
 <nav class="top" id="nav" aria-label="Main">
   <a class="logo" href="/"><b></b>AMCO<small>amco100.me</small></a>
   <div class="links">
-    <a href="#research" data-go="research">Services</a>
+    <a href="#research" data-go="research">The film</a>
+    <a href="#work" data-go="work">The work</a>
     <a href="#how" data-go="how">How it works</a>
     <a href="/writing/">Writing</a>
+    <button class="btn ghost menubtn" id="menubtn" aria-expanded="false" aria-controls="menu">Menu</button>
     <a class="btn primary mag" data-email href="#finale">Work With Us</a>
   </div>
 </nav>
+<div class="menu" id="menu" hidden role="dialog" aria-label="Menu">
+  <button class="x" id="menux">Close</button>
+</div>
 
 <div class="stage" id="stage">
   <section class="shot" id="shot-launch" aria-label="Launch"><div class="cam"><img src="assets/img/jet-hero.jpg" alt="A man in a suit stands on top of a flying jet high above a white-sand beach, typing on a laptop at a steel desk bolted to the jet, coffee in hand."></div></section>
@@ -234,6 +305,9 @@
   <section class="shot" id="shot-brand" aria-label="Brand kit"><div class="cam"><img src="assets/img/balloon.jpg" alt="Hanging one-handed from a hot-air balloon above the clouds, he repaints a giant billboard with a paint roller while flamingos in sunglasses fly past."></div></section>
   <section class="shot" id="shot-video" aria-label="Video"><div class="cam"><img src="assets/img/volcano.jpg" alt="In the crater of an erupting volcano, he sits in a director's chair sipping iced coffee while a film crew in fire suits rolls cameras."></div></section>
   <section class="shot" id="shot-delivery" aria-label="Delivery"><div class="cam"><img src="assets/img/moon.jpg" alt="On the Moon, he jetpacks off with a glowing pizza box for Earth while astronauts wave and a rover pulls a wheelie."></div></section>
+  <div class="work-bg" id="work-bg">
+    <div class="phone" id="phone" aria-hidden="true"><div class="screen"><div class="screen-in" id="screen-in"></div><div class="toast" id="toast"></div></div></div>
+  </div>
   <!-- The formation: each jet is a link to one chapter of the film. -->
   <nav class="jets" id="jets" aria-label="Services"></nav>
   <div class="reach-bg" id="reach-bg">
@@ -287,13 +361,18 @@
     <h2 class="split">One link. <em>All of it.</em></h2>
     <p class="sub">Posts, ads, emails, images and a posting calendar on one page dressed in your brand. Open it on your phone, copy a post, post it.</p>
   </div>
+  <div class="card" id="card-work">
+    <div class="kicker">Scene 08 &middot; The work</div>
+    <h2 class="split">Here's one <em>we made earlier.</em></h2>
+    <p class="sub" id="work-sub"></p>
+  </div>
   <div class="card" id="card-reach">
-    <div class="kicker">Scene 08 &middot; Reach</div>
+    <div class="kicker">Scene 09 &middot; Reach</div>
     <div class="reach-top"><div class="count" id="count">0</div><h2 class="split">Platforms. Written for each one, <em>not pasted into all of them.</em></h2></div>
     <div class="chips" id="chips"></div>
   </div>
   <div class="card" id="card-how">
-    <div class="kicker">Scene 09 &middot; How it works</div>
+    <div class="kicker">Scene 10 &middot; How it works</div>
     <h2 class="split">Three steps. <em>You do the first one.</em></h2>
     <div class="steps">
       <div class="step"><div class="n">01</div><h3>Send your website</h3><p>Or just tell us about the business. Two minutes, tops.</p></div>
@@ -302,14 +381,14 @@
     </div>
   </div>
   <div class="card" id="card-finale">
-    <div class="kicker">Scene 10 &middot; Work with us</div>
+    <div class="kicker">Scene 11 &middot; Work with us</div>
     <h2 class="split">We'll take it <em>from here.</em></h2>
     <p class="sub">Tell us about your business, and we'll show you what a whole campaign for it looks like.</p>
     <div class="ctas">
       <a class="btn primary mag" data-email href="#finale">Work With Us <span class="arr">&rarr;</span></a>
       <a class="btn ghost mag" href="#launch" data-go="launch">Watch it again</a>
     </div>
-    <p class="mailline">Or write to <span data-email-text></span></p>
+    <p class="mailline">Or write to <span data-email-text></span><button class="copybtn" id="copymail" type="button">Copy</button></p>
   </div>
   <div class="foot" id="foot">
     <span>AMCO, made by Cam Sweatman in <span data-place></span>.</span>
@@ -332,6 +411,8 @@
   const T = window.TIMING, D = window.DATA, SITE = !!window.SITE;
   const $ = (s) => document.querySelector(s);
   if (!SITE) document.body.classList.add("render");
+  // Reduced motion on the website: no particles, flashes, streaks or shake.
+  const CALM = SITE && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // ---- Facts from data.json into the page ----
   const mail = `mailto:${D.contactEmail}?subject=${encodeURIComponent(D.contactSubject)}`;
@@ -340,6 +421,21 @@
   document.querySelectorAll("[data-email-text]").forEach((s) => (s.textContent = D.contactEmail));
   $("#chips").innerHTML = D.platforms.map((p) => `<span class="chip p">${p}</span>`).join("") +
     D.deliverables.map((p) => `<span class="chip">${p}</span>`).join("");
+  // The work: one real campaign, name changed (data.json "work").
+  const Wk = D.work;
+  $("#work-sub").textContent = Wk.sub;
+  Object.entries(Wk.theme).forEach(([k, v]) => $("#phone").style.setProperty(`--h-${k}`, v));
+  $("#screen-in").innerHTML =
+    `<div class="hub-top"><span class="stamp">${Wk.stamp}</span><b>${Wk.name}</b><i>${Wk.tagline}</i></div>` +
+    `<div class="hub-sec"><h4>${Wk.whoTitle}</h4><div class="who">${Wk.who.map((p) => `<span>${p}</span>`).join("")}</div></div>` +
+    `<div class="hub-sec"><h4>POSTS, ONE PER PLATFORM</h4>${Wk.posts.map((p) => `<div class="post"><small>${p.platform}</small><span class="copy">COPY</span><p>${p.text}</p></div>`).join("")}</div>` +
+    `<div class="hub-sec"><h4>THE PLAN</h4><div class="plan">${Wk.plan.map((s) => `<div><b>${s.when}</b><span>${s.title}</span></div>`).join("")}</div></div>` +
+    `<div class="hub-sec"><h4>BRAND KIT</h4><div class="swatches">${Object.values(Wk.theme).map((c) => `<i style="background:${c}"></i>`).join("")}</div></div><div style="height:6em"></div>`;
+  $("#toast").innerHTML = Wk.toast;
+  // How far the hub scrolls, in the phone's em, so it ends on the brand kit
+  // whatever the copy length. Measured once fonts are in.
+  const travel = () => { const inr = $("#screen-in"), fs = parseFloat(getComputedStyle(inr).fontSize) || 1; inr.style.setProperty("--travel", `${Math.max(0, (inr.scrollHeight - inr.parentElement.clientHeight) / fs).toFixed(2)}em`); };
+  travel(); document.fonts && document.fonts.ready.then(travel);
   const tickText = (arr) => (arr.join(" • ") + " • ").repeat(3);
   $("#tick1").textContent = tickText(D.platforms);
   $("#tick2").textContent = tickText(D.deliverables);
@@ -386,7 +482,7 @@
   const ids = D.chapters.map((c) => c.id);
   const start = {};
   ids.forEach((id, i) => (start[id] = i === 0 ? 0 : T.introEnd + T.heroHold + (i - 1) * T.chapterLen));
-  const hold = (id) => (id === "launch" ? T.introEnd : id === "finale" ? start[id] + T.burst + T.holdAt : start[id] + T.holdAt);
+  const hold = (id) => (id === "launch" ? T.introEnd : id === "finale" ? start[id] + T.burst + T.holdAt : start[id] + (id === "reach" || id === "how" ? T.holdLate : T.holdAt));
   const END = start.finale + T.holdAt + T.tail;
 
   // Particle layers: their strength is tweened on the timeline, their motion
@@ -407,6 +503,12 @@
   };
   // Whip-pan: old shot tears left with streaks, new shot rips in from the right.
   const whip = (outSel, inSel, at) => {
+    if (CALM) {
+      if (outSel) { tl.to(outSel, { autoAlpha: 0, duration: T.wipe * 0.5, ease: "none" }, at); }
+      tl.set(inSel, { autoAlpha: 1 }, at + T.wipe * 0.3);
+      tl.fromTo(inSel, { opacity: 0 }, { opacity: 1, duration: T.wipe * 0.5, ease: "none" }, at + T.wipe * 0.3);
+      return;
+    }
     tl.to("#streaks", { opacity: 0.85, duration: T.wipe * 0.35, ease: "power2.in" }, at);
     tl.fromTo("#streaks", { backgroundPositionY: "0px" }, { backgroundPositionY: "-420px", duration: T.wipe, ease: "none" }, at);
     tl.to("#streaks", { opacity: 0, duration: T.wipe * 0.5, ease: "power2.out" }, at + T.wipe * 0.5);
@@ -489,15 +591,32 @@
   tl.to(fx, { stars: 1, duration: 0.8 }, start.delivery + 0.4);
   cardIn("#card-delivery", start.delivery + T.wipe * 0.8);
 
+  // The work: the phone rises, then scrolling scrolls the hub inside it.
+  cardOut("#card-delivery", start.work);
+  tl.to(fx, { stars: 0, duration: 0.4 }, start.work);
+  whip("#shot-delivery", "#work-bg", start.work);
+  tl.set("#phone", { autoAlpha: 1 }, start.work + T.wipe * 0.5);
+  tl.fromTo("#phone", { yPercent: 35, rotate: 9, scale: 0.9 }, { yPercent: 0, rotate: -3, scale: 1, duration: 0.9, ease: "back.out(1.2)" }, start.work + T.wipe * 0.5);
+  cardIn("#card-work", start.work + T.wipe * 0.8);
+  // The hub scrolls only after the chapter has settled, so a stop anywhere
+  // in here is a finished frame.
+  const workScroll = start.reach - 0.25 - hold("work");
+  tl.fromTo("#screen-in", { "--scroll": 0 }, { "--scroll": 1, duration: workScroll, ease: "none" }, hold("work"));
+  tl.to("#phone", { rotate: 2, duration: workScroll, ease: "none" }, hold("work"));
+  const stops = document.querySelectorAll("#screen-in .plan div");
+  stops.forEach((c, k) => tl.set(c, { className: "on" }, hold("work") + workScroll * (0.6 + (0.3 * k) / stops.length)));
+  tl.set("#toast", { autoAlpha: 1 }, hold("work") + workScroll * 0.18);
+  tl.fromTo("#toast", { y: 20, scale: 0.9 }, { y: 0, scale: 1, duration: 0.3, ease: "back.out(2)" }, hold("work") + workScroll * 0.18);
+  tl.to("#toast", { autoAlpha: 0, duration: 0.25 }, hold("work") + workScroll * 0.4);
+
   // Reach: text-only scene, count rolls 0 to 11, tickers slide.
-  cardOut("#card-delivery", start.reach);
-  tl.to(fx, { stars: 0, duration: 0.4 }, start.reach);
-  whip("#shot-delivery", "#reach-bg", start.reach);
+  cardOut("#card-work", start.reach);
+  whip("#work-bg", "#reach-bg", start.reach);
   tl.fromTo("#tick1", { xPercent: 0 }, { xPercent: -30, duration: T.chapterLen + 1, ease: "none" }, start.reach);
   tl.fromTo("#tick2", { xPercent: -30 }, { xPercent: 0, duration: T.chapterLen + 1, ease: "none" }, start.reach);
   tl.fromTo("#reach-bg .bgimg", { scale: 1.18, xPercent: 2 }, { scale: 1.02, xPercent: 0, duration: T.chapterLen + T.wipe, ease: "none" }, start.reach + T.wipe * 0.45);
   cardIn("#card-reach", start.reach + T.wipe * 0.8);
-  tl.fromTo(fx, { count: 0 }, { count: D.platforms.length, duration: 1.1, ease: "power2.out" }, start.reach + T.wipe * 0.8 + 0.2);
+  tl.fromTo(fx, { count: 0 }, { count: D.platforms.length, duration: 0.8, ease: "power2.out" }, start.reach + T.wipe * 0.8 + 0.2);
   tl.fromTo("#count", { scale: 0.4, rotate: -10 }, { scale: 1, rotate: 0, duration: 0.8, ease: "back.out(2)" }, start.reach + T.wipe * 0.8 + 0.1);
   tl.fromTo("#chips .chip", { autoAlpha: 0, y: 24, scale: 0.8 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.035, ease: "back.out(2)" }, start.reach + T.wipe * 0.8 + 0.5);
 
@@ -515,9 +634,9 @@
   whip("#how-bg", "#finale-bg", start.finale);
   tl.fromTo("#city", { yPercent: 30 }, { yPercent: 0, duration: 1.0 }, start.finale + T.wipe * 0.5);
   tl.fromTo(fx, { boom: 0 }, { boom: 1, duration: 2.6, ease: "none" }, start.finale + T.burst);
-  tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.85, duration: 0.06, ease: "none" }, start.finale + T.burst);
-  tl.to("#flash", { opacity: 0, duration: 0.6, ease: "power2.out" }, start.finale + T.burst + 0.06);
-  tl.to("#stage", { keyframes: [{ x: -14, y: 8 }, { x: 12, y: -6 }, { x: -8, y: 4 }, { x: 5, y: -2 }, { x: 0, y: 0 }], duration: 0.5, ease: "none" }, start.finale + T.burst);
+  if (!CALM) tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.85, duration: 0.06, ease: "none" }, start.finale + T.burst);
+  if (!CALM) tl.to("#flash", { opacity: 0, duration: 0.6, ease: "power2.out" }, start.finale + T.burst + 0.06);
+  if (!CALM) tl.to("#stage", { keyframes: [{ x: -14, y: 8 }, { x: 12, y: -6 }, { x: -8, y: 4 }, { x: 5, y: -2 }, { x: 0, y: 0 }], duration: 0.5, ease: "none" }, start.finale + T.burst);
   tl.to(fx, { embers: 1, duration: 0.6 }, start.finale + T.burst);
   cardIn("#card-finale", start.finale + T.burst + 0.35);
   tl.fromTo("#foot", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, start.finale + T.burst + 1.2);
@@ -655,6 +774,7 @@
     cx.setTransform(DPR, 0, 0, DPR, 0, 0);
     cx.globalCompositeOperation = "source-over";
     cx.clearRect(0, 0, W, H);
+    if (CALM) { /* still frame: no weather */ } else {
     if (fx.sparks > 0.01) drawSparks(fx.sparks, c);
     cx.globalCompositeOperation = "source-over";
     if (fx.bubbles > 0.01) drawBubbles(fx.bubbles, c);
@@ -662,6 +782,7 @@
     if (fx.snow > 0.01) drawSnow(fx.snow, c);
     if (fx.stars > 0.01) drawStars(fx.stars, c);
     if (fx.boom > 0 || fx.embers > 0.01) drawBoom(fx.boom, fx.embers, c);
+    }
     jetBobs.forEach((b, i) => { b.style.transform = `translateY(${(Math.sin(c * 1.4 + i * 1.7) * 0.6).toFixed(3)}vw) rotate(${(Math.sin(c * 0.9 + i) * 1.4).toFixed(2)}deg)`; });
     $("#count").textContent = Math.round(fx.count);
     const f = Math.floor((t % 1) * (T.fps || 30));
@@ -689,7 +810,7 @@
   lastScene = ""; frame(0, 0);
   if (!SITE) return;
 
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduce = CALM;
   const per = () => T.scrollPerSecond * innerHeight;
   function layout() { $("#scroller").style.height = `${(END - T.introEnd) * per() + innerHeight}px`; }
   layout();
@@ -697,11 +818,16 @@
   const yFor = (t) => Math.max(0, (t - T.introEnd) * per());
   let introDone = scrollY > 4 || reduce;
   let cur = introDone ? timeFor(scrollY) : 0;
+  // The intro is its own tween driving the timeline. Anything that takes over
+  // (a jet click, a deep link, a scroll) must kill it, or its onComplete
+  // yanks the film back to the hero a few seconds later.
+  let intro = null;
+  const stopIntro = () => { if (intro) { intro.kill(); intro = null; } tl.pause(); introDone = true; cur = tl.time(); };
   if (!introDone) {
-    tl.tweenTo(T.introEnd, { duration: T.introEnd, ease: "none", onComplete: () => { introDone = true; cur = T.introEnd; } });
+    intro = tl.tweenTo(T.introEnd, { duration: T.introEnd, ease: "none", onComplete: () => { intro = null; introDone = true; cur = T.introEnd; } });
   }
   const go = (id) => {
-    if (!introDone) { tl.pause(); introDone = true; cur = tl.time(); }
+    if (!introDone) stopIntro();
     scrollTo({ top: yFor(id === "launch" ? T.introEnd : hold(id)), behavior: reduce ? "auto" : "smooth" });
   };
   document.addEventListener("click", (e) => {
@@ -716,9 +842,30 @@
     const next = dir > 0 ? holds.find((h) => h > now + 0.05) : [...holds].reverse().find((h) => h < now - 0.05);
     if (next !== undefined) scrollTo({ top: yFor(next), behavior: reduce ? "auto" : "smooth" });
   });
+  // Phone menu: the chapters plus Writing, since the top links hide on phones.
+  const menu = $("#menu"), menuBtn = $("#menubtn");
+  menu.insertAdjacentHTML("beforeend", D.chapters.map((c) => `<a href="#${c.id}" data-go="${c.id}">${c.label}</a>`).join("") + `<a class="small" href="/writing/">Writing</a>`);
+  const setMenu = (open) => {
+    menu.hidden = !open; menuBtn.setAttribute("aria-expanded", String(open));
+    if (open) { const now = timeFor(scrollY); menu.querySelectorAll("[data-go]").forEach((a) => a.classList.toggle("cur", a.dataset.go === [...ids].reverse().find((id) => start[id] <= now + 0.01))); menu.querySelector("a").focus(); }
+    else menuBtn.focus();
+  };
+  menuBtn.addEventListener("click", () => setMenu(menu.hidden));
+  $("#menux").addEventListener("click", () => setMenu(false));
+  menu.addEventListener("click", (e) => { if (e.target.closest("a")) { menu.hidden = true; menuBtn.setAttribute("aria-expanded", "false"); } });
+  addEventListener("keydown", (e) => { if (e.key === "Escape" && !menu.hidden) setMenu(false); });
+
+  // Copy the address: a mailto: link does nothing on a laptop with no mail app.
+  $("#copymail").addEventListener("click", async () => {
+    const b = $("#copymail");
+    try { await navigator.clipboard.writeText(D.contactEmail); b.textContent = "Copied"; }
+    catch { getSelection().selectAllChildren($(".mailline [data-email-text]")); b.textContent = "Selected"; }
+    setTimeout(() => (b.textContent = "Copy"), 1800);
+  });
+
   // A deep link like amco100.me/#ads lands on that chapter.
   const hash = location.hash.slice(1);
-  if (ids.includes(hash) && hash !== "launch") { introDone = true; tl.progress(0); cur = hold(hash); scrollTo(0, yFor(hold(hash))); }
+  if (ids.includes(hash) && hash !== "launch") { stopIntro(); tl.progress(0); cur = hold(hash); scrollTo(0, yFor(hold(hash))); }
   addEventListener("hashchange", () => { const h = location.hash.slice(1); if (ids.includes(h)) go(h); });
 
   // Mouse parallax on each shot's camera, and a magnetic pull on buttons.
@@ -739,6 +886,27 @@
     });
   }
 
+  // Settle: scrolling scrubs the film, so a stop mid-transition would freeze a
+  // half-built headline. When the scroll rests inside a transition, glide to
+  // whichever finished frame is nearer (end of the last chapter or the hold
+  // of the next).
+  let lastMove = performance.now(), settled = true, touching = false;
+  addEventListener("scroll", () => { lastMove = performance.now(); settled = false; }, { passive: true });
+  addEventListener("touchstart", () => (touching = true), { passive: true });
+  addEventListener("touchend", () => { touching = false; lastMove = performance.now(); }, { passive: true });
+  const settle = () => {
+    settled = true;
+    const now = timeFor(scrollY);
+    for (let i = 1; i < ids.length; i++) {
+      const a = start[ids[i]], b = hold(ids[i]);
+      if (now > a + 0.02 && now < b - 0.02) {
+        const to = now - a < b - now ? a - 0.02 : b;
+        scrollTo({ top: yFor(to), behavior: reduce ? "auto" : "smooth" });
+        return;
+      }
+    }
+  };
+
   // The loop: ease the timeline toward where the scroll says it should be.
   const t0 = performance.now();
   (function loop() {
@@ -748,8 +916,9 @@
       cur += (target - cur) * (reduce ? 1 : 0.1);
       if (Math.abs(target - cur) < 0.001) cur = target;
       if (Math.abs(tl.time() - cur) > 0.0005) tl.time(cur);
+      if (!settled && !touching && performance.now() - lastMove > 260) settle();
     } else if (scrollY > 4) {
-      tl.pause(); introDone = true; cur = tl.time();
+      stopIntro();
     }
     frame(tl.time(), c);
     requestAnimationFrame(loop);
