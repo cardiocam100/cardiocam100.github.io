@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="data:,">
+<script>document.documentElement.classList.add('js');</script>
 <title>AMCO — Create an Entire Marketing Campaign in 24 Hours</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,6 +48,7 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:inherit}
+header,main,footer{position:relative;z-index:1}
 .wrap{max-width:1240px;margin:0 auto;padding:0 20px}
 @media(min-width:768px){.wrap{padding:0 36px}}
 
@@ -121,7 +123,7 @@ h1 em{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;tex
 .pricing-note{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 20px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 
 /* HOW */
-.how{background:var(--bg2);border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
+.how{background:color-mix(in srgb,var(--bg2) 80%,transparent);border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
 .steps{display:grid;gap:0;border:1px solid var(--line-strong)}
 @media(min-width:860px){.steps{grid-template-columns:repeat(4,1fr)}}
 .step{padding:24px 20px;border-bottom:1px solid var(--line)}
@@ -134,7 +136,7 @@ h1 em{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;tex
 /* PORTFOLIO */
 .portfolio-grid{display:grid;gap:16px}
 @media(min-width:860px){.portfolio-grid{grid-template-columns:1fr 1fr}}
-.work{display:block;text-decoration:none;border:1px solid var(--line-strong);border-radius:var(--radius);padding:28px 24px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between;gap:32px;background:var(--card);color:var(--card-ink);transition:.18s}
+.work{display:block;text-decoration:none;border:1px solid var(--line-strong);border-radius:var(--radius);padding:28px 24px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between;gap:32px;background:color-mix(in srgb,var(--card) 74%,transparent);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);color:var(--card-ink);transition:transform .18s,background .18s}
 .work:hover{transform:translateY(-3px)}
 .work-top{display:flex;justify-content:space-between;gap:16px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
 .work h3{font-size:clamp(34px,5vw,54px);line-height:.92;letter-spacing:-.035em;text-transform:uppercase;margin:0;font-weight:900}
@@ -142,9 +144,72 @@ h1 em{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;tex
 .work p{color:var(--muted);line-height:1.55;margin:12px 0 0;max-width:440px}
 .work-link{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:15px}
 .work-link i{font-style:normal;width:44px;height:44px;border-radius:50%;border:1px solid var(--line-strong);display:grid;place-items:center;font-size:18px}
-.work.dark-work{background:var(--dark);color:var(--dark-ink)}
+.work.dark-work{background:color-mix(in srgb,var(--dark) 82%,transparent);color:var(--dark-ink)}
 .work.dark-work p,.work.dark-work .work-top{color:var(--dark-muted)}
 .work.dark-work .work-link i{border-color:var(--dark-muted)}
+
+/* PORTFOLIO — VELVET CRUMB BAKERY: warm, slow, fresh from the oven */
+.work-bakery{background:#fff7e2;color:#211303;border-color:#211303}
+.work-bakery p,.work-bakery .work-top{color:#6f5b3e}
+.work-bakery h3 em{color:#c7500a}
+.work-bakery .work-link i{border-color:#211303}
+.motion-stage{margin-top:22px;border-radius:14px;overflow:hidden;border:1px solid rgba(20,10,0,.22);text-align:left}
+.stage-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase}
+.stage-head .live{display:inline-flex;align-items:center;gap:7px;font-weight:600}
+.play-dot{width:8px;height:8px;border-radius:50%;background:#ff3b0a;flex:0 0 auto;animation:playPulse 1.6s ease-in-out infinite}
+@keyframes playPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.45);opacity:.55}}
+.bakery-stage{background:#ffefd2;color:#211303}
+.bakery-stage .stage-head{background:#211303;color:#ffe9bd}
+.bakery-scene{position:relative;height:168px;overflow:hidden;background:radial-gradient(ellipse 240px 110px at 26% 88%,rgba(255,166,48,.5),transparent 70%),linear-gradient(180deg,#fff6df,#ffecca);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px}
+.bakery-copy{position:relative;z-index:2}
+.bakery-copy strong{display:block;font-size:23px;line-height:1.02;letter-spacing:-.02em;text-transform:uppercase;font-weight:900}
+.bakery-copy span{display:block;margin-top:8px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#8a6a3c}
+.loaf-wrap{position:relative;width:128px;height:118px;flex:0 0 auto}
+.steam{position:absolute;left:0;right:0;top:0;height:44px}
+.steam i{position:absolute;bottom:0;width:7px;height:28px;border-radius:999px;background:linear-gradient(180deg,rgba(190,160,110,0),rgba(160,125,75,.75));filter:blur(1px);opacity:0;animation:steamUp 2.8s ease-in-out infinite}
+.steam i:nth-child(1){left:34px}
+.steam i:nth-child(2){left:60px;animation-delay:.9s;height:34px}
+.steam i:nth-child(3){left:86px;animation-delay:1.7s}
+@keyframes steamUp{0%{transform:translateY(10px) translateX(0);opacity:0}35%{opacity:.95}100%{transform:translateY(-16px) translateX(5px);opacity:0}}
+.loaf{position:absolute;left:9px;right:9px;bottom:16px;height:62px;background:linear-gradient(180deg,#f0b45c,#cd7f24);border-radius:62px 62px 16px 16px;box-shadow:0 10px 22px rgba(160,95,20,.35),inset 0 -10px 0 rgba(120,62,8,.22);animation:loafRise 3.8s ease-in-out infinite}
+@keyframes loafRise{0%,100%{transform:translateY(7px) scaleY(.94)}50%{transform:translateY(-3px) scaleY(1.03)}}
+.loaf .score{position:absolute;top:14px;width:22px;height:6px;border-radius:999px;background:rgba(255,244,214,.85);transform:rotate(-18deg)}
+.loaf .score.s1{left:20px}.loaf .score.s2{left:52px;top:10px}.loaf .score.s3{left:84px}
+.loaf-shadow{position:absolute;left:20px;right:20px;bottom:8px;height:10px;border-radius:50%;background:rgba(120,70,10,.28);filter:blur(3px)}
+.progress{height:4px;background:rgba(20,10,0,.14)}
+.progress-fill{display:block;height:100%;transform-origin:left;background:#ff3b0a;animation:progressFill 4.2s linear infinite}
+@keyframes progressFill{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+.frame-row{display:flex;background:rgba(255,255,255,.55)}
+.frame-chip{flex:1;padding:8px 4px;text-align:center;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;border-right:1px solid rgba(20,10,0,.1);animation:bakerySeq 6.3s ease-in-out infinite}
+.frame-chip:last-child{border-right:0}
+.frame-chip.c2{animation-delay:2.1s}.frame-chip.c3{animation-delay:4.2s}
+@keyframes bakerySeq{0%,28%{background:#211303;color:#ffe9bd}38%,100%{background:transparent;color:inherit}}
+
+/* PORTFOLIO — FAR OUT FUR CO: groovy 70s, a completely different rhythm */
+.work-fur{background:#16251c;color:#fff1cf;border-color:#16251c}
+.work-fur p,.work-fur .work-top{color:#cfc096}
+.work-fur h3 em{color:#ffb627}
+.work-fur .work-link i{border-color:#cfc096}
+.fur-stage{background:#1e3a2a;color:#fff1cf}
+.fur-stage .stage-head{background:#0d1a12;color:#ffd98a}
+.fur-scene{position:relative;height:168px;overflow:hidden;background:linear-gradient(180deg,#27513a,#1a3325);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px}
+.sunburst{position:absolute;right:-38px;top:50%;width:230px;height:230px;margin-top:-115px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,122,41,.5) 0deg 11deg,rgba(255,122,41,0) 11deg 24deg);animation:furSpin 16s linear infinite}
+@keyframes furSpin{to{transform:rotate(360deg)}}
+.fur-copy{position:relative;z-index:2}
+.fur-copy strong{display:block;font-size:23px;line-height:1.02;letter-spacing:-.02em;text-transform:uppercase;font-weight:900}
+.fur-copy span{display:block;margin-top:8px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#ffd98a}
+.fur-paw{position:relative;z-index:2;flex:0 0 auto;margin-right:26px;animation:furBounce 1.5s ease-in-out infinite}
+@keyframes furBounce{0%,100%{transform:translateY(4px) rotate(-7deg)}50%{transform:translateY(-9px) rotate(7deg)}}
+.fur-waves{position:absolute;left:0;bottom:0;width:calc(100% + 48px);height:22px;background:radial-gradient(circle at 12px -4px,transparent 13px,#ff7a29 13.5px,#ff7a29 16px,transparent 16.5px);background-size:48px 22px;opacity:.85;animation:waveSlide 2.4s linear infinite}
+@keyframes waveSlide{to{transform:translateX(-48px)}}
+.fur-stage .progress{background:rgba(255,241,207,.18)}
+.fur-stage .progress-fill{background:#ffb627;animation-duration:3s}
+.fur-stage .frame-row{background:rgba(13,26,18,.55)}
+.fur-stage .frame-chip{border-right-color:rgba(255,241,207,.14);animation-name:furSeq}
+@keyframes furSeq{0%,28%{background:#ffb627;color:#16251c}38%,100%{background:transparent;color:inherit}}
+.work-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.work-meta span{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:5px 9px;opacity:.85}
+@media (prefers-reduced-motion: reduce){.loaf,.steam i,.sunburst,.fur-paw,.fur-waves,.progress-fill,.frame-chip,.play-dot{animation:none !important}.progress-fill{transform:scaleX(.6)}}
 
 /* CLOSE */
 .close{padding:64px 0 72px;border-top:1px solid var(--line-strong);text-align:left}
@@ -153,10 +218,176 @@ h1 em{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;tex
 .close p{color:var(--muted);line-height:1.6;max-width:560px;margin:0 0 28px}
 footer{border-top:1px solid var(--line);padding:22px 0 32px}
 .foot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.work:hover{transform:none}}
+/* CITY PORTRAIT BACKGROUND — fixed, behind all content, wakes up as you scroll */
+.citybg{position:fixed;top:0;right:-24px;height:100vh;height:100dvh;width:min(560px,72vw);z-index:0;pointer-events:none;opacity:.38;display:flex;align-items:stretch;justify-content:flex-end}
+.citybg svg{display:block;height:100%;width:auto;max-width:none;overflow:visible}
+@media(max-width:768px){.citybg{right:-150px;width:420px;opacity:.19}}
+@media (prefers-color-scheme: dark){.citybg{opacity:.32}}
+@media (prefers-color-scheme: dark) and (max-width:768px){.citybg{opacity:.16}}
+
+/* ILLUMINATE ON SCROLL — sections start dim and light up as they enter view */
+.js .sec-head,.js .tier,.js .step,.js .work,.js .pillar{opacity:.22;transform:translateY(18px);transition:opacity .85s ease,transform .85s ease}
+.js .sec-head.lit,.js .tier.lit,.js .step.lit,.js .work.lit,.js .pillar.lit{opacity:1;transform:none}
+.js .work.lit:hover{transform:translateY(-3px)}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.work:hover{transform:none}.js .sec-head,.js .tier,.js .step,.js .work,.js .pillar{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
+<!-- City portrait background: a quiet dawn skyline that wakes up as you scroll -->
+<div class="citybg" id="cityFigure" aria-hidden="true">
+  <svg viewBox="0 0 480 640" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+    <defs>
+      <linearGradient id="skyDawn" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#b9c0c4"/>
+        <stop offset=".55" stop-color="#d8d2c6"/>
+        <stop offset="1" stop-color="#e7dfd2"/>
+      </linearGradient>
+      <linearGradient id="skyAlive" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#5ea9cf"/>
+        <stop offset=".48" stop-color="#f2b879"/>
+        <stop offset=".78" stop-color="#ff8a52"/>
+        <stop offset="1" stop-color="#ffd9a0"/>
+      </linearGradient>
+      <linearGradient id="bldgAlive" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#3d4a56"/>
+        <stop offset="1" stop-color="#1f2a33"/>
+      </linearGradient>
+    </defs>
+    <g id="cityInner">
+      <!-- sky: dormant dawn underneath, living colour fading in on scroll -->
+      <rect x="0" y="0" width="480" height="640" fill="url(#skyDawn)"/>
+      <rect id="skyAliveRect" x="0" y="0" width="480" height="640" fill="url(#skyAlive)" opacity="0"/>
+      <!-- early stars, fading as the city wakes -->
+      <g id="cityStars" fill="#ffffff" opacity=".8">
+        <circle cx="52" cy="58" r="2"/><circle cx="118" cy="34" r="1.5"/><circle cx="196" cy="70" r="1.8"/>
+        <circle cx="268" cy="38" r="1.4"/><circle cx="338" cy="82" r="1.7"/><circle cx="414" cy="46" r="2"/>
+        <circle cx="86" cy="118" r="1.3"/><circle cx="392" cy="128" r="1.4"/><circle cx="232" cy="112" r="1.2"/>
+      </g>
+      <!-- sun, rising behind the skyline as you scroll -->
+      <g id="citySun">
+        <circle id="sunGlow" cx="336" cy="330" r="86" fill="#ffb347" opacity=".25"/>
+        <circle cx="336" cy="330" r="46" fill="#ffc65c"/>
+        <circle cx="336" cy="330" r="46" fill="#ffdf8e" opacity=".45"/>
+      </g>
+      <!-- clouds, drifting and warming -->
+      <g id="cityClouds" fill="#ffffff" opacity=".4">
+        <ellipse cx="104" cy="128" rx="58" ry="16"/>
+        <ellipse cx="140" cy="116" rx="38" ry="13"/>
+        <ellipse cx="366" cy="196" rx="66" ry="15"/>
+        <ellipse cx="330" cy="186" rx="36" ry="11"/>
+      </g>
+      <!-- birds, appearing once the city is awake -->
+      <g id="cityBirds" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" opacity="0">
+        <path d="M96,210 q8,-7 16,0 q8,-7 16,0"/>
+        <path d="M150,238 q6,-5 12,0 q6,-5 12,0"/>
+        <path d="M70,262 q5,-4 10,0 q5,-4 10,0"/>
+      </g>
+
+      <!-- distant skyline -->
+      <g fill="var(--ink)" opacity=".14">
+        <path d="M0,640 L0,392 L34,392 L34,352 L62,352 L62,408 L92,408 L92,318 L124,318 L124,640 Z"/>
+        <path d="M356,640 L356,336 L388,336 L388,300 L416,300 L416,368 L448,368 L448,330 L480,330 L480,640 Z"/>
+        <path d="M118,640 L118,372 L150,372 L150,640 Z"/>
+      </g>
+
+      <!-- mid skyline -->
+      <g opacity=".9">
+        <path fill="var(--ink)" fill-opacity=".34" d="M22,640 L22,300 L58,300 L58,272 L84,272 L84,300 L104,300 L104,640 Z"/>
+        <path fill="var(--ink)" fill-opacity=".4" d="M376,640 L376,282 L404,282 L404,254 L432,254 L432,282 L458,282 L458,640 Z"/>
+        <path fill="var(--ink)" fill-opacity=".3" d="M96,640 L96,356 L138,356 L138,640 Z"/>
+        <path fill="var(--ink)" fill-opacity=".3" d="M330,640 L330,372 L380,372 L380,640 Z"/>
+        <!-- water tower + antenna on the mid blocks -->
+        <path stroke="var(--ink)" stroke-opacity=".45" stroke-width="3" stroke-linecap="round" d="M58,272 L58,238 M84,272 L84,238 M52,238 L90,238"/>
+        <path fill="var(--ink)" fill-opacity=".45" d="M50,238 L92,238 L86,214 L56,214 Z"/>
+        <path stroke="var(--ink)" stroke-opacity=".45" stroke-width="2.5" stroke-linecap="round" d="M418,254 L418,206 M418,206 L406,192 M418,206 L430,192"/>
+        <circle cx="418" cy="204" r="3.5" fill="#ff3b0a" id="beacon" opacity=".35"/>
+      </g>
+
+      <!-- foreground towers -->
+      <g>
+        <path fill="var(--ink)" fill-opacity=".62" d="M128,640 L128,238 L176,238 L176,206 L204,206 L204,238 L232,238 L232,640 Z"/>
+        <path fill="var(--ink)" fill-opacity=".72" d="M238,640 L238,300 L318,300 L318,640 Z"/>
+        <path fill="var(--ink)" fill-opacity=".55" d="M318,640 L318,392 L368,392 L368,640 Z"/>
+        <path fill="var(--ink)" fill-opacity=".5" d="M52,640 L52,430 L128,430 L128,640 Z"/>
+        <!-- warm living tint over the towers, fading in on scroll -->
+        <g id="bldgTint" opacity="0">
+          <path fill="url(#bldgAlive)" fill-opacity=".35" d="M128,640 L128,238 L232,238 L232,640 Z"/>
+          <path fill="url(#bldgAlive)" fill-opacity=".3" d="M238,640 L238,300 L318,300 L318,640 Z"/>
+        </g>
+        <!-- rooftop details -->
+        <path stroke="var(--ink)" stroke-opacity=".6" stroke-width="3" stroke-linecap="round" d="M190,206 L190,168"/>
+        <circle cx="190" cy="164" r="3" fill="var(--ink)" fill-opacity=".6"/>
+        <path fill="var(--ink)" fill-opacity=".6" d="M256,300 L256,282 L300,282 L300,300 Z"/>
+      </g>
+
+      <!-- windows: three waves lighting up as the city comes to life -->
+      <g id="win1" fill="#ffd27a" opacity="0">
+        <rect x="142" y="258" width="12" height="16" rx="1.5"/><rect x="164" y="258" width="12" height="16" rx="1.5"/>
+        <rect x="186" y="258" width="12" height="16" rx="1.5"/><rect x="208" y="258" width="12" height="16" rx="1.5"/>
+        <rect x="252" y="322" width="13" height="17" rx="1.5"/><rect x="276" y="322" width="13" height="17" rx="1.5"/>
+        <rect x="300" y="322" width="13" height="17" rx="1.5"/>
+        <rect x="66" y="452" width="11" height="14" rx="1.5"/><rect x="88" y="452" width="11" height="14" rx="1.5"/>
+        <rect x="332" y="414" width="11" height="14" rx="1.5"/><rect x="110" y="378" width="10" height="13" rx="1.5"/>
+      </g>
+      <g id="win2" fill="#ffbe55" opacity="0">
+        <rect x="142" y="290" width="12" height="16" rx="1.5"/><rect x="186" y="290" width="12" height="16" rx="1.5"/>
+        <rect x="164" y="322" width="12" height="16" rx="1.5"/><rect x="208" y="322" width="12" height="16" rx="1.5"/>
+        <rect x="252" y="354" width="13" height="17" rx="1.5"/><rect x="300" y="354" width="13" height="17" rx="1.5"/>
+        <rect x="276" y="386" width="13" height="17" rx="1.5"/>
+        <rect x="66" y="484" width="11" height="14" rx="1.5"/><rect x="332" y="446" width="11" height="14" rx="1.5"/>
+        <rect x="390" y="304" width="11" height="15" rx="1.5"/><rect x="36" y="322" width="10" height="14" rx="1.5"/>
+      </g>
+      <g id="win3" fill="#fff0b3" opacity="0">
+        <rect x="142" y="354" width="12" height="16" rx="1.5"/><rect x="164" y="386" width="12" height="16" rx="1.5"/>
+        <rect x="186" y="354" width="12" height="16" rx="1.5"/><rect x="208" y="386" width="12" height="16" rx="1.5"/>
+        <rect x="142" y="418" width="12" height="16" rx="1.5"/><rect x="186" y="418" width="12" height="16" rx="1.5"/>
+        <rect x="252" y="418" width="13" height="17" rx="1.5"/><rect x="300" y="418" width="13" height="17" rx="1.5"/>
+        <rect x="276" y="450" width="13" height="17" rx="1.5"/><rect x="252" y="482" width="13" height="17" rx="1.5"/>
+        <rect x="88" y="484" width="11" height="14" rx="1.5"/><rect x="332" y="478" width="11" height="14" rx="1.5"/>
+        <rect x="412" y="304" width="11" height="15" rx="1.5"/><rect x="390" y="336" width="11" height="15" rx="1.5"/>
+      </g>
+
+      <!-- shopfront sign + awnings, gaining colour as the street wakes -->
+      <g id="citySign" opacity="0">
+        <rect x="246" y="540" width="64" height="20" rx="4" fill="#ff3b0a"/>
+        <circle cx="258" cy="550" r="4" fill="#fff"/>
+        <rect x="268" y="547" width="34" height="5" rx="2.5" fill="#fff" opacity=".85"/>
+        <path d="M56,540 L124,540 L116,558 L64,558 Z" fill="#ff8a3c"/>
+        <path d="M326,540 L364,540 L358,556 L332,556 Z" fill="#2e9e6b"/>
+      </g>
+
+      <!-- street level -->
+      <path fill="var(--ink)" fill-opacity=".78" d="M0,640 L0,586 L480,586 L480,640 Z"/>
+      <path stroke="#ffffff" stroke-opacity=".35" stroke-width="3" stroke-dasharray="18 14" d="M0,614 L480,614"/>
+      <!-- street lamps: glow while it is still dawn, easing off as the sun takes over -->
+      <g id="lampGlow" fill="#ffd27a">
+        <circle cx="30" cy="540" r="12" opacity=".35"/><circle cx="150" cy="540" r="12" opacity=".35"/>
+        <circle cx="452" cy="540" r="12" opacity=".35"/>
+      </g>
+      <g stroke="var(--ink)" stroke-opacity=".7" stroke-width="3" stroke-linecap="round">
+        <path d="M30,586 L30,544"/><path d="M150,586 L150,544"/><path d="M452,586 L452,544"/>
+      </g>
+      <g fill="#ffe9a8">
+        <circle cx="30" cy="540" r="4.5"/><circle cx="150" cy="540" r="4.5"/><circle cx="452" cy="540" r="4.5"/>
+      </g>
+
+      <!-- trees: grey-green and dormant, then full living green -->
+      <g>
+        <g stroke="var(--ink)" stroke-opacity=".6" stroke-width="3" stroke-linecap="round">
+          <path d="M106,586 L106,556"/><path d="M196,586 L196,560"/><path d="M402,586 L402,558"/>
+        </g>
+        <g fill="#7d8b74">
+          <circle cx="106" cy="544" r="17"/><circle cx="196" cy="548" r="15"/><circle cx="402" cy="546" r="16"/>
+        </g>
+        <g id="foliageAlive" fill="#2e9e6b" opacity="0">
+          <circle cx="106" cy="544" r="17"/><circle cx="92" cy="552" r="11"/><circle cx="120" cy="552" r="11"/>
+          <circle cx="196" cy="548" r="15"/><circle cx="184" cy="555" r="10"/><circle cx="208" cy="555" r="10"/>
+          <circle cx="402" cy="546" r="16"/><circle cx="389" cy="554" r="10"/><circle cx="415" cy="554" r="10"/>
+        </g>
+      </g>
+    </g>
+  </svg>
+</div>
 <header class="hero">
   <div class="wrap">
     <div class="topbar">
@@ -344,9 +575,57 @@ footer{border-top:1px solid var(--line);padding:22px 0 32px}
     <div class="wrap">
       <div class="sec-head">
         <h2>Portfolio.<br><em>See a campaign.</em></h2>
-        <p>Sample campaigns built by AMCO — open one to see the film, posts, cards, ads, emails, and plan together in its hub.</p>
+        <p>The motion ads lead. Velvet Crumb Bakery first, warm and slow, fresh from the oven. Far Out Fur Co. second, groovy and moving to a completely different rhythm. Big Lou and Rosa Delgado follow.</p>
       </div>
       <div class="portfolio-grid">
+        <!-- 01 — VELVET CRUMB BAKERY (redacted showcase) with its motion ads -->
+        <a class="work work-bakery" href="https://muse.ai/s/velvet-crumb-bakery-portfolio-hub-fxh6xgmdxn5xixaxv/DYEWN3l4FqpXrFhpcTBHq4UuKLwfvgjd86uQLpHok_Q" target="_blank" rel="noopener">
+          <div>
+            <div class="work-top"><span>01 · Bakery</span><span>Motion Ads · Showcase</span></div>
+            <h3 style="margin-top:22px">Velvet Crumb<br><em>Bakery</em></h3>
+            <p>A redacted bakery campaign built around its motion ads: the loaf rises, the steam curls, and the crumb lands the offer. Personas, posts, cards, and plan all live in the same hub personality: warm, handmade, and hungry.</p>
+            <div class="motion-stage bakery-stage" aria-hidden="true">
+              <div class="stage-head"><span class="live"><span class="play-dot"></span>Motion Ad · Playing</span><span>20 sec · Story 9:16</span></div>
+              <div class="bakery-scene">
+                <div class="bakery-copy"><strong>Fresh from<br>the oven</strong><span>Velvet Crumb · Motion Ad 01</span></div>
+                <div class="loaf-wrap">
+                  <div class="steam"><i></i><i></i><i></i></div>
+                  <div class="loaf"><span class="score s1"></span><span class="score s2"></span><span class="score s3"></span></div>
+                  <div class="loaf-shadow"></div>
+                </div>
+              </div>
+              <div class="progress"><span class="progress-fill"></span></div>
+              <div class="frame-row"><span class="frame-chip c1">01 · Rise</span><span class="frame-chip c2">02 · Bake</span><span class="frame-chip c3">03 · Crumb</span></div>
+            </div>
+            <div class="work-meta"><span>2 motion ads</span><span>Personas</span><span>Posts</span><span>Share cards</span><span>Plan</span></div>
+          </div>
+          <span class="work-link">View campaign <i>→</i></span>
+        </a>
+
+        <!-- 02 — FAR OUT FUR CO. (redacted showcase) with its own unique motion -->
+        <a class="work work-fur" href="https://muse.ai/s/far-out-fur-co-campaign-hub-ca6xgmdsyxxxki/BF60Fqny0kjHjvbq2iKX_XLLJR3IknUkfqMzCgrO69s" target="_blank" rel="noopener">
+          <div>
+            <div class="work-top"><span>02 · Pet Grooming</span><span>Motion Ads · Showcase</span></div>
+            <h3 style="margin-top:22px">Far Out<br><em>Fur Co.</em></h3>
+            <p>A redacted grooming campaign with motion that is all its own: no oven, no steam. A spinning 70s sunburst, waves rolling across the bottom, and a paw bouncing to the beat. Playful, groovy, and built for the happiest pup on the block.</p>
+            <div class="motion-stage fur-stage" aria-hidden="true">
+              <div class="stage-head"><span class="live"><span class="play-dot"></span>Motion Ad · Playing</span><span>20 sec · Story 9:16</span></div>
+              <div class="fur-scene">
+                <div class="sunburst"></div>
+                <div class="fur-copy"><strong>Groovy groom<br>Happy pup</strong><span>Far Out Fur Co. · Motion Ad 01</span></div>
+                <div class="fur-paw">
+                  <svg width="76" height="70" viewBox="0 0 76 70" fill="#ffc93c" aria-hidden="true"><ellipse cx="38" cy="48" rx="17" ry="13"/><circle cx="10" cy="34" r="7.5"/><circle cx="24" cy="20" r="8.5"/><circle cx="42" cy="16" r="8.5"/><circle cx="59" cy="24" r="7.5"/></svg>
+                </div>
+                <div class="fur-waves"></div>
+              </div>
+              <div class="progress"><span class="progress-fill"></span></div>
+              <div class="frame-row"><span class="frame-chip c1">01 · Wash</span><span class="frame-chip c2">02 · Floof</span><span class="frame-chip c3">03 · Strut</span></div>
+            </div>
+            <div class="work-meta"><span>2 motion ads</span><span>Personas</span><span>Posts</span><span>Share cards</span><span>Plan</span></div>
+          </div>
+          <span class="work-link">View campaign <i>→</i></span>
+        </a>
+
         <a class="work dark-work" href="https://muse.ai/s/big-lou-moving-co-xoxk6xaxhdrwxhgxm/sXklM3uMnhHapGk6BXGcom64BxhWqiNKopYC4EFFD54" target="_blank" rel="noopener">
           <div>
             <div class="work-top"><span>Home Services</span><span>Campaign Hub ↗</span></div>
@@ -384,5 +663,79 @@ footer{border-top:1px solid var(--line);padding:22px 0 32px}
     <span>amco100.me</span>
   </div>
 </footer>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Illuminate each section as it scrolls into view */
+  var targets = document.querySelectorAll('.sec-head, .tier, .step, .work, .pillar');
+  if (reduce || !('IntersectionObserver' in window)) {
+    targets.forEach(function(el){ el.classList.add('lit'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add('lit'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    targets.forEach(function(el, i){
+      el.style.transitionDelay = (el.classList.contains('step') || el.classList.contains('pillar')) ? ((i % 4) * 80) + 'ms' : '0ms';
+      io.observe(el);
+    });
+  }
+
+  /* City portrait: scroll progress 0 (top, quiet dawn) → 1 (bottom, city fully alive) */
+  var skyAlive = document.getElementById('skyAliveRect');
+  var stars    = document.getElementById('cityStars');
+  var sun      = document.getElementById('citySun');
+  var sunGlow  = document.getElementById('sunGlow');
+  var clouds   = document.getElementById('cityClouds');
+  var birds    = document.getElementById('cityBirds');
+  var beacon   = document.getElementById('beacon');
+  var tint     = document.getElementById('bldgTint');
+  var win1     = document.getElementById('win1');
+  var win2     = document.getElementById('win2');
+  var win3     = document.getElementById('win3');
+  var sign     = document.getElementById('citySign');
+  var foliage  = document.getElementById('foliageAlive');
+  var lamps    = document.getElementById('lampGlow');
+  if (!skyAlive) return;
+
+  function seg(p, a, b){ return Math.min(1, Math.max(0, (p - a) / (b - a))); }
+  function render(p){
+    skyAlive.setAttribute('opacity', p.toFixed(3));
+    stars.setAttribute('opacity', (0.8 * (1 - seg(p, 0, 0.4))).toFixed(3));
+    /* sun starts low behind the towers (offset +185) and rises as you scroll */
+    sun.setAttribute('transform', 'translate(0 ' + (185 * (1 - p)).toFixed(1) + ')');
+    sunGlow.setAttribute('opacity', (0.25 + 0.5 * p).toFixed(3));
+    clouds.setAttribute('transform', 'translate(' + (-8 + 30 * p).toFixed(1) + ' 0)');
+    clouds.setAttribute('opacity', (0.4 + 0.4 * p).toFixed(3));
+    birds.setAttribute('opacity', seg(p, 0.35, 0.8).toFixed(3));
+    birds.setAttribute('transform', 'translate(' + (26 * p).toFixed(1) + ' ' + (-10 * p).toFixed(1) + ')');
+    beacon.setAttribute('opacity', (0.35 + 0.65 * p).toFixed(3));
+    tint.setAttribute('opacity', (0.85 * p).toFixed(3));
+    /* windows wake in three waves, top floors first */
+    win1.setAttribute('opacity', seg(p, 0.05, 0.35).toFixed(3));
+    win2.setAttribute('opacity', seg(p, 0.3, 0.65).toFixed(3));
+    win3.setAttribute('opacity', seg(p, 0.6, 0.95).toFixed(3));
+    sign.setAttribute('opacity', seg(p, 0.45, 0.85).toFixed(3));
+    foliage.setAttribute('opacity', p.toFixed(3));
+    /* dawn lamp-glow eases off as daylight takes over */
+    lamps.setAttribute('opacity', (1 - 0.65 * p).toFixed(3));
+  }
+
+  if (reduce) { render(0.55); return; }
+  var ticking = false;
+  function update(){
+    ticking = false;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    render(p);
+  }
+  function onScroll(){ if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+</script>
 </body>
 </html>
