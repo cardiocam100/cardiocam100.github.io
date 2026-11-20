@@ -3,927 +3,386 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AMCO | Whole marketing campaigns, built for real businesses</title>
-<meta name="description" content="AMCO builds complete marketing campaigns for local businesses: customer research, posts for 11 platforms, ads, emails, images and video, delivered on one link and ready to post.">
-<meta name="theme-color" content="#07080c">
-<!-- Link previews on X, LinkedIn, iMessage and Slack. The card is drawn by
-     docs/amco-site/share-card.mjs from the hero shot. Absolute URLs: the
-     scrapers do not resolve relative ones. -->
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="AMCO">
-<meta property="og:url" content="https://amco100.me/">
-<meta property="og:title" content="It's a normal Tuesday. Your campaign is done.">
-<meta property="og:description" content="Customer research, posts for 11 platforms, ads, emails, images and video. One link, ready to post.">
-<meta property="og:image" content="https://amco100.me/assets/img/share.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A man in a suit types at a desk bolted to a flying jet. Headline: It's a normal Tuesday. Your campaign is done.">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="It's a normal Tuesday. Your campaign is done.">
-<meta name="twitter:description" content="Customer research, posts for 11 platforms, ads, emails, images and video. One link, ready to post.">
-<meta name="twitter:image" content="https://amco100.me/assets/img/share.jpg">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='%23ff2e63'/></svg>">
-<!-- Motion scene, built with the amco-orchestrator motion kit: ONE paused GSAP
-     timeline on window.__timeline, every time from timing.ts, facts from
-     data.json. render.mjs seeks it to make video; on the website (SITE mode,
-     set by build.mjs) the intro autoplays and scrolling scrubs the rest.
-     Never load anything from the network: fonts and images are local. -->
-<script src="assets/gsap.min.js"></script>
-<script>window.SITE = true; window.TIMING = {"fps":30,"size":[1920,1080],"shutter":0.1,"shutterLen":0.9,"heroIn":0.25,"kickerIn":0.9,"headlineIn":1.15,"wordStagger":0.09,"subIn":1.9,"ctaIn":2.25,"jetsIn":1,"jetsFly":1.5,"jetsStagger":0.14,"hudIn":2.4,"introEnd":3.2,"heroHold":1.4,"chapterLen":4.2,"wipe":0.85,"holdAt":1.6,"holdLate":2.3,"burst":0.9,"tail":3,"scrollPerSecond":0.5,"stills":[0.6,3,7.4,11.6,15.8,20,24.2,28.4,32.6,36.8,41,44.6,46.8]}; window.DATA = {"brand":"AMCO","site":"amco100.me","contactEmail":"camcampaigns@agentmail.to","contactSubject":"I want a campaign","place":"Pensacola, Florida","platforms":["Facebook","Instagram","Threads","X","YouTube","Reddit","LinkedIn","Pinterest","Etsy","Snapchat","TikTok"],"deliverables":["Customer profiles","Competitor intel","Keywords","Facebook and Instagram ads","Google search ads","Email sequences","Video ad scripts","Short vertical videos","Images","Content calendar","Brand kit","One-link campaign hub"],"chapters":[{"id":"launch","label":"Launch"},{"id":"research","label":"Research"},{"id":"intel","label":"Intel"},{"id":"ads","label":"Ads"},{"id":"brand","label":"Brand"},{"id":"video","label":"Video"},{"id":"delivery","label":"Delivery"},{"id":"work","label":"The work"},{"id":"reach","label":"Reach"},{"id":"how","label":"How it works"},{"id":"finale","label":"Work with us"}],"jets":[{"go":"research","label":"Research","x":70,"y":11,"w":8,"px":20,"py":12,"pw":24},{"go":"ads","label":"Ads and emails","x":87,"y":14,"w":9.5,"px":80,"py":12,"pw":26},{"go":"work","label":"See one we made","x":78,"y":27,"w":8,"px":24,"py":26,"pw":20},{"go":"reach","label":"11 platforms","x":92,"y":34,"w":6.5,"px":80,"py":26,"pw":20},{"go":"how","label":"How it works","x":72,"y":41,"w":7,"px":22,"py":39,"pw":18}],"work":{"_note":"Big Lou Moving Co., from the showcase thread (2026-10-29). Copy, plan and colors come from its hub. Cam 2026-10-30: no on-screen demo stamp. Swap in any showcase campaign here.","name":"Big Lou Moving Co.","stamp":"","tagline":"Every 10 paid moves fund a free move for a family starting over.","sub":"A family mover whose mascot is a gentle eight-foot sasquatch, where every 10 paid moves fund a free move for a family starting over. The posts, the plan and the brand, on one link.","whoTitle":"THE CAMPAIGN","who":["Family-owned movers","Sasquatch mascot","December push","10 moves = 1 free move"],"posts":[{"platform":"Instagram","text":"Lou carries pianos up three flights without breaking a sweat.\nHand him Grandma's teacup and he forgets how to breathe."},{"platform":"TikTok","text":"POV: your mover cried harder at your baby photos than you did."},{"platform":"Facebook","text":"Every 10 paid moves fund one free Fresh Start Move for a family starting over.\n60 moves. 6 fresh starts. Help us count."},{"platform":"X","text":"Things Lou has cried at this week:\nA wedding album.\nA kid's height chart on a door frame.\nA very nice lamp.\nHe's fine. Your stuff's fine."},{"platform":"Threads","text":"How Lou packs a box marked FRAGILE:\n1. Reads it twice.\n2. Whispers to it.\n3. Carries it like a newborn.\n4. Never explains the whisper."}],"plan":[{"when":"Dec 1","title":"Say the number"},{"when":"Week 2","title":"Lou being Lou, funny first"},{"when":"Week 3","title":"The tearjerker"},{"when":"Dec 28","title":"Last trucks, final count"}],"theme":{"paper":"#FFF6E8","top":"#2B3F7A","dark":"#1F2F5C","gold":"#F4B43A","hot":"#E8553A"},"toast":"<b>Copied.</b> Paste it into TikTok."}};</script>
-
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<title>AMCO — Create an Entire Marketing Campaign in 24 Hours</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  @font-face { font-family: "Anton"; src: url("assets/fonts/anton.woff2") format("woff2"); font-display: block; }
-  @font-face { font-family: "Bebas Neue"; src: url("assets/fonts/bebas-neue.woff2") format("woff2"); font-display: block; }
-  @font-face { font-family: "Inter"; src: url("assets/fonts/inter.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
-  @font-face { font-family: "JetBrains Mono"; src: url("assets/fonts/jetbrains-mono.woff2") format("woff2"); font-weight: 100 800; font-display: swap; }
-
-  :root {
-    --bg: #07080c; --ink: #f4f1ea; --muted: #a9afbd; --dim: #6b7280;
-    --neon: #ff2e63; --cyan: #2de2e6; --ember: #ff7a1a; --gold: #ffc53d;
-    --display: "Anton", "Impact", "Arial Narrow", sans-serif;
-    --hud: "Bebas Neue", "Anton", sans-serif;
-    --body: "Inter", "Helvetica Neue", Arial, sans-serif;
-    --mono: "JetBrains Mono", ui-monospace, monospace;
-    --gutter: clamp(16px, 4.2vw, 80px);
+:root{
+  --bg:#f6f5f2;
+  --bg2:#eceae5;
+  --ink:#101010;
+  --ink2:#3a3a38;
+  --muted:#6f6e6a;
+  --line:#10101022;
+  --line-strong:#101010;
+  --card:#ffffff;
+  --card-ink:#101010;
+  --accent:#ff3b0a;
+  --accent-ink:#ffffff;
+  --dark:#101010;
+  --dark-ink:#f6f5f2;
+  --dark-muted:#a9a8a3;
+  --radius:20px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0e0e0e;
+    --bg2:#171716;
+    --ink:#f4f3ef;
+    --ink2:#d6d5cf;
+    --muted:#9c9b96;
+    --line:#ffffff24;
+    --line-strong:#f4f3ef;
+    --card:#171716;
+    --card-ink:#f4f3ef;
+    --dark:#f4f3ef;
+    --dark-ink:#101010;
+    --dark-muted:#5c5b57;
   }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); }
-  body { overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-  body.render { width: 100vw; height: 100vh; overflow: hidden; }
-  a { color: inherit; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+@media(min-width:768px){.wrap{padding:0 36px}}
 
-  /* The stage is the film frame: fixed, full viewport. The scroller under it
-     only provides scroll distance (SITE mode). */
-  .stage { position: fixed; inset: 0; overflow: hidden; background: var(--bg); }
-  #scroller { position: relative; width: 1px; pointer-events: none; }
+/* HERO */
+.hero{padding:28px 0 0;border-bottom:1px solid var(--line-strong)}
+.topbar{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.topbar strong{font-weight:600}
+.topbar span{color:var(--muted)}
+.hero-main{padding:44px 0 36px}
+@media(min-width:768px){.hero-main{padding:64px 0 48px}}
+.kicker{display:flex;align-items:center;gap:10px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+.kicker::before{content:"";width:10px;height:10px;background:var(--accent);display:inline-block;border-radius:50%}
+h1{font-size:clamp(44px,9.2vw,108px);line-height:.92;letter-spacing:-.04em;font-weight:900;text-transform:uppercase;margin:0;max-width:980px}
+h1 em{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.02em;color:var(--accent)}
+.hero-sub{display:grid;gap:24px;margin-top:32px}
+@media(min-width:860px){.hero-sub{grid-template-columns:1.2fr .8fr;align-items:end}}
+.hero-sub p{font-size:clamp(18px,2.2vw,22px);line-height:1.45;color:var(--ink2);margin:0;max-width:620px;font-weight:500}
+.hero-sub p b{color:var(--ink)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px;border:1px solid var(--line-strong);transition:.18s}
+.btn-primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn-primary:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:var(--bg2)}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);margin-top:44px}
+.pillar{padding:18px 14px;border-right:1px solid var(--line)}
+.pillar:last-child{border-right:0}
+.pillar small{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;color:var(--accent);display:block;margin-bottom:6px}
+.pillar strong{font-size:15px;line-height:1.2;display:block}
+@media(min-width:768px){.pillar{padding:22px 20px}.pillar strong{font-size:18px}}
+.deliverables{display:flex;flex-wrap:wrap;gap:8px 18px;padding:16px 0 20px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.deliverables span::before{content:"— "}
 
-  /* Shots: one full-bleed image per chapter. .cam takes mouse parallax, the
-     img takes the timeline's camera moves, so they never fight. */
-  .shot { position: absolute; inset: 0; visibility: hidden; }
-  .shot .cam { position: absolute; inset: -3%; will-change: transform; }
-  .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; will-change: transform; }
-  .shot::after { content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(90deg, rgba(7,8,12,.92) 0%, rgba(7,8,12,.72) 30%, rgba(7,8,12,.12) 58%, rgba(7,8,12,0) 75%),
-                linear-gradient(0deg, rgba(7,8,12,.85) 0%, rgba(7,8,12,0) 28%); }
-  #shot-launch img { object-position: 50% 30%; }
-  #shot-research img { object-position: 60% 40%; }
-  #shot-intel img { object-position: 60% 40%; }
-  #shot-ads img { object-position: 55% 40%; }
-  #shot-brand img { object-position: 60% 40%; }
-  #shot-video img { object-position: 62% 40%; }
-  #how-bg .bgimg { object-position: 60% 35%; }
-  #shot-delivery img { object-position: 60% 35%; }
-  /* Reach and How keep their graphic look: the scene sits behind a dark wash. */
-  .bgimg { position: absolute; inset: -3%; width: 106%; height: 106%; object-fit: cover; object-position: 58% 40%; will-change: transform; }
-  .reach-bg::after, .how-bg::after { content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(90deg, rgba(7,8,12,.9) 0%, rgba(7,8,12,.66) 40%, rgba(7,8,12,.3) 70%, rgba(7,8,12,.45) 100%), linear-gradient(0deg, rgba(7,8,12,.85) 0%, rgba(7,8,12,0) 40%); }
-  .how-bg::after { background: linear-gradient(0deg, rgba(7,8,12,.92) 0%, rgba(7,8,12,.55) 55%, rgba(7,8,12,.25) 100%); }
-  .reach-bg .ticker { z-index: 1; }
+/* SECTION HEADS */
+.section{padding:56px 0}
+@media(min-width:768px){.section{padding:80px 0}}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.sec-head h2{font-size:clamp(32px,5vw,56px);line-height:.95;letter-spacing:-.03em;text-transform:uppercase;margin:0;font-weight:900}
+.sec-head h2 em{font-family:"Instrument Serif",serif;font-style:italic;text-transform:none;font-weight:400;color:var(--accent)}
+.sec-head p{margin:0;color:var(--muted);max-width:380px;line-height:1.5;font-size:15px}
 
-  /* Jets: --x/--y are % of the stage, --w is vw; --px/--py/--pw on phones. */
-  .jets { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
-  .jet { position: absolute; left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); width: calc(var(--w) * 1vw); transform: translate(-50%, -50%); pointer-events: auto; text-decoration: none; display: block; visibility: hidden; }
-  .jet .fly, .jet .bob { display: block; position: relative; }
-  .jet img { display: block; width: 100%; filter: drop-shadow(0 8px 10px rgba(0,0,0,.28)); transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
-  .jet .trail { position: absolute; right: 86%; top: 48%; width: 320%; height: 16%; border-radius: 50%; pointer-events: none;
-    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55) 60%, rgba(255,255,255,.95)); filter: blur(3px); transform-origin: 100% 50%; transition: transform .35s, filter .35s; }
-  .jet .burn { position: absolute; right: 93%; top: 47%; width: 14%; height: 12%; border-radius: 50%; background: radial-gradient(closest-side, #fff7d6, #ffb347 45%, rgba(255,90,30,0)); opacity: 0; transition: opacity .25s; }
-  .jet .tag { position: absolute; left: 50%; top: 100%; margin-top: 2px; transform: translateX(-50%); white-space: nowrap; font-family: var(--hud); font-size: clamp(12px, .95vw, 18px); letter-spacing: .1em; text-transform: uppercase; padding: .3em .85em; border-radius: 999px; color: #fff; background: rgba(7,8,12,.62); box-shadow: 0 0 0 1px rgba(255,255,255,.35) inset; backdrop-filter: blur(4px); transition: background .25s, box-shadow .25s, transform .25s; }
-  .jet .tag b { font-weight: 400; color: var(--cyan); margin-left: .35em; }
-  .jet:hover img, .jet:focus-visible img { transform: translateY(-8%) rotate(-5deg) scale(1.1); }
-  .jet:hover .trail, .jet:focus-visible .trail { transform: scaleX(1.35); filter: blur(2px) brightness(1.2); }
-  .jet:hover .burn, .jet:focus-visible .burn { opacity: 1; }
-  .jet:hover .tag, .jet:focus-visible .tag { background: var(--neon); box-shadow: 0 0 22px rgba(255,46,99,.75); transform: translateX(-50%) scale(1.06); }
-  .jet:hover .tag b, .jet:focus-visible .tag b { color: #fff; }
-  .jet:focus-visible { outline: none; }
-  .jet:focus-visible .tag { outline: 2px solid var(--cyan); outline-offset: 2px; }
-  #card-launch { width: min(760px, 42vw); }
-  #card-launch h1 { font-size: clamp(50px, 6.2vw, 124px); }
-  canvas#fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-  .grain { position: absolute; inset: -50%; pointer-events: none; opacity: .09; mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
-  .vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 60% 45%, rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 100%); }
-  .streaks { position: absolute; inset: 0; pointer-events: none; opacity: 0; mix-blend-mode: screen;
-    background: repeating-linear-gradient(180deg, rgba(255,255,255,0) 0 22px, rgba(255,255,255,.55) 22px 24px, rgba(255,255,255,0) 24px 61px, rgba(45,226,230,.6) 61px 62px, rgba(255,255,255,0) 62px 97px, rgba(255,46,99,.55) 97px 99px);
-    filter: blur(1px); }
-  .flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
-  .shutter { position: absolute; left: 0; right: 0; height: 50.5%; background: #000; z-index: 30; }
-  .shutter.top { top: 0; } .shutter.bot { bottom: 0; }
+/* TIERS */
+.tiers{display:flex;flex-direction:column;border-top:1px solid var(--line-strong)}
+.tier{display:grid;gap:20px;padding:28px 0;border-bottom:1px solid var(--line-strong);position:relative}
+@media(min-width:900px){.tier{grid-template-columns:300px 1fr 210px;gap:32px;padding:36px 0;align-items:start}}
+.tier-num{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+@media(min-width:900px){.tier-num{justify-content:flex-start;gap:12px}}
+.badge{display:inline-flex;align-items:center;min-height:28px;padding:4px 10px;border-radius:999px;background:var(--accent);color:#fff;font-family:"Archivo",sans-serif;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.badge-outline{background:transparent;color:var(--ink);border:1px solid var(--line-strong)}
+.tier-name{font-size:clamp(30px,4vw,44px);line-height:.95;letter-spacing:-.03em;font-weight:900;text-transform:uppercase;margin:10px 0 8px}
+.tier-price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.tier-price .price{font-size:28px;font-weight:800;letter-spacing:-.02em}
+.tier-price .once{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tier-desc{font-size:16px;line-height:1.5;color:var(--ink2);margin:0 0 16px;max-width:560px}
+.features{list-style:none;margin:0;padding:0;display:grid;gap:0}
+@media(min-width:640px){.features{grid-template-columns:1fr 1fr;column-gap:28px}}
+.features li{padding:10px 0;border-top:1px solid var(--line);font-size:14.5px;font-weight:600;display:flex;gap:10px;align-items:baseline}
+.features li::before{content:"";width:7px;height:7px;background:var(--accent);border-radius:50%;flex:0 0 auto;transform:translateY(-1px)}
+.tier-cta{display:flex;flex-direction:column;gap:10px}
+@media(min-width:900px){.tier-cta{position:sticky;top:20px}}
+.buy{display:inline-flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:0 18px;border-radius:14px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:800;font-size:15px}
+.buy:hover{background:var(--accent);color:#fff}
+.buy span:last-child{font-size:20px}
+.tier-note{font-size:12.5px;line-height:1.45;color:var(--muted);margin:0;text-align:center}
+.tier.featured{background:var(--dark);color:var(--dark-ink);margin:0 -20px;padding-left:20px;padding-right:20px;border-bottom-color:var(--dark)}
+@media(min-width:768px){.tier.featured{margin:0 -36px;padding-left:36px;padding-right:36px}}
+.tier.featured .tier-desc,.tier.featured .tier-price .once,.tier.featured .tier-num{color:var(--dark-muted)}
+.tier.featured .features li{border-top-color:rgba(128,128,128,.28)}
+.tier.featured .buy{background:var(--accent);color:#fff}
+.tier.featured .buy:hover{background:var(--ink);color:var(--bg)}
+.tier.featured .tier-note{color:var(--dark-muted)}
+.pricing-note{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 20px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 
-  /* Copy blocks */
-  .card { position: absolute; left: var(--gutter); top: 0; bottom: 0; width: min(780px, 52vw); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; visibility: hidden; z-index: 5; }
-  /* Cards and the top bar span big areas: only their own links take clicks,
-     so the jets underneath stay clickable. */
-  .card, nav.top { pointer-events: none; }
-  .card a, .card .step, nav.top a, nav.top button { pointer-events: auto; }
-  .kicker { font-family: var(--hud); font-size: clamp(16px, 1.45vw, 28px); letter-spacing: .14em; color: var(--cyan); display: flex; align-items: center; gap: .6em; }
-  .kicker::before { content: ""; width: 2.4em; height: 2px; background: currentColor; }
-  h1, h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: .92; margin: .25em 0 .35em; letter-spacing: .005em; }
-  h1 { font-size: clamp(54px, 7.6vw, 150px); }
-  h2 { font-size: clamp(44px, 5.6vw, 112px); }
-  .w { display: inline-block; overflow: hidden; vertical-align: top; padding: .04em .02em 0; margin: -.04em -.02em 0; }
-  .w > span { display: inline-block; }
-  h1 em, h2 em { font-style: normal; color: var(--neon); text-shadow: 0 0 .35em rgba(255,46,99,.45); }
-  .sub { font-size: clamp(16px, 1.3vw, 24px); line-height: 1.5; color: #d9dbe2; max-width: 34em; margin: 0 0 1.6em; }
-  .ctas { display: flex; flex-wrap: wrap; gap: 14px; }
-  .btn { position: relative; display: inline-flex; align-items: center; gap: .6em; padding: .95em 1.5em; border-radius: 999px; font-family: var(--hud); font-size: clamp(18px, 1.35vw, 26px); letter-spacing: .08em; text-decoration: none; cursor: pointer; border: 0; will-change: transform; }
-  .btn.primary { background: var(--neon); color: #fff; box-shadow: 0 0 0 1px rgba(255,255,255,.12) inset, 0 10px 40px rgba(255,46,99,.45); }
-  .btn.primary:hover { box-shadow: 0 0 0 1px rgba(255,255,255,.3) inset, 0 12px 60px rgba(255,46,99,.75); }
-  .btn.ghost { color: var(--ink); background: rgba(255,255,255,.06); box-shadow: 0 0 0 1px rgba(255,255,255,.28) inset; backdrop-filter: blur(6px); }
-  .btn.ghost:hover { background: rgba(255,255,255,.14); }
-  .btn:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
-  .btn .arr { transition: transform .25s; } .btn:hover .arr { transform: translateX(4px); }
+/* HOW */
+.how{background:var(--bg2);border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
+.steps{display:grid;gap:0;border:1px solid var(--line-strong)}
+@media(min-width:860px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{padding:24px 20px;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:0}
+@media(min-width:860px){.step{border-bottom:0;border-right:1px solid var(--line)}.step:last-child{border-right:0}}
+.step b{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent);letter-spacing:.12em}
+.step h3{margin:10px 0 8px;font-size:20px;letter-spacing:-.02em}
+.step p{margin:0;color:var(--muted);line-height:1.55;font-size:14.5px}
 
-  /* HUD: the camera viewfinder over everything */
-  .hud { position: absolute; inset: 0; pointer-events: none; z-index: 10; }
-  .hud .corner { position: absolute; width: 38px; height: 38px; border: 2px solid rgba(255,255,255,.55); opacity: 0; }
-  .hud .tl { top: 84px; left: calc(var(--gutter) - 22px); border-right: 0; border-bottom: 0; }
-  .hud .tr { top: 84px; right: calc(var(--gutter) - 22px); border-left: 0; border-bottom: 0; }
-  .hud .bl { bottom: 28px; left: calc(var(--gutter) - 22px); border-right: 0; border-top: 0; }
-  .hud .br { bottom: 28px; right: calc(var(--gutter) - 22px); border-left: 0; border-top: 0; }
-  .hud .readout { position: absolute; bottom: 40px; right: var(--gutter); font-family: var(--mono); font-size: clamp(11px, .8vw, 15px); color: rgba(255,255,255,.75); letter-spacing: .08em; text-align: right; opacity: 0; line-height: 1.7; }
-  .rec { color: #fff; } .rec i { display: inline-block; width: .7em; height: .7em; border-radius: 50%; background: var(--neon); margin-right: .5em; vertical-align: -1px; box-shadow: 0 0 10px var(--neon); }
-  .hud .scene-name { color: var(--cyan); }
+/* PORTFOLIO */
+.portfolio-grid{display:grid;gap:16px}
+@media(min-width:860px){.portfolio-grid{grid-template-columns:1fr 1fr}}
+.work{display:block;text-decoration:none;border:1px solid var(--line-strong);border-radius:var(--radius);padding:28px 24px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between;gap:32px;background:var(--card);color:var(--card-ink);transition:.18s}
+.work:hover{transform:translateY(-3px)}
+.work-top{display:flex;justify-content:space-between;gap:16px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.work h3{font-size:clamp(34px,5vw,54px);line-height:.92;letter-spacing:-.035em;text-transform:uppercase;margin:0;font-weight:900}
+.work h3 em{font-family:"Instrument Serif",serif;font-style:italic;text-transform:none;font-weight:400;color:var(--accent)}
+.work p{color:var(--muted);line-height:1.55;margin:12px 0 0;max-width:440px}
+.work-link{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:15px}
+.work-link i{font-style:normal;width:44px;height:44px;border-radius:50%;border:1px solid var(--line-strong);display:grid;place-items:center;font-size:18px}
+.work.dark-work{background:var(--dark);color:var(--dark-ink)}
+.work.dark-work p,.work.dark-work .work-top{color:var(--dark-muted)}
+.work.dark-work .work-link i{border-color:var(--dark-muted)}
 
-  /* Top bar */
-  nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 18px var(--gutter); opacity: 0; }
-  .logo { display: flex; align-items: center; gap: .45em; font-family: var(--display); font-size: 30px; letter-spacing: .04em; text-decoration: none; }
-  .logo b { width: .5em; height: .5em; border-radius: 50%; background: var(--neon); box-shadow: 0 0 14px var(--neon); }
-  .logo small { font-family: var(--hud); font-size: 15px; color: var(--muted); letter-spacing: .14em; margin-left: .3em; }
-  .links { display: flex; align-items: center; gap: clamp(14px, 2vw, 34px); font-family: var(--hud); font-size: 19px; letter-spacing: .1em; }
-  .links a { text-decoration: none; color: #e7e8ec; }
-  .links a:hover { color: var(--cyan); }
-  .links .btn { font-size: 18px; padding: .65em 1.2em; }
-
-  /* Chapter rail */
-  .rail { position: fixed; right: calc(var(--gutter) - 30px); top: 50%; transform: translateY(-50%); z-index: 20; display: flex; flex-direction: column; gap: 14px; opacity: 0; }
-  .rail button { all: unset; cursor: pointer; display: flex; align-items: center; justify-content: flex-end; gap: 10px; font-family: var(--hud); letter-spacing: .12em; font-size: 15px; color: rgba(255,255,255,0); transition: color .2s; }
-  .rail button i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.35); transition: all .25s; }
-  .rail button:hover, .rail button:focus-visible { color: rgba(255,255,255,.9); }
-  .rail button.on i { background: var(--neon); box-shadow: 0 0 10px var(--neon); transform: scale(1.5); }
-
-  .hint { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); font-family: var(--hud); letter-spacing: .2em; font-size: 16px; color: rgba(255,255,255,.7); z-index: 6; opacity: 0; text-align: center; }
-  .hint span { display: block; width: 2px; height: 34px; margin: 8px auto 0; background: linear-gradient(var(--neon), transparent); }
-
-  /* Reach: platforms wall */
-  #card-reach { width: auto; right: var(--gutter); align-items: stretch; }
-  .count { font-family: var(--display); font-size: clamp(120px, 17vw, 330px); line-height: .8; color: var(--neon); text-shadow: 0 0 40px rgba(255,46,99,.45); float: left; margin: 0 .12em 0 -.04em; }
-  .reach-top { display: flow-root; }
-  .reach-top h2 { margin-top: .1em; }
-  .chips { display: flex; flex-wrap: wrap; gap: 10px; max-width: 1180px; margin-top: 22px; }
-  .chip { font-family: var(--hud); font-size: clamp(17px, 1.45vw, 28px); letter-spacing: .08em; padding: .35em .8em; border-radius: 6px; background: rgba(255,255,255,.07); box-shadow: 0 0 0 1px rgba(255,255,255,.18) inset; }
-  .chip.p { color: #fff; background: rgba(45,226,230,.12); box-shadow: 0 0 0 1px rgba(45,226,230,.55) inset; }
-  .reach-bg { position: absolute; inset: 0; visibility: hidden; background: radial-gradient(ellipse at 20% 30%, rgba(255,46,99,.20), transparent 55%), radial-gradient(ellipse at 85% 80%, rgba(45,226,230,.16), transparent 50%), #07080c; }
-  .ticker { position: absolute; left: 0; white-space: nowrap; font-family: var(--display); text-transform: uppercase; font-size: clamp(60px, 9vw, 180px); color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.10); line-height: 1; }
-
-  /* How it works */
-  #card-how { width: auto; right: var(--gutter); align-items: stretch; }
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.6vw, 28px); margin-top: 10px; }
-  .step { position: relative; padding: clamp(18px, 2vw, 34px); border-radius: 14px; background: linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.02)); box-shadow: 0 0 0 1px rgba(255,255,255,.14) inset; transform-style: preserve-3d; }
-  .step .n { font-family: var(--display); font-size: clamp(48px, 5vw, 96px); line-height: 1; color: var(--cyan); text-shadow: 0 0 24px rgba(45,226,230,.35); }
-  .step h3 { font-family: var(--hud); font-weight: 400; font-size: clamp(24px, 2.1vw, 40px); letter-spacing: .06em; margin: .3em 0 .3em; }
-  .step p { margin: 0; color: #cfd2da; line-height: 1.5; font-size: clamp(14px, 1.05vw, 19px); }
-  .how-bg { position: absolute; inset: 0; visibility: hidden; background: linear-gradient(180deg, #0a0c14, #07080c); }
-  .how-bg::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(45,226,230,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(45,226,230,.07) 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse at 50% 60%, #000 30%, transparent 75%); }
-
-  /* Finale */
-  .finale-bg { position: absolute; inset: 0; visibility: hidden; background: radial-gradient(ellipse at 70% 60%, #3a1206 0%, #12070a 45%, #07080c 80%); }
-  .city { position: absolute; left: 0; right: 0; bottom: 0; height: 42%; }
-  #card-finale { width: min(980px, 64vw); }
-  #card-finale h2 { font-size: clamp(54px, 7vw, 140px); }
-  .mailline { margin: 1.1em 0 0; font-family: var(--mono); font-size: clamp(12px, .9vw, 16px); color: var(--muted); }
-  .mailline span { color: var(--ink); user-select: all; }
-  .foot { position: absolute; left: calc(var(--gutter) - 12px); bottom: 16px; display: flex; flex-direction: column; gap: 4px; padding: 8px 12px; border-radius: 8px; background: rgba(7,8,12,.82); backdrop-filter: blur(4px); font-size: 13px; color: var(--dim); z-index: 6; visibility: hidden; }
-  .foot a { color: var(--muted); }
-
-  /* The work: a showcase campaign hub on a phone drawn in code.
-     Everything inside the phone is sized in em off the phone's font-size, so
-     the screen scroll (--scroll, 0 to 1, tweened on the timeline) travels the
-     same distance at every viewport size. */
-  .work-bg { position: absolute; inset: 0; visibility: hidden; background: radial-gradient(ellipse at 72% 45%, rgba(45,226,230,.16), transparent 55%), radial-gradient(ellipse at 10% 90%, rgba(255,46,99,.14), transparent 50%), #07080c; }
-  .work-bg::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.10) 1px, transparent 1.4px); background-size: 28px 28px; mask-image: radial-gradient(ellipse at 70% 50%, #000 0%, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at 70% 50%, #000 0%, transparent 70%); }
-  .phone { position: absolute; left: 70%; top: 52%; font-size: min(1.55vh, 1.05vw); width: 24em; height: 49em; margin: -24.5em 0 0 -12em; border-radius: 3.6em; padding: .9em; background: linear-gradient(145deg, #2a2e3a, #0d0f15 60%); box-shadow: 0 0 0 .18em #3a3f4d inset, 0 2.4em 6em rgba(0,0,0,.65), 0 0 9em rgba(45,226,230,.18); visibility: hidden; }
-  .phone::before { content: ""; position: absolute; top: 1.6em; left: 50%; width: 6.5em; height: 1.8em; margin-left: -3.25em; border-radius: 1em; background: #050608; z-index: 3; }
-  /* The hub wears the sample campaign's own brand colors (data.json work.theme). */
-  .screen { position: relative; width: 100%; height: 100%; border-radius: 2.8em; overflow: hidden; background: var(--h-paper); color: var(--h-dark); font-family: var(--body); }
-  .screen-in { --scroll: 0; --travel: 52em; transform: translateY(calc(var(--scroll) * var(--travel) * -1)); }
-  .hub-top { padding: 4.6em 1.6em 1.6em; background: var(--h-top); color: var(--h-paper); }
-  .hub-top .stamp { display: inline-block; font-family: var(--mono); font-size: .78em; letter-spacing: .08em; text-transform: uppercase; background: rgba(0,0,0,.35); padding: .35em .7em; border-radius: .4em; margin-bottom: 1em; }
-  .hub-top b { display: block; font-family: var(--display); font-weight: 400; font-size: 2.5em; line-height: .95; text-transform: uppercase; }
-  .hub-top i { display: block; font-style: normal; margin-top: .5em; font-size: 1.05em; opacity: .9; }
-  .hub-sec { padding: 1.3em 1.6em .4em; }
-  .hub-sec h4 { margin: 0 0 .7em; font-family: var(--hud); font-weight: 400; letter-spacing: .12em; font-size: 1.15em; color: var(--h-top); }
-  .who { display: flex; flex-wrap: wrap; gap: .5em; }
-  .who span { font-size: .86em; padding: .45em .75em; border-radius: 2em; background: var(--h-dark); color: var(--h-paper); }
-  .post { position: relative; background: #fff; border-radius: 1.1em; padding: 1em 1.1em; margin-bottom: .8em; box-shadow: 0 .2em .8em rgba(0,0,0,.10); }
-  .post small { display: block; font-family: var(--hud); letter-spacing: .1em; font-size: .95em; color: var(--h-hot); margin-bottom: .3em; }
-  .post p { margin: 0; font-size: 1.02em; line-height: 1.35; white-space: pre-line; }
-  .post .copy { position: absolute; right: .9em; top: .8em; font-family: var(--mono); font-size: .72em; color: var(--h-top); }
-  .plan { display: grid; gap: .45em; }
-  .plan div { display: grid; grid-template-columns: 6.6em 1fr; gap: .6em; align-items: baseline; padding: .6em .8em; border-radius: .7em; background: rgba(0,0,0,.06); transition: none; }
-  .plan div b { font-family: var(--hud); font-weight: 400; letter-spacing: .08em; font-size: 1.05em; }
-  .plan div span { font-size: .95em; }
-  .plan div.on { background: var(--h-top); color: var(--h-paper); }
-  .plan div.on b { color: var(--h-gold); }
-  .swatches { display: flex; gap: .5em; }
-  .swatches i { flex: 1; height: 3em; border-radius: .6em; box-shadow: 0 0 0 1px rgba(0,0,0,.12) inset; }
-  .toast { position: absolute; left: 50%; bottom: 2.4em; transform: translateX(-50%); white-space: nowrap; font-size: .95em; padding: .7em 1.1em; border-radius: 2em; background: var(--h-dark); color: var(--h-paper); box-shadow: 0 .6em 1.6em rgba(0,0,0,.3); visibility: hidden; z-index: 4; }
-  .toast b { color: var(--h-gold); font-weight: 600; }
-  .copybtn { all: unset; cursor: pointer; margin-left: .8em; padding: .2em .7em; border-radius: 4px; color: var(--cyan); box-shadow: 0 0 0 1px rgba(45,226,230,.5) inset; font-family: var(--mono); pointer-events: auto; }
-  .copybtn:hover { background: rgba(45,226,230,.12); }
-  .copybtn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
-  .menubtn { display: none; }
-  .menu { position: fixed; inset: 0; z-index: 40; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 80px var(--gutter) 40px; background: rgba(7,8,12,.96); backdrop-filter: blur(8px); }
-  .menu[hidden] { display: none; }
-  .menu a, .menu button.x { all: unset; cursor: pointer; font-family: var(--display); text-transform: uppercase; font-size: clamp(30px, 9vw, 54px); line-height: 1.12; color: var(--ink); }
-  .menu a:focus-visible, .menu button.x:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
-  .menu a.cur { color: var(--neon); }
-  .menu a.small { font-family: var(--hud); font-size: 22px; letter-spacing: .12em; color: var(--muted); margin-top: 18px; }
-  .menu button.x { position: absolute; top: 18px; right: var(--gutter); font-family: var(--hud); font-size: 20px; letter-spacing: .12em; padding: .5em .9em; border-radius: 999px; box-shadow: 0 0 0 1px rgba(255,255,255,.3) inset; }
-
-  /* Phones and portrait: copy sits at the bottom over a taller scrim. */
-  @media (max-aspect-ratio: 1/1), (max-width: 760px) {
-    .shot::after { background: linear-gradient(0deg, rgba(7,8,12,.97) 0%, rgba(7,8,12,.86) 40%, rgba(7,8,12,.15) 66%, rgba(7,8,12,0) 80%); }
-    #shot-launch img { object-position: 47% 20%; }
-    #shot-research img { object-position: 80% 30%; }
-    #shot-intel img { object-position: 88% 30%; }
-    #shot-brand img { object-position: 62% 40%; }
-    #shot-video img { object-position: 64% 40%; }
-    #how-bg .bgimg { object-position: 72% 30%; }
-    #shot-ads img { object-position: 60% 30%; }
-    #shot-delivery img { object-position: 68% 20%; }
-    .bgimg { object-position: 62% 30%; }
-    .card, #card-finale { width: auto; right: var(--gutter); justify-content: flex-end; padding-bottom: max(92px, 9vh); }
-    #card-reach, #card-how { justify-content: center; padding: 70px 0 40px; }
-    .steps { grid-template-columns: 1fr; }
-    .step { padding: 14px 18px; display: grid; grid-template-columns: auto 1fr; column-gap: 16px; align-items: center; }
-    .step .n { grid-row: span 2; }
-    .step h3 { margin: 0; }
-    .links a:not(.btn) { display: none; }
-    .rail { right: 6px; gap: 10px; }
-    .rail button span { display: none; }
-    .hud .readout { bottom: auto; top: 70px; }
-    .hud .corner { display: none; }
-    .hint { display: none; }
-    .foot { bottom: 10px; font-size: 11px; }
-    .count { font-size: clamp(110px, 32vw, 200px); }
-    .phone { left: 50%; top: 36%; font-size: min(.98vh, 2vw); }
-    #card-work { padding-bottom: max(64px, 6vh); }
-    #card-work h2 { font-size: clamp(40px, 11vw, 64px); }
-    #card-work .sub { font-size: 15px; margin-bottom: 0; }
-    .menubtn { display: inline-flex; font-size: 16px; padding: .6em 1em; }
-  }
-  @media (max-aspect-ratio: 1/1), (max-width: 760px) {
-    .jet { left: calc(var(--px) * 1%); top: calc(var(--py) * 1%); width: calc(var(--pw) * 1vw); }
-    .jet .tag { font-size: 11px; padding: .25em .6em; }
-    #card-launch { width: auto; }
-  }
-  @media (max-width: 760px) { .logo small { display: none; } }
+/* CLOSE */
+.close{padding:64px 0 72px;border-top:1px solid var(--line-strong);text-align:left}
+.close h2{font-size:clamp(36px,6.5vw,72px);line-height:.95;letter-spacing:-.035em;text-transform:uppercase;margin:0 0 20px;font-weight:900;max-width:820px}
+.close h2 em{font-family:"Instrument Serif",serif;font-style:italic;text-transform:none;font-weight:400;color:var(--accent)}
+.close p{color:var(--muted);line-height:1.6;max-width:560px;margin:0 0 28px}
+footer{border-top:1px solid var(--line);padding:22px 0 32px}
+.foot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.work:hover{transform:none}}
 </style>
 </head>
 <body>
-<nav class="top" id="nav" aria-label="Main">
-  <a class="logo" href="/"><b></b>AMCO<small>amco100.me</small></a>
-  <div class="links">
-    <a href="#research" data-go="research">The film</a>
-    <a href="#work" data-go="work">The work</a>
-    <a href="#how" data-go="how">How it works</a>
-    <a href="/writing/">Writing</a>
-    <button class="btn ghost menubtn" id="menubtn" aria-expanded="false" aria-controls="menu">Menu</button>
-    <a class="btn primary mag" data-email href="#finale">Work With Us</a>
-  </div>
-</nav>
-<div class="menu" id="menu" hidden role="dialog" aria-label="Menu">
-  <button class="x" id="menux">Close</button>
-</div>
-
-<div class="stage" id="stage">
-  <section class="shot" id="shot-launch" aria-label="Launch"><div class="cam"><img src="assets/img/jet-hero.jpg" alt="A man in a suit stands on top of a flying jet high above a white-sand beach, typing on a laptop at a steel desk bolted to the jet, coffee in hand."></div></section>
-  <section class="shot" id="shot-research" aria-label="Research"><div class="cam"><img src="assets/img/ocean.jpg" alt="At the bottom of the ocean, a man in a suit and a glass diving helmet runs a focus group, taking notes while a giant squid, anglerfish and a sea turtle sit on a sunken couch."></div></section>
-  <section class="shot" id="shot-intel" aria-label="Competitor intel"><div class="cam"><img src="assets/img/shark.jpg" alt="In a hurricane at sea, he sits on a tiny raft playing chess against a great white shark."></div></section>
-  <section class="shot" id="shot-ads" aria-label="Ads"><div class="cam"><img src="assets/img/everest.jpg" alt="At a glass desk on the snowy summit of Everest, he arm-wrestles a grizzly bear and signs a contract with his other hand while a climber holds an umbrella over the paperwork."></div></section>
-  <section class="shot" id="shot-brand" aria-label="Brand kit"><div class="cam"><img src="assets/img/balloon.jpg" alt="Hanging one-handed from a hot-air balloon above the clouds, he repaints a giant billboard with a paint roller while flamingos in sunglasses fly past."></div></section>
-  <section class="shot" id="shot-video" aria-label="Video"><div class="cam"><img src="assets/img/volcano.jpg" alt="In the crater of an erupting volcano, he sits in a director's chair sipping iced coffee while a film crew in fire suits rolls cameras."></div></section>
-  <section class="shot" id="shot-delivery" aria-label="Delivery"><div class="cam"><img src="assets/img/moon.jpg" alt="On the Moon, he jetpacks off with a glowing pizza box for Earth while astronauts wave and a rover pulls a wheelie."></div></section>
-  <div class="work-bg" id="work-bg">
-    <div class="phone" id="phone" aria-hidden="true"><div class="screen"><div class="screen-in" id="screen-in"></div><div class="toast" id="toast"></div></div></div>
-  </div>
-  <!-- The formation: each jet is a link to one chapter of the film. -->
-  <nav class="jets" id="jets" aria-label="Services"></nav>
-  <div class="reach-bg" id="reach-bg">
-    <img class="bgimg" src="assets/img/trex.jpg" alt="He rides a galloping T. rex down a city street, eleven glowing phones strapped to it, posting from a twelfth while the crowd films.">
-    <div class="ticker" id="tick1" style="top:8%"></div>
-    <div class="ticker" id="tick2" style="top:auto;bottom:6%"></div>
-  </div>
-  <div class="how-bg" id="how-bg"><img class="bgimg" src="assets/img/train.jpg" alt="He walks along the roof of a speeding train through the mountains at dusk, reading a tablet, tie flying behind him."></div>
-  <div class="finale-bg" id="finale-bg"><svg class="city" id="city" viewBox="0 0 1600 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg></div>
-
-  <canvas id="fx"></canvas>
-  <div class="streaks" id="streaks"></div>
-
-  <!-- Copy. Every claim here is something AMCO really does today. -->
-  <div class="card" id="card-launch">
-    <div class="kicker">Marketing campaigns, made by AMCO</div>
-    <h1 class="split">It's a normal Tuesday. <em>Your campaign is done.</em></h1>
-    <p class="sub">We research your customers, read your competitors, then write and design everything: posts for 11 platforms, ads, emails, images and video. You get one link with all of it, ready to post.</p>
-    <div class="ctas">
-      <a class="btn primary mag" data-email href="#finale">Work With Us <span class="arr">&rarr;</span></a>
-      <a class="btn ghost mag" href="#research" data-go="research">Roll the film</a>
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <strong>AMCO — Asset Orchestrator</strong>
+      <span>Autonomous Marketing Campaign Orchestrator</span>
+      <span>Hubs hosted on this website</span>
+    </div>
+    <div class="hero-main">
+      <div class="kicker">One page &nbsp;·&nbsp; Five tiers &nbsp;·&nbsp; Secure checkout via Stripe</div>
+      <h1>Create an entire marketing campaign in <em>24 hours.</em></h1>
+      <div class="hero-sub">
+        <p>Personas first. Psychology first. Visuals first. Then the posts, motion ads, emails, share cards, and hub — built as <b>one campaign</b>, not a pile of pieces.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#tiers">See the five tiers ↓</a>
+          <a class="btn btn-ghost" href="#portfolio">View portfolio →</a>
+        </div>
+      </div>
+      <div class="pillars" aria-label="AMCO order of work">
+        <div class="pillar"><small>01 / First</small><strong>Customer personas</strong></div>
+        <div class="pillar"><small>02 / First</small><strong>Psychology</strong></div>
+        <div class="pillar"><small>03 / First</small><strong>Visuals</strong></div>
+      </div>
+      <div class="deliverables" aria-label="What a campaign can include">
+        <span>Personas</span><span>Social posts</span><span>Motion ads</span><span>Emails</span><span>Share cards</span><span>Campaign hub</span><span>Full plan</span>
+      </div>
     </div>
   </div>
-  <div class="card" id="card-research">
-    <div class="kicker">Scene 02 &middot; Research</div>
-    <h2 class="split">First, we find out <em>who actually buys from you.</em></h2>
-    <p class="sub">Customer profiles built from your website and your market: what your buyers want, what makes them hesitate, and what finally gets a yes. Plus the exact words they search before they find you.</p>
-  </div>
-  <div class="card" id="card-intel">
-    <div class="kicker">Scene 03 &middot; Competitor intel</div>
-    <h2 class="split">We read your competitors' websites <em>so you don't have to.</em></h2>
-    <p class="sub">Who you're up against, what each of them leads with, and the gap nobody is filling yet. Every source we cite is a page we actually read.</p>
-  </div>
-  <div class="card" id="card-ads">
-    <div class="kicker">Scene 04 &middot; Ads that close</div>
-    <h2 class="split">No more staring at <em>an empty ad box.</em></h2>
-    <p class="sub">Facebook, Instagram and Google ads written around the reason people pick you, plus email sequences ready to load into your email tool.</p>
-  </div>
-  <div class="card" id="card-brand">
-    <div class="kicker">Scene 05 &middot; Brand kit</div>
-    <h2 class="split">Every post looks like <em>the same business made it.</em></h2>
-    <p class="sub">Your logo, colors and fonts on every image, video and page, so someone who scrolls past three of your posts knows all three were you.</p>
-  </div>
-  <div class="card" id="card-video">
-    <div class="kicker">Scene 06 &middot; Video</div>
-    <h2 class="split">And yes, <em>video.</em></h2>
-    <p class="sub">Vertical videos for Reels, TikTok and Shorts, plus video ad scripts with a voiceover track, all built from the same research as everything else.</p>
-  </div>
-  <div class="card" id="card-delivery">
-    <div class="kicker">Scene 07 &middot; Delivery</div>
-    <h2 class="split">One link. <em>All of it.</em></h2>
-    <p class="sub">Posts, ads, emails, images and a posting calendar on one page dressed in your brand. Open it on your phone, copy a post, post it.</p>
-  </div>
-  <div class="card" id="card-work">
-    <div class="kicker">Scene 08 &middot; The work</div>
-    <h2 class="split">Here's one <em>we made earlier.</em></h2>
-    <p class="sub" id="work-sub"></p>
-  </div>
-  <div class="card" id="card-reach">
-    <div class="kicker">Scene 09 &middot; Reach</div>
-    <div class="reach-top"><div class="count" id="count">0</div><h2 class="split">Platforms. Written for each one, <em>not pasted into all of them.</em></h2></div>
-    <div class="chips" id="chips"></div>
-  </div>
-  <div class="card" id="card-how">
-    <div class="kicker">Scene 10 &middot; How it works</div>
-    <h2 class="split">Three steps. <em>You do the first one.</em></h2>
-    <div class="steps">
-      <div class="step"><div class="n">01</div><h3>Send your website</h3><p>Or just tell us about the business. Two minutes, tops.</p></div>
-      <div class="step"><div class="n">02</div><h3>We build the campaign</h3><p>Research, strategy, posts, ads, emails, images and video. A real person checks every claim before you see it.</p></div>
-      <div class="step"><div class="n">03</div><h3>You get one link</h3><p>Everything in one place, ready to post. Want another one next month? Say so.</p></div>
+</header>
+
+<main>
+  <!-- TIERS -->
+  <section class="section" id="tiers">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Five tiers.<br><em>Pick your build.</em></h2>
+        <p>Every tier is one-time pricing. No sales tax is collected. Choose a tier and check out securely — your campaign build starts from there.</p>
+      </div>
+
+      <div class="tiers">
+        <!-- TIER 1 -->
+        <article class="tier">
+          <div>
+            <div class="tier-num"><span>TIER 01</span><span class="badge badge-outline">Agencies &amp; partners only</span></div>
+            <h3 class="tier-name">The Pack</h3>
+            <div class="tier-price"><span class="price">$150</span><span class="once">One time</span></div>
+          </div>
+          <div>
+            <p class="tier-desc">The white-label campaign pack for agencies and partners — ready to put your name on and deliver to your client.</p>
+            <ul class="features">
+              <li>White-label campaign pack</li>
+              <li>3 personas</li>
+              <li>Posts</li>
+              <li>Motion ads</li>
+              <li>Emails</li>
+              <li>Hub-ready files</li>
+            </ul>
+          </div>
+          <div class="tier-cta">
+            <a class="buy" href="https://buy.stripe.com/5kQ8wHeAkdgt0Ln0ZKaAw0R" target="_blank" rel="noopener"><span>Get The Pack</span><span>→</span></a>
+            <p class="tier-note">Agencies &amp; partners only</p>
+          </div>
+        </article>
+
+        <!-- TIER 2 -->
+        <article class="tier">
+          <div>
+            <div class="tier-num"><span>TIER 02</span><span class="badge badge-outline">Delivered in 24 hours</span></div>
+            <h3 class="tier-name">The Spark</h3>
+            <div class="tier-price"><span class="price">$750</span><span class="once">One time</span></div>
+          </div>
+          <div>
+            <p class="tier-desc">A fast, focused start — one persona, one channel, and the first pieces live in 24 hours.</p>
+            <ul class="features">
+              <li>1 persona</li>
+              <li>3 social posts in 1 format</li>
+              <li>1 motion ad — 20 seconds, 1 format</li>
+              <li>1 channel</li>
+              <li>Delivered in 24 hours</li>
+            </ul>
+          </div>
+          <div class="tier-cta">
+            <a class="buy" href="https://buy.stripe.com/3cIdR13VG3FT0LnaAkaAw0S" target="_blank" rel="noopener"><span>Get The Spark</span><span>→</span></a>
+            <p class="tier-note">Secure checkout via Stripe</p>
+          </div>
+        </article>
+
+        <!-- TIER 3 -->
+        <article class="tier">
+          <div>
+            <div class="tier-num"><span>TIER 03</span></div>
+            <h3 class="tier-name">The Launch</h3>
+            <div class="tier-price"><span class="price">$2,500</span><span class="once">One time</span></div>
+          </div>
+          <div>
+            <p class="tier-desc">A real launch across two channels — personas, posts, motion, and email working from the same strategy.</p>
+            <ul class="features">
+              <li>3 personas</li>
+              <li>9 posts in 3 formats</li>
+              <li>3 motion ads — 20 seconds, 3 formats</li>
+              <li>3 emails</li>
+              <li>2 channels</li>
+              <li>Strategy summary</li>
+            </ul>
+          </div>
+          <div class="tier-cta">
+            <a class="buy" href="https://buy.stripe.com/00w3cn77Sb81bq18scaAw0T" target="_blank" rel="noopener"><span>Get The Launch</span><span>→</span></a>
+            <p class="tier-note">Secure checkout via Stripe</p>
+          </div>
+        </article>
+
+        <!-- TIER 4 -->
+        <article class="tier featured">
+          <div>
+            <div class="tier-num"><span>TIER 04</span><span class="badge">The full campaign</span></div>
+            <h3 class="tier-name">The Campaign</h3>
+            <div class="tier-price"><span class="price">$5,000</span><span class="once">One time</span></div>
+          </div>
+          <div>
+            <p class="tier-desc">The full campaign in 24 hours — everything connected, finished, and presented in its own campaign hub.</p>
+            <ul class="features">
+              <li>3 personas</li>
+              <li>15 posts in 3 formats</li>
+              <li>14 motion ads — 20 seconds, 3 formats</li>
+              <li>Emails</li>
+              <li>Share cards</li>
+              <li>Campaign hub</li>
+              <li>Full plan with SMART goals</li>
+            </ul>
+          </div>
+          <div class="tier-cta">
+            <a class="buy" href="https://buy.stripe.com/7sY6ozcscb8l8dPbEoaAw0U" target="_blank" rel="noopener"><span>Get The Campaign</span><span>→</span></a>
+            <p class="tier-note">The complete 24-hour build</p>
+          </div>
+        </article>
+
+        <!-- TIER 5 -->
+        <article class="tier">
+          <div>
+            <div class="tier-num"><span>TIER 05</span><span class="badge badge-outline">Everything + website</span></div>
+            <h3 class="tier-name">The Full Stack</h3>
+            <div class="tier-price"><span class="price">$10,000</span><span class="once">One time</span></div>
+          </div>
+          <div>
+            <p class="tier-desc">Everything in The Campaign, plus the website and hub build and a full month of content — with the strategy underneath it.</p>
+            <ul class="features">
+              <li>Everything in Tier 4</li>
+              <li>Website &amp; hub build</li>
+              <li>30 days of content — 1 piece a day, 3 formats</li>
+              <li>Competitive analysis</li>
+              <li>Keyword strategy</li>
+              <li>Reporting setup</li>
+            </ul>
+          </div>
+          <div class="tier-cta">
+            <a class="buy" href="https://buy.stripe.com/6oU3cn1Ny3FTalXgYIaAw0V" target="_blank" rel="noopener"><span>Get The Full Stack</span><span>→</span></a>
+            <p class="tier-note">Ad spend always on top</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="pricing-note">
+        <span>All prices one-time</span><span>No sales tax collected</span><span>Ad spend always on top</span><span>Checkout powered by Stripe</span>
+      </div>
     </div>
-  </div>
-  <div class="card" id="card-finale">
-    <div class="kicker">Scene 11 &middot; Work with us</div>
-    <h2 class="split">We'll take it <em>from here.</em></h2>
-    <p class="sub">Tell us about your business, and we'll show you what a whole campaign for it looks like.</p>
-    <div class="ctas">
-      <a class="btn primary mag" data-email href="#finale">Work With Us <span class="arr">&rarr;</span></a>
-      <a class="btn ghost mag" href="#launch" data-go="launch">Watch it again</a>
+  </section>
+
+  <!-- HOW -->
+  <section class="section how">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>How 24 hours<br><em>actually works.</em></h2>
+        <p>The order matters. Personas, psychology, and visuals come first — everything else is built from them.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><b>STEP 01</b><h3>Personas first</h3><p>Who it is for, what they are struggling with, and the language they actually use.</p></div>
+        <div class="step"><b>STEP 02</b><h3>Strategy from the persona</h3><p>Hook, angle, channel, format, and call to action — each one mapped to a persona.</p></div>
+        <div class="step"><b>STEP 03</b><h3>Build the campaign</h3><p>Posts, motion ads, emails, and share cards made as one set, in every format the tier includes.</p></div>
+        <div class="step"><b>STEP 04</b><h3>Delivered in a hub</h3><p>The finished campaign presented in one hub, hosted on this website, ready to review and launch.</p></div>
+      </div>
     </div>
-    <p class="mailline">Or write to <span data-email-text></span><button class="copybtn" id="copymail" type="button">Copy</button></p>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="section" id="portfolio">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Portfolio.<br><em>See a campaign.</em></h2>
+        <p>Sample campaigns built by AMCO — open one to see the film, posts, cards, ads, emails, and plan together in its hub.</p>
+      </div>
+      <div class="portfolio-grid">
+        <a class="work dark-work" href="https://muse.ai/s/big-lou-moving-co-xoxk6xaxhdrwxhgxm/sXklM3uMnhHapGk6BXGcom64BxhWqiNKopYC4EFFD54" target="_blank" rel="noopener">
+          <div>
+            <div class="work-top"><span>Home Services</span><span>Campaign Hub ↗</span></div>
+            <h3 style="margin-top:22px">Big Lou<br><em>Moving Co.</em></h3>
+            <p>A home services campaign idea — built end to end as a portfolio sample.</p>
+          </div>
+          <span class="work-link">View campaign <i>→</i></span>
+        </a>
+        <a class="work" href="https://muse.ai/s/rosa-delgado-for-mayor-fd6xaxhe1xquxlxt/MsDS7M2EpsMB8NBaNAVHkeD-q0oPROssgNKtC4BDwNo" target="_blank" rel="noopener">
+          <div>
+            <div class="work-top"><span>Political</span><span>Campaign Hub ↗</span></div>
+            <h3 style="margin-top:22px">Rosa Delgado<br><em>for Mayor</em></h3>
+            <p>A political creative sample — personas, film, posts, and plan in one hub.</p>
+          </div>
+          <span class="work-link">View campaign <i>→</i></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSE -->
+  <section class="close">
+    <div class="wrap">
+      <h2>Your campaign could be <em>done tomorrow.</em></h2>
+      <p>Pick the tier that fits the job. Check out once, and the build starts — personas, psychology, and visuals first, the full campaign in 24 hours on the tiers that promise it.</p>
+      <a class="btn btn-primary" href="#tiers" style="min-height:56px;padding:0 26px">Back to the five tiers ↑</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>AMCO — Asset Orchestrator</span>
+    <span>One-time pricing · No sales tax collected · Ad spend always on top</span>
+    <span>amco100.me</span>
   </div>
-  <div class="foot" id="foot">
-    <span>AMCO, made by Cam Sweatman in <span data-place></span>.</span>
-    <span><a href="/writing/">Writing</a> &middot; As an Amazon Associate I earn from qualifying purchases.</span>
-  </div>
-
-  <div class="hint" id="hint">Click a jet, or scroll to roll the film<span></span></div>
-  <div class="hud" aria-hidden="true">
-    <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-    <div class="readout" id="readout"><div class="rec"><i></i>REC <span id="tc">00:00:00:00</span></div><div class="scene-name" id="scene-name">SCENE 01 &middot; LAUNCH</div></div>
-  </div>
-  <div class="flash" id="flash"></div>
-  <div class="shutter top" id="sh-top"></div><div class="shutter bot" id="sh-bot"></div>
-</div>
-<nav class="rail" id="rail" aria-label="Chapters"></nav>
-<div id="scroller"></div>
-
-<script>
-(() => {
-  const T = window.TIMING, D = window.DATA, SITE = !!window.SITE;
-  const $ = (s) => document.querySelector(s);
-  if (!SITE) document.body.classList.add("render");
-  // Reduced motion on the website: no particles, flashes, streaks or shake.
-  const CALM = SITE && matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // ---- Facts from data.json into the page ----
-  const mail = `mailto:${D.contactEmail}?subject=${encodeURIComponent(D.contactSubject)}`;
-  document.querySelectorAll("[data-email]").forEach((a) => a.setAttribute("href", mail));
-  document.querySelectorAll("[data-place]").forEach((s) => (s.textContent = D.place));
-  document.querySelectorAll("[data-email-text]").forEach((s) => (s.textContent = D.contactEmail));
-  $("#chips").innerHTML = D.platforms.map((p) => `<span class="chip p">${p}</span>`).join("") +
-    D.deliverables.map((p) => `<span class="chip">${p}</span>`).join("");
-  // The work: one real campaign, name changed (data.json "work").
-  const Wk = D.work;
-  $("#work-sub").textContent = Wk.sub;
-  Object.entries(Wk.theme).forEach(([k, v]) => $("#phone").style.setProperty(`--h-${k}`, v));
-  $("#screen-in").innerHTML =
-    `<div class="hub-top">${Wk.stamp ? `<span class="stamp">${Wk.stamp}</span>` : ""}<b>${Wk.name}</b><i>${Wk.tagline}</i></div>` +
-    `<div class="hub-sec"><h4>${Wk.whoTitle}</h4><div class="who">${Wk.who.map((p) => `<span>${p}</span>`).join("")}</div></div>` +
-    `<div class="hub-sec"><h4>POSTS, ONE PER PLATFORM</h4>${Wk.posts.map((p) => `<div class="post"><small>${p.platform}</small><span class="copy">COPY</span><p>${p.text}</p></div>`).join("")}</div>` +
-    `<div class="hub-sec"><h4>THE PLAN</h4><div class="plan">${Wk.plan.map((s) => `<div><b>${s.when}</b><span>${s.title}</span></div>`).join("")}</div></div>` +
-    `<div class="hub-sec"><h4>BRAND KIT</h4><div class="swatches">${Object.values(Wk.theme).map((c) => `<i style="background:${c}"></i>`).join("")}</div></div><div style="height:6em"></div>`;
-  $("#toast").innerHTML = Wk.toast;
-  // How far the hub scrolls, in the phone's em, so it ends on the brand kit
-  // whatever the copy length. Measured once fonts are in.
-  const travel = () => { const inr = $("#screen-in"), fs = parseFloat(getComputedStyle(inr).fontSize) || 1; inr.style.setProperty("--travel", `${Math.max(0, (inr.scrollHeight - inr.parentElement.clientHeight) / fs).toFixed(2)}em`); };
-  travel(); document.fonts && document.fonts.ready.then(travel);
-  const tickText = (arr) => (arr.join(" • ") + " • ").repeat(3);
-  $("#tick1").textContent = tickText(D.platforms);
-  $("#tick2").textContent = tickText(D.deliverables);
-
-  $("#jets").innerHTML = D.jets.map((j) =>
-    `<a class="jet" href="#${j.go}" data-go="${j.go}" aria-label="Fly to ${j.label}" style="--x:${j.x};--y:${j.y};--w:${j.w};--px:${j.px};--py:${j.py};--pw:${j.pw}">` +
-    `<span class="fly"><span class="bob"><span class="trail"></span><span class="burn"></span><img src="assets/img/jet.png" alt=""><span class="tag">${j.label}<b>&rarr;</b></span></span></span></a>`).join("");
-
-  // Skyline for the finale: deterministic, drawn once.
-  (() => {
-    let s = 7, out = "", x = 0;
-    const r = () => ((s = (s * 9301 + 49297) % 233280) / 233280);
-    while (x < 1600) {
-      const w = 50 + r() * 90, h = 90 + r() * 240, y = 400 - h;
-      out += `<rect x="${x.toFixed(0)}" y="${y.toFixed(0)}" width="${w.toFixed(0)}" height="${h.toFixed(0)}" fill="#0b0608"/>`;
-      for (let wy = y + 14; wy < 390; wy += 22) for (let wx = x + 10; wx < x + w - 12; wx += 18)
-        if (r() > 0.62) out += `<rect class="win" x="${wx.toFixed(0)}" y="${wy.toFixed(0)}" width="8" height="10" fill="#ff9a3d" opacity="${(0.25 + r() * 0.6).toFixed(2)}"/>`;
-      x += w + 4;
-    }
-    // The tower that blows up stands where drawBoom() puts the blast (72% across).
-    out += `<rect x="1100" y="80" width="120" height="320" fill="#120709"/><rect x="1140" y="40" width="40" height="44" fill="#120709"/>`;
-    for (let wy = 100; wy < 390; wy += 24) for (let wx = 1112; wx < 1210; wx += 20) out += `<rect x="${wx}" y="${wy}" width="10" height="12" fill="#ffb347" opacity="${wy < 180 ? 0.9 : 0.35}"/>`;
-    $("#city").innerHTML = out;
-  })();
-
-  // Split headlines into masked words.
-  document.querySelectorAll(".split").forEach((h) => {
-    const walk = (node) => [...node.childNodes].forEach((n) => {
-      if (n.nodeType === 3) {
-        const frag = document.createDocumentFragment();
-        n.textContent.split(/(\s+)/).forEach((part) => {
-          if (!part) return;
-          if (/^\s+$/.test(part)) return frag.appendChild(document.createTextNode(" "));
-          const w = document.createElement("span"); w.className = "w";
-          const i = document.createElement("span"); i.textContent = part; w.appendChild(i); frag.appendChild(w);
-        });
-        n.replaceWith(frag);
-      } else walk(n);
-    });
-    walk(h);
-  });
-
-  // ---- Chapter clock ----
-  const ids = D.chapters.map((c) => c.id);
-  const start = {};
-  ids.forEach((id, i) => (start[id] = i === 0 ? 0 : T.introEnd + T.heroHold + (i - 1) * T.chapterLen));
-  const hold = (id) => (id === "launch" ? T.introEnd : id === "finale" ? start[id] + T.burst + T.holdAt : start[id] + (id === "reach" || id === "how" ? T.holdLate : T.holdAt));
-  const END = start.finale + T.holdAt + T.tail;
-
-  // Particle layers: their strength is tweened on the timeline, their motion
-  // is a pure function of time (drawn in frame()).
-  const fx = { sparks: 0, bubbles: 0, rain: 0, snow: 0, stars: 0, embers: 0, boom: 0, count: 0 };
-
-  const tl = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
-  const wordsOf = (sel) => document.querySelectorAll(`${sel} .w > span`);
-  const cardIn = (sel, at) => {
-    tl.set(sel, { autoAlpha: 1 }, at);
-    tl.fromTo(`${sel} .kicker`, { autoAlpha: 0, x: -40 }, { autoAlpha: 1, x: 0, duration: 0.5 }, at);
-    tl.fromTo(wordsOf(sel), { yPercent: 115, rotate: 4 }, { yPercent: 0, rotate: 0, duration: 0.6, stagger: T.wordStagger * 0.7, ease: "back.out(1.4)" }, at + 0.12);
-    tl.fromTo(`${sel} .sub, ${sel} .ctas, ${sel} .mailline, ${sel} .steps, ${sel} .chips`, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.55, stagger: 0.1 }, at + 0.45);
-  };
-  const cardOut = (sel, at) => {
-    tl.to(sel, { autoAlpha: 0, x: -60, duration: 0.35, ease: "power2.in" }, at);
-    tl.set(sel, { x: 0 }, at + 0.36);
-  };
-  // Whip-pan: old shot tears left with streaks, new shot rips in from the right.
-  const whip = (outSel, inSel, at) => {
-    if (CALM) {
-      if (outSel) { tl.to(outSel, { autoAlpha: 0, duration: T.wipe * 0.5, ease: "none" }, at); }
-      tl.set(inSel, { autoAlpha: 1 }, at + T.wipe * 0.3);
-      tl.fromTo(inSel, { opacity: 0 }, { opacity: 1, duration: T.wipe * 0.5, ease: "none" }, at + T.wipe * 0.3);
-      return;
-    }
-    tl.to("#streaks", { opacity: 0.85, duration: T.wipe * 0.35, ease: "power2.in" }, at);
-    tl.fromTo("#streaks", { backgroundPositionY: "0px" }, { backgroundPositionY: "-420px", duration: T.wipe, ease: "none" }, at);
-    tl.to("#streaks", { opacity: 0, duration: T.wipe * 0.5, ease: "power2.out" }, at + T.wipe * 0.5);
-    if (outSel) {
-      tl.to(`${outSel}`, { xPercent: -45, skewX: 8, duration: T.wipe * 0.6, ease: "power3.in" }, at);
-      tl.set(outSel, { autoAlpha: 0, xPercent: 0, skewX: 0 }, at + T.wipe * 0.6);
-    }
-    tl.set(inSel, { autoAlpha: 1 }, at + T.wipe * 0.45);
-    tl.fromTo(inSel, { xPercent: 45, skewX: -8 }, { xPercent: 0, skewX: 0, duration: T.wipe * 0.6, ease: "power3.out" }, at + T.wipe * 0.45);
-    tl.fromTo("#flash", { opacity: 0.0 }, { opacity: 0.18, duration: 0.08, yoyo: true, repeat: 1, ease: "none" }, at + T.wipe * 0.42);
-  };
-  // Slow camera push on a shot's image for its whole stay.
-  const push = (sel, from, to, at, len) => tl.fromTo(`${sel} img`, from, { ...to, duration: len, ease: "none" }, at);
-
-  // ---- Intro (autoplays on the site) ----
-  tl.set(".shot, .card, .reach-bg, .how-bg, .finale-bg, .foot", { autoAlpha: 0 }, 0);
-  tl.fromTo("#sh-top", { yPercent: 0 }, { yPercent: -101, duration: T.shutterLen, ease: "expo.inOut" }, T.shutter);
-  tl.fromTo("#sh-bot", { yPercent: 0 }, { yPercent: 101, duration: T.shutterLen, ease: "expo.inOut" }, T.shutter);
-  tl.set("#shot-launch", { autoAlpha: 1 }, 0);
-  tl.fromTo("#shot-launch img", { scale: 1.3, filter: "brightness(2.2) saturate(0.4)" }, { scale: 1.0, filter: "brightness(1) saturate(1)", duration: 1.1, ease: "expo.out" }, T.heroIn);
-  tl.fromTo(fx, { sparks: 0 }, { sparks: 1, duration: 0.8 }, T.heroIn + 0.3);
-  tl.set("#card-launch", { autoAlpha: 1 }, T.kickerIn);
-  tl.fromTo("#card-launch .kicker", { autoAlpha: 0, x: -40 }, { autoAlpha: 1, x: 0, duration: 0.5 }, T.kickerIn);
-  tl.fromTo(wordsOf("#card-launch"), { yPercent: 120, rotate: 6 }, { yPercent: 0, rotate: 0, duration: 0.55, stagger: T.wordStagger, ease: "back.out(1.7)" }, T.headlineIn);
-  tl.fromTo("#card-launch .sub", { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 0.6 }, T.subIn);
-  tl.fromTo("#card-launch .ctas", { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 0.6 }, T.ctaIn);
-  tl.fromTo("#nav, #rail, .hud .readout", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, T.hudIn);
-  tl.fromTo(".hud .corner", { autoAlpha: 0, scale: 1.6 }, { autoAlpha: 1, scale: 1, duration: 0.5, stagger: 0.06 }, T.hudIn);
-  tl.set(".jet", { autoAlpha: 1 }, T.jetsIn);
-  tl.fromTo(".jet .fly", { x: () => -innerWidth * 1.2, y: 40 }, { x: 0, y: 0, duration: T.jetsFly, stagger: T.jetsStagger, ease: "power3.out" }, T.jetsIn);
-  tl.fromTo(".jet .tag", { autoAlpha: 0, y: -6 }, { autoAlpha: 1, y: 0, duration: 0.4, stagger: T.jetsStagger }, T.jetsIn + T.jetsFly * 0.7);
-  tl.fromTo("#hint", { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.5 }, T.introEnd - 0.4);
-  tl.addLabel("introEnd", T.introEnd);
-
-  // ---- Scroll chapters ----
-  // Launch: the train keeps moving while the hero holds.
-  push("#shot-launch", { scale: 1.0, xPercent: 0 }, { scale: 1.06, xPercent: 1.5 }, T.introEnd, start.research - T.introEnd + T.wipe);
-  tl.to("#hint", { autoAlpha: 0, duration: 0.3 }, T.introEnd + 0.25);
-
-  cardOut("#card-launch", start.research);
-  tl.to(".jet .fly", { x: () => innerWidth * 1.1, y: -60, duration: 0.6, stagger: 0.05, ease: "power2.in" }, start.research - 0.2);
-  tl.set(".jet", { autoAlpha: 0 }, start.research + 0.7);
-  tl.to(fx, { sparks: 0, duration: 0.4 }, start.research);
-  whip("#shot-launch", "#shot-research", start.research);
-  push("#shot-research", { scale: 1.22, yPercent: 3 }, { scale: 1.04, yPercent: 0 }, start.research + T.wipe * 0.45, T.chapterLen);
-  tl.to(fx, { bubbles: 1, duration: 0.8 }, start.research + 0.5);
-  cardIn("#card-research", start.research + T.wipe * 0.8);
-
-  // Intel: chess with a shark, in the rain.
-  cardOut("#card-research", start.intel);
-  tl.to(fx, { bubbles: 0, duration: 0.4 }, start.intel);
-  whip("#shot-research", "#shot-intel", start.intel);
-  push("#shot-intel", { scale: 1.2, xPercent: -3 }, { scale: 1.04, xPercent: 0 }, start.intel + T.wipe * 0.45, T.chapterLen);
-  tl.to(fx, { rain: 1, duration: 0.8 }, start.intel + 0.4);
-  cardIn("#card-intel", start.intel + T.wipe * 0.8);
-
-  cardOut("#card-intel", start.ads);
-  tl.to(fx, { rain: 0, duration: 0.4 }, start.ads);
-  whip("#shot-intel", "#shot-ads", start.ads);
-  push("#shot-ads", { scale: 1.2, xPercent: 3 }, { scale: 1.04, xPercent: 0 }, start.ads + T.wipe * 0.45, T.chapterLen);
-  tl.to(fx, { snow: 1, duration: 0.8 }, start.ads + 0.4);
-  cardIn("#card-ads", start.ads + T.wipe * 0.8);
-
-  // Brand: the billboard in the clouds.
-  cardOut("#card-ads", start.brand);
-  tl.to(fx, { snow: 0, duration: 0.4 }, start.brand);
-  whip("#shot-ads", "#shot-brand", start.brand);
-  push("#shot-brand", { scale: 1.22, yPercent: -3 }, { scale: 1.04, yPercent: 0 }, start.brand + T.wipe * 0.45, T.chapterLen);
-  cardIn("#card-brand", start.brand + T.wipe * 0.8);
-
-  // Video: directing in a volcano, embers drifting.
-  cardOut("#card-brand", start.video);
-  whip("#shot-brand", "#shot-video", start.video);
-  push("#shot-video", { scale: 1.2, xPercent: 3 }, { scale: 1.04, xPercent: 0 }, start.video + T.wipe * 0.45, T.chapterLen);
-  cardIn("#card-video", start.video + T.wipe * 0.8);
-
-  cardOut("#card-video", start.delivery);
-  whip("#shot-video", "#shot-delivery", start.delivery);
-  push("#shot-delivery", { scale: 1.25, xPercent: -3 }, { scale: 1.05, xPercent: 0 }, start.delivery + T.wipe * 0.45, T.chapterLen);
-  tl.to(fx, { stars: 1, duration: 0.8 }, start.delivery + 0.4);
-  cardIn("#card-delivery", start.delivery + T.wipe * 0.8);
-
-  // The work: the phone rises, then scrolling scrolls the hub inside it.
-  cardOut("#card-delivery", start.work);
-  tl.to(fx, { stars: 0, duration: 0.4 }, start.work);
-  whip("#shot-delivery", "#work-bg", start.work);
-  tl.set("#phone", { autoAlpha: 1 }, start.work + T.wipe * 0.5);
-  tl.fromTo("#phone", { yPercent: 35, rotate: 9, scale: 0.9 }, { yPercent: 0, rotate: -3, scale: 1, duration: 0.9, ease: "back.out(1.2)" }, start.work + T.wipe * 0.5);
-  cardIn("#card-work", start.work + T.wipe * 0.8);
-  // The hub scrolls only after the chapter has settled, so a stop anywhere
-  // in here is a finished frame.
-  const workScroll = start.reach - 0.25 - hold("work");
-  tl.fromTo("#screen-in", { "--scroll": 0 }, { "--scroll": 1, duration: workScroll, ease: "none" }, hold("work"));
-  tl.to("#phone", { rotate: 2, duration: workScroll, ease: "none" }, hold("work"));
-  const stops = document.querySelectorAll("#screen-in .plan div");
-  stops.forEach((c, k) => tl.set(c, { className: "on" }, hold("work") + workScroll * (0.6 + (0.3 * k) / stops.length)));
-  tl.set("#toast", { autoAlpha: 1 }, hold("work") + workScroll * 0.18);
-  tl.fromTo("#toast", { y: 20, scale: 0.9 }, { y: 0, scale: 1, duration: 0.3, ease: "back.out(2)" }, hold("work") + workScroll * 0.18);
-  tl.to("#toast", { autoAlpha: 0, duration: 0.25 }, hold("work") + workScroll * 0.4);
-
-  // Reach: text-only scene, count rolls 0 to 11, tickers slide.
-  cardOut("#card-work", start.reach);
-  whip("#work-bg", "#reach-bg", start.reach);
-  tl.fromTo("#tick1", { xPercent: 0 }, { xPercent: -30, duration: T.chapterLen + 1, ease: "none" }, start.reach);
-  tl.fromTo("#tick2", { xPercent: -30 }, { xPercent: 0, duration: T.chapterLen + 1, ease: "none" }, start.reach);
-  tl.fromTo("#reach-bg .bgimg", { scale: 1.18, xPercent: 2 }, { scale: 1.02, xPercent: 0, duration: T.chapterLen + T.wipe, ease: "none" }, start.reach + T.wipe * 0.45);
-  cardIn("#card-reach", start.reach + T.wipe * 0.8);
-  tl.fromTo(fx, { count: 0 }, { count: D.platforms.length, duration: 0.8, ease: "power2.out" }, start.reach + T.wipe * 0.8 + 0.2);
-  tl.fromTo("#count", { scale: 0.4, rotate: -10 }, { scale: 1, rotate: 0, duration: 0.8, ease: "back.out(2)" }, start.reach + T.wipe * 0.8 + 0.1);
-  tl.fromTo("#chips .chip", { autoAlpha: 0, y: 24, scale: 0.8 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.035, ease: "back.out(2)" }, start.reach + T.wipe * 0.8 + 0.5);
-
-  // How it works: steps flip up like cards being dealt.
-  cardOut("#card-reach", start.how);
-  whip("#reach-bg", "#how-bg", start.how);
-  tl.fromTo("#how-bg .bgimg", { scale: 1.2, yPercent: 2 }, { scale: 1.04, yPercent: 0, duration: T.chapterLen + T.wipe, ease: "none" }, start.how + T.wipe * 0.45);
-  tl.fromTo(fx, { sparks: 0 }, { sparks: 0.8, duration: 0.8 }, start.how + 0.4);
-  tl.to(fx, { sparks: 0, duration: 0.4 }, start.finale);
-  cardIn("#card-how", start.how + T.wipe * 0.8);
-  tl.fromTo("#card-how .step", { rotateX: -70, y: 60, autoAlpha: 0, transformPerspective: 900 }, { rotateX: 0, y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.18, ease: "back.out(1.3)" }, start.how + T.wipe * 0.8 + 0.45);
-
-  // Finale: the building blows, our hero card does not.
-  cardOut("#card-how", start.finale);
-  whip("#how-bg", "#finale-bg", start.finale);
-  tl.fromTo("#city", { yPercent: 30 }, { yPercent: 0, duration: 1.0 }, start.finale + T.wipe * 0.5);
-  tl.fromTo(fx, { boom: 0 }, { boom: 1, duration: 2.6, ease: "none" }, start.finale + T.burst);
-  if (!CALM) tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.85, duration: 0.06, ease: "none" }, start.finale + T.burst);
-  if (!CALM) tl.to("#flash", { opacity: 0, duration: 0.6, ease: "power2.out" }, start.finale + T.burst + 0.06);
-  if (!CALM) tl.to("#stage", { keyframes: [{ x: -14, y: 8 }, { x: 12, y: -6 }, { x: -8, y: 4 }, { x: 5, y: -2 }, { x: 0, y: 0 }], duration: 0.5, ease: "none" }, start.finale + T.burst);
-  tl.to(fx, { embers: 1, duration: 0.6 }, start.finale + T.burst);
-  cardIn("#card-finale", start.finale + T.burst + 0.35);
-  tl.fromTo("#foot", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, start.finale + T.burst + 1.2);
-  tl.to({}, { duration: 0.01 }, END - 0.01);
-  window.__timeline = tl;
-
-  // ---- Per-frame layer: particles, timecode, chapter readout ----
-  const cv = $("#fx"), cx = cv.getContext("2d");
-  let W = 0, H = 0, DPR = 1;
-  const size = () => {
-    DPR = Math.min(window.devicePixelRatio || 1, SITE ? 1.5 : 1);
-    W = cv.clientWidth; H = cv.clientHeight;
-    cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
-  };
-  size(); addEventListener("resize", () => { size(); if (SITE) layout(); });
-  const rnd = (i, k) => { const x = Math.sin(i * 127.1 + k * 311.7) * 43758.5453; return x - Math.floor(x); };
-  const N = () => (W < 760 ? 0.55 : 1);
-  const pad = (n) => String(Math.floor(n)).padStart(2, "0");
-  const railBtns = [];
-  const jetBobs = [...document.querySelectorAll(".jet .bob")];
-  let lastScene = "";
-
-  // Wind: thin speed lines racing past the jet (the hero shot's "sparks" layer).
-  function drawSparks(a, c) {
-    const n = Math.round(70 * N());
-    cx.lineCap = "round";
-    for (let i = 0; i < n; i++) {
-      const sp = (1.6 + rnd(i, 1) * 2.4) * W, len = W * (0.06 + rnd(i, 2) * 0.16);
-      const x = W + len - ((c * sp + rnd(i, 3) * (W + len * 2)) % (W + len * 2));
-      const y = H * (0.04 + rnd(i, 4) * 0.92);
-      const g = cx.createLinearGradient(x, y, x + len, y);
-      g.addColorStop(0, `rgba(255,255,255,${a * (0.25 + 0.45 * rnd(i, 5))})`); g.addColorStop(1, "rgba(255,255,255,0)");
-      cx.strokeStyle = g; cx.lineWidth = 0.8 + rnd(i, 6) * 1.6;
-      cx.beginPath(); cx.moveTo(x, y); cx.lineTo(x + len, y); cx.stroke();
-    }
-  }
-  function drawBubbles(a, c) {
-    const n = Math.round(70 * N());
-    for (let i = 0; i < n; i++) {
-      const sp = 40 + rnd(i, 1) * 90, r = 2 + rnd(i, 2) * 9;
-      const y = H + 40 - ((c * sp + rnd(i, 3) * (H + 80)) % (H + 80));
-      const x = W * rnd(i, 4) + Math.sin(c * (0.8 + rnd(i, 5)) + i) * 14;
-      cx.strokeStyle = `rgba(170,240,255,${a * (0.25 + rnd(i, 6) * 0.45)})`; cx.lineWidth = 1.2;
-      cx.beginPath(); cx.arc(x, y, r, 0, 6.283); cx.stroke();
-      cx.fillStyle = `rgba(255,255,255,${a * 0.35})`; cx.beginPath(); cx.arc(x - r * 0.35, y - r * 0.35, r * 0.22, 0, 6.283); cx.fill();
-    }
-  }
-  function drawRain(a, c) {
-    const n = Math.round(220 * N());
-    cx.lineWidth = 1.2;
-    for (let i = 0; i < n; i++) {
-      const z = 0.4 + rnd(i, 1) * 1.1, len = 18 + 34 * z;
-      const y = ((c * 1100 * z + rnd(i, 2) * (H + 80)) % (H + 80)) - 40;
-      const x = (((W * rnd(i, 3) - c * 380 * z) % (W + 80)) + W + 80) % (W + 80) - 40;
-      cx.strokeStyle = `rgba(200,220,235,${a * (0.18 + 0.35 * rnd(i, 4))})`;
-      cx.beginPath(); cx.moveTo(x, y); cx.lineTo(x - len * 0.35, y + len); cx.stroke();
-    }
-  }
-  function drawSnow(a, c) {
-    const n = Math.round(260 * N());
-    for (let i = 0; i < n; i++) {
-      const z = 0.3 + rnd(i, 1) * 1.2, sp = 90 * z;
-      const y = ((c * sp * 1.4 + rnd(i, 2) * (H + 40)) % (H + 40)) - 20;
-      const x = (((W * rnd(i, 3) - c * 160 * z) % (W + 40)) + W + 40) % (W + 40) - 20;
-      cx.fillStyle = `rgba(240,246,255,${a * (0.35 + 0.5 * rnd(i, 4))})`;
-      cx.beginPath(); cx.arc(x, y, 0.8 + z * 1.9, 0, 6.283); cx.fill();
-    }
-  }
-  function drawStars(a, c) {
-    const n = Math.round(160 * N());
-    for (let i = 0; i < n; i++) {
-      const x = W * rnd(i, 1), y = H * 0.62 * rnd(i, 2);
-      const tw = 0.5 + 0.5 * Math.sin(c * (1 + rnd(i, 3) * 3) + i);
-      cx.fillStyle = `rgba(255,255,255,${a * (0.2 + 0.7 * tw) * rnd(i, 4)})`;
-      cx.fillRect(x, y, 1.6, 1.6);
-    }
-    const d = (c * 0.12) % 1, sx = W * (1.05 - d * 1.4), sy = H * (0.08 + d * 0.3);
-    if (d < 0.35) {
-      const g = cx.createLinearGradient(sx, sy, sx + 160, sy - 50);
-      g.addColorStop(0, `rgba(255,255,255,${a * 0.9})`); g.addColorStop(1, "rgba(255,255,255,0)");
-      cx.strokeStyle = g; cx.lineWidth = 2; cx.beginPath(); cx.moveTo(sx, sy); cx.lineTo(sx + 160, sy - 50); cx.stroke();
-    }
-  }
-  function drawBoom(b, e, c) {
-    // Same spot as the tower top: the skyline is 42% of the height, slice-scaled.
-    const k = Math.max(W / 1600, (H * 0.42) / 400), ox = W / 2 + (1160 - 800) * k, oy = H - (400 - 60) * k, R = Math.max(W, H);
-    cx.globalCompositeOperation = "lighter";
-    if (b > 0 && b < 1) {
-      const fb = Math.min(1, b * 3);
-      const core = cx.createRadialGradient(ox, oy, 0, ox, oy, R * 0.34 * fb);
-      core.addColorStop(0, `rgba(255,250,220,${(1 - b) * 0.95})`);
-      core.addColorStop(0.35, `rgba(255,160,40,${(1 - b) * 0.8})`);
-      core.addColorStop(1, "rgba(255,60,20,0)");
-      cx.fillStyle = core; cx.beginPath(); cx.arc(ox, oy, R * 0.34 * fb, 0, 6.283); cx.fill();
-      for (let k = 0; k < 3; k++) {
-        const rb = Math.max(0, b - k * 0.08);
-        cx.strokeStyle = `rgba(255,${200 - k * 50},120,${(1 - rb) * 0.7})`;
-        cx.lineWidth = 6 * (1 - rb) + 1;
-        cx.beginPath(); cx.arc(ox, oy, R * 0.75 * Math.pow(rb, 0.6), 0, 6.283); cx.stroke();
-      }
-      const n = Math.round(90 * N());
-      for (let i = 0; i < n; i++) {
-        const ang = rnd(i, 1) * 6.283, sp = R * (0.25 + rnd(i, 2) * 0.6), t = b * 1.4;
-        const x = ox + Math.cos(ang) * sp * t, y = oy + Math.sin(ang) * sp * t + 300 * t * t;
-        cx.fillStyle = `rgba(255,${120 + (rnd(i, 3) * 120) | 0},40,${Math.max(0, 1 - b * 1.1)})`;
-        cx.fillRect(x, y, 2 + rnd(i, 4) * 4, 2 + rnd(i, 4) * 4);
-      }
-    }
-    if (e > 0) {
-      // The fire that stays lit on the tower after the blast.
-      for (let k = 0; k < 4; k++) {
-        const fl = 0.75 + 0.25 * Math.sin(c * (7 + k * 3.1) + k * 2) * Math.sin(c * (3.3 + k) + k);
-        const fr = R * (0.05 + k * 0.035) * fl;
-        const fy = oy - k * R * 0.012;
-        const g = cx.createRadialGradient(ox, fy, 0, ox, fy, fr);
-        g.addColorStop(0, `rgba(255,${220 - k * 40},120,${e * 0.55 * fl})`);
-        g.addColorStop(1, "rgba(255,70,20,0)");
-        cx.fillStyle = g; cx.beginPath(); cx.arc(ox, fy, fr, 0, 6.283); cx.fill();
-      }
-      const n = Math.round(120 * N());
-      for (let i = 0; i < n; i++) {
-        const sp = 30 + rnd(i, 1) * 110;
-        const y = H + 20 - ((c * sp + rnd(i, 2) * (H + 40)) % (H + 40));
-        const x = W * rnd(i, 3) + Math.sin(c * (0.6 + rnd(i, 4)) + i) * 30;
-        const al = e * (0.3 + 0.6 * rnd(i, 5)) * (y / H);
-        cx.fillStyle = `rgba(255,${110 + (rnd(i, 6) * 100) | 0},40,${al})`;
-        cx.beginPath(); cx.arc(x, y, 0.8 + rnd(i, 7) * 2.2, 0, 6.283); cx.fill();
-      }
-    }
-  }
-
-  // t: timeline time (scrubbed). c: the clock particles move on. On render
-  // they are the same number, so every frame is reproducible.
-  function frame(t, c) {
-    cx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    cx.globalCompositeOperation = "source-over";
-    cx.clearRect(0, 0, W, H);
-    if (CALM) { /* still frame: no weather */ } else {
-    if (fx.sparks > 0.01) drawSparks(fx.sparks, c);
-    cx.globalCompositeOperation = "source-over";
-    if (fx.bubbles > 0.01) drawBubbles(fx.bubbles, c);
-    if (fx.rain > 0.01) drawRain(fx.rain, c);
-    if (fx.snow > 0.01) drawSnow(fx.snow, c);
-    if (fx.stars > 0.01) drawStars(fx.stars, c);
-    if (fx.boom > 0 || fx.embers > 0.01) drawBoom(fx.boom, fx.embers, c);
-    }
-    jetBobs.forEach((b, i) => { b.style.transform = `translateY(${(Math.sin(c * 1.4 + i * 1.7) * 0.6).toFixed(3)}vw) rotate(${(Math.sin(c * 0.9 + i) * 1.4).toFixed(2)}deg)`; });
-    $("#count").textContent = Math.round(fx.count);
-    const f = Math.floor((t % 1) * (T.fps || 30));
-    $("#tc").textContent = `00:${pad(t / 60)}:${pad(t % 60)}:${pad(f)}`;
-    let cur = ids[0];
-    ids.forEach((id) => { if (t >= start[id] + T.wipe * 0.45) cur = id; });
-    if (cur !== lastScene) {
-      lastScene = cur;
-      const i = ids.indexOf(cur);
-      $("#scene-name").textContent = `SCENE ${pad(i + 1)} · ${D.chapters[i].label.toUpperCase()}`;
-      railBtns.forEach((b, k) => b.classList.toggle("on", k === i));
-    }
-  }
-  window.__afterSeek = (t) => frame(t, t);
-  frame(0, 0);
-
-  // ---- Website mode: intro autoplay, scroll scrubbing, interaction ----
-  ids.forEach((id, i) => {
-    const b = document.createElement("button");
-    b.innerHTML = `<span>${D.chapters[i].label}</span><i></i>`;
-    b.setAttribute("aria-label", `Go to ${D.chapters[i].label}`);
-    b.dataset.go = id;
-    $("#rail").appendChild(b); railBtns.push(b);
-  });
-  lastScene = ""; frame(0, 0);
-  if (!SITE) return;
-
-  const reduce = CALM;
-  const per = () => T.scrollPerSecond * innerHeight;
-  function layout() { $("#scroller").style.height = `${(END - T.introEnd) * per() + innerHeight}px`; }
-  layout();
-  const timeFor = (y) => Math.min(END, T.introEnd + y / per());
-  const yFor = (t) => Math.max(0, (t - T.introEnd) * per());
-  let introDone = scrollY > 4 || reduce;
-  let cur = introDone ? timeFor(scrollY) : 0;
-  // The intro is its own tween driving the timeline. Anything that takes over
-  // (a jet click, a deep link, a scroll) must kill it, or its onComplete
-  // yanks the film back to the hero a few seconds later.
-  let intro = null;
-  const stopIntro = () => { if (intro) { intro.kill(); intro = null; } tl.pause(); introDone = true; cur = tl.time(); };
-  if (!introDone) {
-    intro = tl.tweenTo(T.introEnd, { duration: T.introEnd, ease: "none", onComplete: () => { intro = null; introDone = true; cur = T.introEnd; } });
-  }
-  const go = (id) => {
-    if (!introDone) stopIntro();
-    scrollTo({ top: yFor(id === "launch" ? T.introEnd : hold(id)), behavior: reduce ? "auto" : "smooth" });
-  };
-  document.addEventListener("click", (e) => {
-    const g = e.target.closest("[data-go]");
-    if (g) { e.preventDefault(); go(g.dataset.go); }
-  });
-  addEventListener("keydown", (e) => {
-    if (!["ArrowDown", "ArrowUp", "PageDown", "PageUp"].includes(e.key) || e.target.closest("input,textarea")) return;
-    e.preventDefault();
-    const now = timeFor(scrollY), dir = e.key === "ArrowDown" || e.key === "PageDown" ? 1 : -1;
-    const holds = ids.map(hold);
-    const next = dir > 0 ? holds.find((h) => h > now + 0.05) : [...holds].reverse().find((h) => h < now - 0.05);
-    if (next !== undefined) scrollTo({ top: yFor(next), behavior: reduce ? "auto" : "smooth" });
-  });
-  // Phone menu: the chapters plus Writing, since the top links hide on phones.
-  const menu = $("#menu"), menuBtn = $("#menubtn");
-  menu.insertAdjacentHTML("beforeend", D.chapters.map((c) => `<a href="#${c.id}" data-go="${c.id}">${c.label}</a>`).join("") + `<a class="small" href="/writing/">Writing</a>`);
-  const setMenu = (open) => {
-    menu.hidden = !open; menuBtn.setAttribute("aria-expanded", String(open));
-    if (open) { const now = timeFor(scrollY); menu.querySelectorAll("[data-go]").forEach((a) => a.classList.toggle("cur", a.dataset.go === [...ids].reverse().find((id) => start[id] <= now + 0.01))); menu.querySelector("a").focus(); }
-    else menuBtn.focus();
-  };
-  menuBtn.addEventListener("click", () => setMenu(menu.hidden));
-  $("#menux").addEventListener("click", () => setMenu(false));
-  menu.addEventListener("click", (e) => { if (e.target.closest("a")) { menu.hidden = true; menuBtn.setAttribute("aria-expanded", "false"); } });
-  addEventListener("keydown", (e) => { if (e.key === "Escape" && !menu.hidden) setMenu(false); });
-
-  // Copy the address: a mailto: link does nothing on a laptop with no mail app.
-  $("#copymail").addEventListener("click", async () => {
-    const b = $("#copymail");
-    try { await navigator.clipboard.writeText(D.contactEmail); b.textContent = "Copied"; }
-    catch { getSelection().selectAllChildren($(".mailline [data-email-text]")); b.textContent = "Selected"; }
-    setTimeout(() => (b.textContent = "Copy"), 1800);
-  });
-
-  // A deep link like amco100.me/#ads lands on that chapter.
-  const hash = location.hash.slice(1);
-  if (ids.includes(hash) && hash !== "launch") { stopIntro(); tl.progress(0); cur = hold(hash); scrollTo(0, yFor(hold(hash))); }
-  addEventListener("hashchange", () => { const h = location.hash.slice(1); if (ids.includes(h)) go(h); });
-
-  // Mouse parallax on each shot's camera, and a magnetic pull on buttons.
-  if (!reduce && matchMedia("(pointer: fine)").matches) {
-    const cams = [...document.querySelectorAll(".shot .cam")].map((el) => ({ x: gsap.quickTo(el, "x", { duration: 0.9, ease: "power3" }), y: gsap.quickTo(el, "y", { duration: 0.9, ease: "power3" }) }));
-    addEventListener("pointermove", (e) => {
-      const nx = e.clientX / innerWidth - 0.5, ny = e.clientY / innerHeight - 0.5;
-      cams.forEach((c) => { c.x(nx * -26); c.y(ny * -18); });
-    });
-    document.querySelectorAll(".mag").forEach((b) => {
-      const qx = gsap.quickTo(b, "x", { duration: 0.4, ease: "power3" }), qy = gsap.quickTo(b, "y", { duration: 0.4, ease: "power3" });
-      b.addEventListener("pointermove", (e) => { const r = b.getBoundingClientRect(); qx((e.clientX - r.left - r.width / 2) * 0.28); qy((e.clientY - r.top - r.height / 2) * 0.35); });
-      b.addEventListener("pointerleave", () => { qx(0); qy(0); });
-    });
-    document.querySelectorAll(".step").forEach((s) => {
-      s.addEventListener("pointermove", (e) => { const r = s.getBoundingClientRect(); gsap.to(s, { rotateY: ((e.clientX - r.left) / r.width - 0.5) * 14, rotateX: -((e.clientY - r.top) / r.height - 0.5) * 14, duration: 0.4, overwrite: "auto" }); });
-      s.addEventListener("pointerleave", () => gsap.to(s, { rotateY: 0, rotateX: 0, duration: 0.6 }));
-    });
-  }
-
-  // Settle: scrolling scrubs the film, so a stop mid-transition would freeze a
-  // half-built headline. When the scroll rests inside a transition, glide to
-  // whichever finished frame is nearer (end of the last chapter or the hold
-  // of the next).
-  let lastMove = performance.now(), settled = true, touching = false;
-  addEventListener("scroll", () => { lastMove = performance.now(); settled = false; }, { passive: true });
-  addEventListener("touchstart", () => (touching = true), { passive: true });
-  addEventListener("touchend", () => { touching = false; lastMove = performance.now(); }, { passive: true });
-  const settle = () => {
-    settled = true;
-    const now = timeFor(scrollY);
-    for (let i = 1; i < ids.length; i++) {
-      const a = start[ids[i]], b = hold(ids[i]);
-      if (now > a + 0.02 && now < b - 0.02) {
-        const to = now - a < b - now ? a - 0.02 : b;
-        scrollTo({ top: yFor(to), behavior: reduce ? "auto" : "smooth" });
-        return;
-      }
-    }
-  };
-
-  // The loop: ease the timeline toward where the scroll says it should be.
-  const t0 = performance.now();
-  (function loop() {
-    const c = (performance.now() - t0) / 1000;
-    if (introDone) {
-      const target = timeFor(scrollY);
-      cur += (target - cur) * (reduce ? 1 : 0.1);
-      if (Math.abs(target - cur) < 0.001) cur = target;
-      if (Math.abs(tl.time() - cur) > 0.0005) tl.time(cur);
-      if (!settled && !touching && performance.now() - lastMove > 260) settle();
-    } else if (scrollY > 4) {
-      stopIntro();
-    }
-    frame(tl.time(), c);
-    requestAnimationFrame(loop);
-  })();
-})();
-</script>
+</footer>
 </body>
 </html>
