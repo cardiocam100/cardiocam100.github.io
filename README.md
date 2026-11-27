@@ -4,9 +4,11 @@ Static site, served by GitHub Pages from `main`. No build step, no dependencies,
 no external requests: plain HTML and one stylesheet.
 
 - `index.html` — the AMCO home page: a scroll-driven motion film (GSAP, one
-  timeline). BUILT, do not hand-edit: source lives in Asset-Orchestrator
-  `docs/amco-site/` (`node build.mjs`), then copy `dist/index.html` and
-  `dist/assets/` here.
+  timeline). BUILT, do not hand-edit: source is the Muse artifact
+  `amco-website`, shipped through the web-artifact tools, then the built
+  `index.html` is pushed here. Asset-Orchestrator `docs/amco-site/` exists
+  only on unmerged branches (#117, #134) and is NOT the canonical source;
+  do not rebuild from it.
 - `assets/` — fonts (OFL, licences alongside), gsap.min.js, scene images
 - `writing/` — the blog: `writing/index.html` is the post list, one file per post
 - `about.html`, `404.html`, `style.css`
